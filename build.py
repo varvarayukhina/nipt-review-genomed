@@ -44,9 +44,12 @@ css = sub1(css, ":root{--chrome-h:48px}\n@media(max-width:760px){:root{--chrome-
 # Правило как в MEMA: врачебный тон, но доступно; без жаргона, разговорных оборотов,
 # повторов «не диагноз» и внутренних пометок для заказчика. «Геномед» — без кавычек и склонения.
 EDITS = [
-    # hero
+    # hero: понятный заголовок + пара предложений о сути теста
+    ('<p class="eyebrow">Пренатальный скрининг · с 10 полных недель</p>', '<p class="eyebrow">НИПТ · с 10 недель беременности</p>'),
+    ("<h1>НИПТ с 10 недель — точный скрининг <em>хромосомных аномалий</em> по\u00a0крови мамы</h1>",
+     "<h1>Риск синдрома Дауна у&nbsp;малыша&nbsp;— по&nbsp;анализу <em>крови мамы</em></h1>"),
     ("Не нужно самостоятельно разбираться в пяти панелях. Ответьте на три вопроса — подскажем подходящий вариант, а врач-генетик подтвердит выбор на бесплатной консультации.",
-     "Исследование выполняется в пяти вариантах — панелях. Ответьте на три вопроса, и мы подскажем подходящую, а врач-генетик подтвердит выбор на бесплатной консультации."),
+     "НИПТ — неинвазивный пренатальный тест. С 10-й недели беременности по крови мамы он оценивает вероятность синдрома Дауна и других хромосомных аномалий у плода — без прокола и риска для беременности. Заключение врача-генетика — через 8 дней."),
     # что это / для кого
     ("Скрининговый тест по венозной крови мамы: анализирует внеклеточную ДНК плода и оценивает вероятность самых частых хромосомных аномалий — например, синдрома Дауна.",
      "Скрининговое исследование по венозной крови матери. Оно анализирует ДНК плода, которая попадает в кровь из плаценты, и оценивает вероятность самых частых хромосомных аномалий — например, синдрома Дауна."),
@@ -103,8 +106,7 @@ EDITS = [
     ("вклад каждого плода в общий пул ДНК разделить нельзя.", "ДНК каждого плода в крови матери разделить нельзя."),
     # запись
     ("подскажем ближайшее место сдачи и ответим на вопросы.", "подскажем ближайший медицинский офис и ответим на вопросы."),
-    ("Если удобнее голосом — <a href=\"tel:+74956608377\" class=\"mono\">8 (495) 660-83-77</a>, клиентский сервис работает круглосуточно.",
-     "Удобнее по телефону — <a href=\"tel:+74956608377\" class=\"mono\">8 (495) 660-83-77</a>, клиентский сервис работает круглосуточно."),
+    ('\n        <p class="cta-phone">Если удобнее голосом — <a href="tel:+74956608377" class="mono">8 (495) 660-83-77</a>, клиентский сервис работает круглосуточно.</p>', ""),
     # подвал страницы
     ("ООО «Геномед», лаборатория сертифицирована", "ООО Геномед, лаборатория сертифицирована"),
     # раздел для врачей (переезжает из «Точности»)
@@ -284,12 +286,14 @@ def vbar(active: str) -> str:
             f'<a href="index.html"{a1}>Исправленная</a><a href="naglyadnaya.html"{a2}>Наглядная · путь ДНК</a></div></div>')
 
 
-def page(version: str, safe_block: str, css_extra: str = "", js_extra: str = "", head_extra: str = "") -> str:
+def page(version: str, safe_block: str, css_extra: str = "", js_extra: str = "", head_extra: str = "",
+         hero_block: str | None = None, photo_block: str | None = "", acc_block: str | None = None,
+         panels_block: str | None = None, how_block: str | None = None) -> str:
     title = "НИПТ — Геномед · исправленная версия" if version == "v1" else "НИПТ — Геномед · наглядная версия"
     viewport = "width=device-width, initial-scale=1" + (", viewport-fit=cover" if version == "v2" else "")
     order = [
-        vbar(version), NAV, hero, intro, notice, photo, safe_block, about, acc_main,
-        blocks["panels"], blocks["compare"], blocks["quiz"], blocks["how"], blocks["limits"],
+        vbar(version), NAV, hero_block or hero, intro, notice, photo if photo_block == "" else photo_block, safe_block, about,
+        acc_block or acc_main, panels_block or blocks["panels"], blocks["compare"], blocks["quiz"], how_block or blocks["how"], blocks["limits"],
         blocks["why"], blocks["faq"], DOCTORS, blocks["cta"], footer, sticky, MODAL,
     ]
     return f"""<!DOCTYPE html>
@@ -302,7 +306,7 @@ def page(version: str, safe_block: str, css_extra: str = "", js_extra: str = "",
 {head_links}<style>{css}{EXTRA_CSS}{css_extra}</style>
 </head>
 <body>
-{chr(10).join(order)}
+{chr(10).join(x for x in order if x)}
 <script>{script}{MODAL_JS}{js_extra}</script>
 </body>
 </html>
@@ -315,15 +319,46 @@ v1 = page("v1", SAFE_STATIC)
 
 # ---------------------------------------------------------------- версия 2
 V2 = HERE / "v2"
-v2_css = (V2 / "dnax.css").read_text(encoding="utf-8")
-v2_js = (V2 / "dnax.js").read_text(encoding="utf-8")
-v2_html = (V2 / "dnax.html").read_text(encoding="utf-8")
+v2_css = (V2 / "v2.css").read_text(encoding="utf-8")
+v2_js = (V2 / "fx.js").read_text(encoding="utf-8")
+scene = (V2 / "scene.html").read_text(encoding="utf-8")
+fpv = (V2 / "fpv.html").read_text(encoding="utf-8")
+
+# первый экран: текст слева, фото справа (фотополоса больше не нужна)
+hero_v2 = sub1(hero, '<div class="wrap hero__grid">', '<div class="wrap hv2">')
+hero_v2 = sub1(hero_v2, "\n\n    \n  </div>\n</section>",
+    '\n    <figure class="hv2__img"><img src="mother.jpg" alt="Мама держит на руках новорождённого ребёнка" width="910" height="400">'
+    '<figcaption><b>Результат — через 8 дней.</b> Заключение врач-генетик разбирает вместе с вами.</figcaption></figure>\n  </div>\n</section>')
+
+# точность: вместо полосок — 1000 беременных и ложные тревоги
+ci = acc_main.index('<div class="cmp-card">')
+cj = acc_main.rindex("  </div>\n</section>")
+acc_v2 = acc_main[:ci] + fpv.strip() + "\n" + acc_main[cj:]
+
+# панели: число синдромов точками (1 / 3 / 7 / 13 / 38+ — как в сводной таблице)
+LADDER = [(1, "1 синдром"), (3, "3 синдрома"), (7, "7 синдромов"), (13, "13 синдромов"), (38, "38+ синдромов")]
+parts = re.split(r'(<p class="desc">[^<]*</p>)', blocks["panels"])
+if len(parts) != 11:
+    raise SystemExit(f"ожидалось 5 карточек панелей, найдено {(len(parts) - 1) // 2}")
+k = 0
+for n, (cnt, label) in enumerate(LADDER):
+    idx = 1 + n * 2
+    parts[idx] += f'\n      <div class="ladder" aria-label="{label}">' + "<i></i>" * cnt + f"<b>{label}</b></div>"
+panels_v2 = "".join(parts)
+
+# как проходит: восемь дней полосой
+DAYS8 = """
+  <div class="wrap days8" aria-label="Восемь дней: день 0 — взятие крови, дни 1–7 — лаборатория, день 8 — заключение">
+    <div class="days8__row"><div class="d0"><b>День 0</b><span>Взятие крови</span></div>""" + "".join(f"<i>{d}</i>" for d in range(1, 8)) + """<div class="d8"><b>День 8</b><span>Заключение на почте</span></div></div>
+    <div class="days8__lab"><span></span><span>лаборатория: выделение ДНК, секвенирование, расчёт риска</span><span></span></div>
+    <p class="days8__note">Т21, базовая и стандартная панели — 8 календарных дней, расширенная и экспертная — 8 рабочих.</p>
+  </div>"""
+how_v2 = sub1(blocks["how"], '\n\n  <div class="wrap where">', DAYS8 + '\n\n  <div class="wrap where">')
 
 # доводка по mobile-native: hover только у мыши (иначе залипает после тапа)
 css_v2 = re.sub(r"(?m)^([^@\n{]*:hover[^{\n]*\{[^}\n]*\})\s*$", r"@media (hover:hover) and (pointer:fine){\1}", css)
-safe_v2 = SAFE_HEAD + v2_html + "\n</section>"
-v2 = page("v2", safe_v2, css_extra=v2_css, js_extra=v2_js,
-          head_extra='<meta name="theme-color" content="#0A2540">\n')
+v2 = page("v2", scene, css_extra=v2_css, js_extra=v2_js, head_extra='<meta name="theme-color" content="#0A2540">\n',
+          hero_block=hero_v2, photo_block=None, acc_block=acc_v2, panels_block=panels_v2, how_block=how_v2)
 v2 = v2.replace(f"<style>{css}", f"<style>{css_v2}", 1)
 (HERE / "naglyadnaya.html").write_text(v2, encoding="utf-8")
 
