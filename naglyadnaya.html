@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A2540">
+<title>НИПТ — Геномед · наглядная версия</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F4F8FE; --bg-card:#FFFFFF; --bg-deep:#0A2540; --bg-deep-2:#102A4C;
+  --ink:#0A2540; --ink-2:#2E4A6B; --muted:#6E839C;
+  --line:#D8E4F2; --line-soft:#ECF2FB;
+  --blue:#0057FF; --blue-2:#0046CC; --cyan:#00C2FF; --cyan-soft:#B8ECFF; --teal:#00A8B5;
+  --accent-soft:#E6F0FF;
+  --ok:#1AA06D; --ok-soft:#E4F7EF; --warn:#C8791B; --warn-soft:#FFF2E0; --stop:#D2453E; --stop-soft:#FDEBEA;
+  --shadow-sm:0 1px 2px rgba(10,37,64,.04),0 2px 8px rgba(10,37,64,.04);
+  --shadow-md:0 8px 24px rgba(10,37,64,.08);
+  --shadow-lg:0 24px 64px rgba(10,37,64,.12);
+  --r-sm:8px; --r-md:16px; --r-lg:24px; --r-xl:32px;
+  --disp:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --body:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --maxw:1160px;
+}
+*{box-sizing:border-box}
+img{max-width:100%;display:block} a{color:inherit;text-decoration:none}
+:focus-visible{outline:2.5px solid var(--blue);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin-inline:auto !important;padding-inline:24px}
+section{padding-block:clamp(3em,6vw,5.5em)}
+.mono{font-family:var(--mono);font-feature-settings:"tnum"1,"zero"1;letter-spacing:-.01em}
+
+h1,h2,h3,h4{font-family:var(--disp);font-weight:800;letter-spacing:-.03em;line-height:1.06;margin:0 !important;text-wrap:balance}
+h1{font-size:clamp(2.1em,4.4vw,3.3em) !important;line-height:1.05}
+h2{font-size:clamp(30px,4vw,54px) !important;margin:0 0 18px !important}
+h3{font-size:1.15em !important}
+h1 em,h2 em,h3 em{font-style:normal;color:var(--blue)}
+.lead{color:var(--ink-2);font-size:clamp(1em,1.5vw,1.16em);max-width:64ch;margin:1.1em 0 0;font-weight:500}
+.muted{color:var(--muted)}
+.center{text-align:center}
+.center .lead{margin-inline:auto !important}
+
+.lnipt {margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:500;
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-wrap:break-word}
+
+/* eyebrows */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid var(--line);
+  border-radius:100px;font-size:13px;font-weight:700;letter-spacing:-.01em;background:#fff;margin:0 0 1.4em;
+  box-shadow:var(--shadow-sm)}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue);
+  box-shadow:0 0 0 4px rgba(0,87,255,.15);animation:pulse 2s infinite;flex:none}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(0,87,255,.15)}50%{box-shadow:0 0 0 7px rgba(0,87,255,.05)}}
+@media(prefers-reduced-motion:reduce){.eyebrow::before{animation:none}}
+.section-eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:16px}
+.section-head h2{max-width:780px}
+.section-head .lead{max-width:64ch}
+.section-head.center h2,.section-head.center .lead{margin-inline:auto !important}
+
+/* buttons */
+.btn-lnipt{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:100px;
+  font-weight:700;font-size:15px;letter-spacing:-.01em;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;
+  font-family:inherit;text-align:center}
+.btn-lnipt--primary{background:var(--bg-deep);color:#fff !important;position:relative;overflow:hidden}
+.btn-lnipt--primary::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--blue),var(--cyan) 120%);opacity:0;transition:opacity .3s}
+@media (hover:hover) and (pointer:fine){.btn-lnipt--primary:hover::before{opacity:1}}
+.btn-lnipt--primary>*{position:relative;z-index:1}
+@media (hover:hover) and (pointer:fine){.btn-lnipt--primary:hover,.btn-lnipt--secondary:hover{transform:translateY(-1px);box-shadow:var(--shadow-md)}}
+.btn-lnipt--secondary{background:var(--accent-soft);color:var(--ink) !important}
+.btn-lnipt--light{background:#fff;color:var(--ink) !important}
+.btn-lnipt--sm{padding:11px 18px;font-size:14px}
+
+/* hero */
+.hero{padding:clamp(2.5em,5vw,4.5em) 0 clamp(3em,5vw,4.5em);
+  background:linear-gradient(180deg,#F4F8FE 0%,#FFFFFF 100%)}
+.nw{white-space:nowrap}
+.hero__grid{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(2em,4vw,3.5em);align-items:center}
+.hero__grid>*{min-width:0}
+@media(max-width:940px){.hero__grid{grid-template-columns:1fr}}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.8em;margin-top:2em}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1em;margin-top:2.4em;
+  border-top:1px solid var(--line);padding-top:1.5em}
+.stats>div{min-width:0}
+.stats .n{font-family:var(--mono);font-feature-settings:"tnum"1;font-weight:700;font-size:clamp(1.3em,2.4vw,1.75em);
+  color:var(--blue);line-height:1}
+.stats .c{color:var(--muted);font-size:.8em;margin-top:.45em;line-height:1.35}
+@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr);gap:1.2em}}
+
+/* карточка-отчёт */
+.report{background:var(--bg-card);border-radius:var(--r-lg);padding:1.6em;box-shadow:var(--shadow-lg);
+  border:1px solid var(--line-soft);min-width:0}
+.report .rhead{display:flex;justify-content:space-between;align-items:baseline;gap:1em;
+  border-bottom:1px solid var(--line);padding-bottom:.95em;margin-bottom:1.1em}
+.report .rhead b{font-family:var(--disp);font-weight:800;font-size:1.05em;letter-spacing:-.02em}
+.report .rhead small{font-family:var(--mono);color:var(--muted);font-size:.68em;white-space:nowrap;
+  letter-spacing:.02em;text-transform:uppercase}
+.rrow{margin:.95em 0}
+.rrow .rl{display:flex;justify-content:space-between;align-items:center;gap:.6em;font-size:.86em;
+  margin-bottom:.4em;font-weight:600}
+.rrow .rl span:first-child{min-width:0}
+.chip{font-weight:700;font-size:.8em;padding:.2em .6em;border-radius:100px;white-space:nowrap;flex:none;
+  letter-spacing:.01em}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.stop{background:var(--stop-soft);color:var(--stop)}
+.chip.blue{background:var(--accent-soft);color:var(--blue)}
+.bar{height:7px;border-radius:100px;background:var(--line-soft);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:100px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.bar.calm>i{background:linear-gradient(90deg,var(--ok),#5CD1A4)}
+.rfoot{margin-top:1.2em;padding-top:.95em;border-top:1px solid var(--line-soft);
+  font-size:.74em;color:var(--muted);line-height:1.5}
+.rfoot b{color:var(--ink-2)}
+
+/* тёмная плашка */
+.deep{position:relative;overflow:hidden;background:var(--bg-deep);color:#fff;border-radius:var(--r-xl);
+  padding:clamp(1.8em,4vw,3em)}
+.deep::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at top right,rgba(0,194,255,.16),transparent 60%),
+             radial-gradient(ellipse at bottom left,rgba(0,87,255,.22),transparent 60%)}
+.deep>*{position:relative}
+.deep h2,.deep h3{color:#fff}
+.deep p{color:#CFE0FF}
+.deep .big{font-family:var(--disp);font-weight:800;font-size:clamp(3.4em,9vw,6em);color:var(--cyan);
+  line-height:.92;letter-spacing:-.04em;white-space:nowrap}
+.deep-grid{display:grid;grid-template-columns:auto 1fr;gap:clamp(1.4em,4vw,3em);align-items:center}
+.deep-grid>*{min-width:0}
+@media(max-width:720px){.deep-grid{grid-template-columns:1fr}}
+
+/* карточки */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1em}
+.cards.c2{grid-template-columns:repeat(2,1fr)}
+.cards>*{min-width:0}
+@media(max-width:860px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.cards,.cards.c2{grid-template-columns:1fr}}
+.fcard{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.7em;
+  box-shadow:var(--shadow-sm);min-width:0;transition:transform .2s,box-shadow .2s}
+@media (hover:hover) and (pointer:fine){.fcard:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}}
+.fcard .n{font-family:var(--mono);font-weight:700;font-size:.78em;color:var(--blue);letter-spacing:.06em;
+  text-transform:uppercase}
+.fcard h3{margin:.75em 0 .55em !important}
+.fcard p{color:var(--muted);font-size:.95em;margin:0}
+.badge{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;
+  border-radius:var(--r-md);background:var(--accent-soft);color:var(--blue);border:1px solid #D3E3FF;flex:none}
+.badge svg{width:22px;height:22px}
+
+/* блок PPV/NPV */
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1em}
+.risk-grid>*{min-width:0}
+@media(max-width:760px){.risk-grid{grid-template-columns:1fr}}
+.risk{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.7em;box-shadow:var(--shadow-sm);
+  position:relative;overflow:hidden}
+.risk::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+.risk.hi::after{background:linear-gradient(180deg,var(--warn),#E9A64B)}
+.risk.lo::after{background:linear-gradient(180deg,var(--ok),#5CD1A4)}
+.risk .tag{display:inline-flex;align-items:center;gap:.5em;font-family:var(--mono);font-size:.72em;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase}
+.risk.hi .tag{color:var(--warn)} .risk.lo .tag{color:var(--ok)}
+.risk .thr{font-family:var(--mono);font-weight:700;font-size:clamp(1.5em,3vw,2em);margin:.7em 0 .1em;
+  letter-spacing:-.02em}
+.risk p{color:var(--muted);font-size:.93em;margin:.7em 0 0}
+.risk .metric{margin-top:1.1em;padding-top:1em;border-top:1px solid var(--line-soft);font-size:.9em;color:var(--ink-2)}
+.risk .metric b{font-family:var(--mono);font-weight:700}
+
+.ppv{margin-top:1.6em;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:1.7em;box-shadow:var(--shadow-sm)}
+.ppv h3{margin:0 0 .35em !important}
+.ppv .sub{color:var(--muted);font-size:.9em;margin:0 0 1.4em}
+.ppv-row{display:grid;grid-template-columns:1fr 84px;gap:1em;align-items:center;margin:.95em 0}
+.ppv-row>*{min-width:0}
+.ppv-row .lbl{font-weight:600;font-size:.93em}
+.ppv-row .lbl small{display:block;color:var(--muted);font-weight:500;font-size:.78em;margin-top:.1em}
+.ppv-row .val{font-family:var(--mono);font-weight:700;font-size:1em;text-align:right;color:var(--blue)}
+.ppv-row .track{grid-column:1/-1;height:7px;border-radius:100px;background:var(--line-soft);overflow:hidden;margin-top:-.35em}
+.ppv-row .track>i{display:block;height:100%;border-radius:100px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.note{display:flex;gap:.9em;align-items:flex-start;margin-top:1.6em;background:var(--warn-soft);
+  border:1px solid #F3DFC0;border-radius:var(--r-md);padding:1.15em 1.3em}
+.note svg{width:20px;height:20px;color:var(--warn);flex:none;margin-top:.15em}
+.note p{margin:0;font-size:.92em;color:#7A4E12;line-height:1.55}
+.note p b{color:#5E3A0A}
+
+/* сравнение НИПТ vs биохимия */
+.cmp{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(2em,5vw,4em);align-items:center}
+.cmp>*{min-width:0}
+@media(max-width:900px){.cmp{grid-template-columns:1fr}}
+.cmp-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.7em;box-shadow:var(--shadow-md)}
+.cmp-item{margin:1.5em 0}
+.cmp-item:first-child{margin-top:0} .cmp-item:last-child{margin-bottom:0}
+.cmp-item .t{display:flex;justify-content:space-between;align-items:baseline;gap:.8em;margin-bottom:.85em}
+.cmp-item .t b{font-size:.95em} .cmp-item .t small{color:var(--muted);font-size:.75em;font-family:var(--mono)}
+.cmp-line{display:grid;grid-template-columns:1fr 68px;gap:.7em;align-items:center;margin:.4em 0}
+.cmp-line>*{min-width:0}
+.cmp-line .bar2{height:22px;border-radius:6px;background:var(--line-soft);overflow:hidden}
+.cmp-line .bar2>i{display:block;height:100%;border-radius:6px}
+.cmp-line.a .bar2>i{background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.cmp-line.b .bar2>i{background:#A9BDD6}
+.cmp-line .v{font-family:var(--mono);font-weight:700;font-size:.82em;text-align:right}
+.cmp-line.a .v{color:var(--blue)} .cmp-line.b .v{color:var(--muted)}
+.cmp-legend{display:flex;gap:1.2em;flex-wrap:wrap;margin-top:1.3em;padding-top:1.1em;border-top:1px solid var(--line-soft);
+  font-size:.78em;color:var(--muted)}
+.cmp-legend span{display:inline-flex;align-items:center;gap:.45em}
+.cmp-legend i{width:12px;height:12px;border-radius:4px;display:inline-block}
+.src{font-size:.76em;color:var(--muted);margin-top:1.2em;line-height:1.5}
+
+/* панели */
+.panels{display:grid;grid-template-columns:repeat(5,1fr);gap:1em;align-items:stretch}
+@media(max-width:1120px){.panels{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:820px){.panels{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.panels{grid-template-columns:1fr}}
+.panels>*{min-width:0}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5em 1.25em;
+  display:flex;flex-direction:column;box-shadow:var(--shadow-sm);position:relative;transition:transform .2s,box-shadow .2s}
+@media (hover:hover) and (pointer:fine){.panel:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}}
+.panel.pop{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,87,255,.09),var(--shadow-md)}
+.panel .flag{position:absolute;top:-11px;left:1.4em;background:var(--blue);color:#fff;font-size:.66em;
+  font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.3em .7em;border-radius:100px;
+  font-family:var(--mono)}
+.panel .code{font-family:var(--mono);font-size:.68em;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.panel h3{margin:.5em 0 .3em !important;font-size:1.15em !important}
+.panel .desc{color:var(--muted);font-size:.85em;margin:0 0 1.1em;line-height:1.45}
+.panel ul{list-style:none;margin:0 0 1.3em;padding:0;display:grid;gap:.55em}
+.panel li{position:relative;padding-left:1.35em;font-size:.83em;color:var(--ink-2);line-height:1.4}
+.panel li::before{content:"";position:absolute;left:0;top:.42em;width:13px;height:9px;
+  border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg) scale(.85);
+  transform-origin:left center;border-radius:1px}
+.panel li.plus{color:var(--ok);font-weight:600}
+.panel li.plus::before{border-color:var(--ok)}
+.panel .price{margin-top:auto;padding-top:1em;border-top:1px solid var(--line-soft)}
+.panel .price .p{font-family:var(--mono);font-weight:700;font-size:1.4em;letter-spacing:-.02em}
+.panel .price .term{font-family:var(--mono);font-size:.68em;color:var(--muted);letter-spacing:.05em;
+  text-transform:uppercase;margin-top:.3em}
+.panel .btn-lnipt{margin-top:1em;width:100%}
+.panels-note{margin-top:1.4em;background:var(--accent-soft);border-radius:var(--r-md);padding:1.15em 1.3em;
+  font-size:.9em;color:var(--ink-2)}
+.panels-note b{font-weight:700}
+
+/* таблица */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-lg);background:#fff;
+  box-shadow:var(--shadow-sm);-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:1em}
+th,td{padding:.85em 1em;text-align:center;border-bottom:1px solid var(--line-soft)}
+thead th{background:#FAFCFF;font-family:var(--disp);font-weight:800;font-size:.9em;position:sticky;top:0;
+  border-bottom:1px solid var(--line)}
+thead th .pr{display:block;font-family:var(--mono);font-size:.75em;color:var(--blue);font-weight:700;margin-top:.2em}
+tbody th{text-align:left;font-weight:600;color:var(--ink-2);font-size:.87em;background:#FCFDFF}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:none}
+td.y{color:var(--ok);font-weight:700}
+td.n{color:#C3D2E4}
+td .mono{font-size:.82em}
+.thint{font-size:.78em;color:var(--muted);margin-top:.8em}
+
+/* шаги */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1em;counter-reset:s}
+.steps>*{min-width:0}
+@media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5em;box-shadow:var(--shadow-sm)}
+.step .n{font-family:var(--mono);font-weight:700;font-size:.8em;color:#fff;background:var(--bg-deep);
+  width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1em}
+.step h3{font-size:1.02em !important;margin:0 0 .45em !important}
+.step p{color:var(--muted);font-size:.9em;margin:0}
+
+/* где сдать */
+.where{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1em;margin-top:1.4em}
+.where>*{min-width:0}
+@media(max-width:860px){.where{grid-template-columns:1fr}}
+.wcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.6em;box-shadow:var(--shadow-sm)}
+.wcard h3{font-size:1.05em !important;margin:.9em 0 .5em !important}
+.wcard p{color:var(--muted);font-size:.9em;margin:0 0 1em}
+.wcard .tagline{font-family:var(--mono);font-size:.7em;font-weight:700;color:var(--blue);letter-spacing:.06em;
+  text-transform:uppercase}
+
+/* доверие */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6em;text-align:center}
+.trust>*{min-width:0}
+@media(max-width:760px){.trust{grid-template-columns:repeat(2,1fr);gap:2em 1em}}
+.trust .n{font-family:var(--mono);font-weight:700;font-size:clamp(1.6em,3.4vw,2.4em);color:var(--cyan);line-height:1}
+.trust .c{color:#B9CDE8;font-size:.84em;margin-top:.6em;line-height:1.4}
+
+/* отзывы */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1em}
+.revs>*{min-width:0}
+@media(max-width:900px){.revs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.revs{grid-template-columns:1fr}}
+.rev{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.6em;box-shadow:var(--shadow-sm);
+  display:flex;flex-direction:column}
+.rev .stars{color:#F0A81E;font-size:.9em;letter-spacing:.1em;margin-bottom:.9em}
+.rev p{margin:0 0 1.3em;font-size:.94em;color:var(--ink-2);line-height:1.6}
+.rev .who{margin-top:auto;display:flex;align-items:center;gap:.8em;padding-top:1em;border-top:1px solid var(--line-soft)}
+.rev .av{width:38px;height:38px;border-radius:50%;background:var(--accent-soft);color:var(--blue);
+  display:flex;align-items:center;justify-content:center;font-weight:800;flex:none;font-family:var(--disp)}
+.rev .who b{display:block;font-size:.9em}
+.rev .who small{color:var(--muted);font-size:.76em;font-family:var(--mono)}
+
+/* faq */
+.faq{display:grid;gap:.7em;max-width:880px}
+details{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:0;box-shadow:var(--shadow-sm)}
+details[open]{border-color:#BFD5F2}
+summary{cursor:pointer;list-style:none;padding:1.15em 1.4em;display:flex;gap:1em;align-items:flex-start;
+  font-weight:700;font-size:1em;letter-spacing:-.01em}
+summary::-webkit-details-marker{display:none}
+summary .faq__n{font-family:var(--mono);color:var(--blue);font-size:.8em;flex:none;padding-top:.15em}
+summary .q{flex:1;min-width:0}
+summary .ic{flex:none;width:20px;height:20px;color:var(--muted);transition:transform .2s}
+details[open] summary .ic{transform:rotate(45deg)}
+details .a{padding:0 1.4em 1.3em 3.35em;color:var(--ink-2);font-size:.95em;line-height:1.65;margin:0}
+@media(max-width:520px){details .a{padding-left:1.4em}}
+
+/* cta */
+.cta-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(1.6em,4vw,3em);align-items:center}
+.cta-grid>*{min-width:0}
+@media(max-width:820px){.cta-grid{grid-template-columns:1fr}}
+.contacts{display:flex;flex-wrap:wrap;gap:.7em;margin-top:1.8em}
+.contacts a{display:inline-flex;align-items:center;gap:.5em;padding:12px 20px;border-radius:100px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-weight:700;font-size:.9em;
+  transition:background .2s}
+@media (hover:hover) and (pointer:fine){.contacts a:hover{background:rgba(255,255,255,.2)}}
+.contacts a.tel{background:#fff;color:var(--bg-deep);font-family:var(--mono);border-color:#fff}
+.pricebox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:var(--r-lg);padding:1.7em}
+.pricebox .l{font-family:var(--mono);font-size:.7em;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan-soft)}
+.pricebox .p{font-family:var(--disp);font-weight:800;font-size:clamp(2em,5vw,2.7em);color:#fff;letter-spacing:-.03em;
+  margin:.4em 0 .3em}
+.pricebox p{font-size:.87em;margin:0;color:#CFE0FF}
+
+/* ---------- строка фактов в hero ---------- */
+.herofacts{list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:.55em 0;
+  margin:2.2em 0 0;padding:1.4em 0 0;border-top:1px solid var(--line);font-size:.93em;color:var(--muted)}
+.herofacts li{display:inline-flex;align-items:baseline;gap:.42em;min-width:0;flex-wrap:wrap}
+.herofacts li:not(:last-child)::after{content:"\00B7";margin:0 .85em;color:#BFD2E8}
+.herofacts b{color:var(--blue);font-weight:700;white-space:nowrap}
+@media(max-width:560px){
+  .herofacts{display:grid;grid-template-columns:1fr 1fr;gap:1.1em}
+  .herofacts li{display:block}
+  .herofacts li::after{display:none}
+  .herofacts b{display:block;margin-bottom:.15em;white-space:normal}
+}
+
+/* ---------- полоса «важно» ---------- */
+.notice{display:flex;gap:1.1em;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-left:4px solid var(--blue);border-radius:var(--r-md);padding:1.2em 1.5em;box-shadow:var(--shadow-sm)}
+.notice svg{width:21px;height:21px;color:var(--blue);flex:none;margin-top:.15em}
+.notice p{margin:0;font-size:.95em;color:var(--ink-2);line-height:1.6}
+.notice b{color:var(--ink)}
+
+/* ---------- подбор панели (квиз) ---------- */
+.quiz{background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:clamp(1.5em,4vw,2.6em);box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.quiz::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at top right,rgba(0,194,255,.09),transparent 55%)}
+.quiz>*{position:relative}
+.quiz__prog{display:flex;gap:.45em;margin-bottom:1.7em}
+.quiz__prog i{height:4px;flex:1;border-radius:100px;background:var(--line-soft);transition:background .3s}
+.quiz__prog i.on{background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.qstep,.qres{display:none}
+.qstep.on,.qres.on{display:block;animation:qin .32s ease}
+@keyframes qin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.qstep.on,.qres.on{animation:none}}
+.qn{font-family:var(--mono);font-size:.72em;color:var(--blue);letter-spacing:.08em;text-transform:uppercase}
+.qstep h3,.qres h3{font-size:clamp(1.15em,2.5vw,1.55em) !important;margin:.55em 0 1.2em !important}
+.qopts{display:grid;gap:.6em}
+.qopt{display:flex;align-items:flex-start;gap:.9em;width:100%;text-align:left;background:#FAFCFF;
+  border:1px solid var(--line);border-radius:var(--r-md);padding:1em 1.2em;font-family:inherit;
+  font-weight:600;font-size:.97em;color:var(--ink);cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
+@media (hover:hover) and (pointer:fine){.qopt:hover{border-color:#A9C7FF;background:var(--accent-soft);transform:translateX(2px)}}
+.qopt .k{font-family:var(--mono);font-size:.72em;color:var(--blue);flex:none;padding-top:.18em;min-width:1.1em}
+.qopt span.tx{min-width:0}
+.qopt small{display:block;font-weight:500;color:var(--muted);font-size:.83em;margin-top:.2em;line-height:1.45}
+.qfoot{display:flex;flex-wrap:wrap;gap:1em;align-items:center;justify-content:space-between;
+  margin-top:1.6em;padding-top:1.3em;border-top:1px solid var(--line-soft)}
+.qfoot p{margin:0;font-size:.79em;color:var(--muted);max-width:60ch;line-height:1.5}
+.qlink{background:none;border:none;font-family:inherit;font-weight:700;font-size:.88em;color:var(--blue);
+  cursor:pointer;padding:0;display:inline-flex;align-items:center;gap:.4em}
+@media (hover:hover) and (pointer:fine){.qlink:hover{color:var(--blue-2)}}
+.qres__box{background:linear-gradient(135deg,#F4F8FE,#FFFFFF);border:1px solid #C9DDFB;border-radius:var(--r-lg);
+  padding:1.6em;display:grid;grid-template-columns:1fr auto;gap:1.4em;align-items:center}
+.qres__box>*{min-width:0}
+@media(max-width:700px){.qres__box{grid-template-columns:1fr}}
+.qres__tag{display:inline-flex;align-items:center;gap:.5em;font-family:var(--mono);font-size:.7em;
+  font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:.6em}
+.qres__name{font-family:var(--disp);font-weight:800;font-size:clamp(1.3em,3vw,1.75em);letter-spacing:-.03em}
+.qres__why{color:var(--ink-2);font-size:.94em;margin:.7em 0 0;line-height:1.6}
+.qres__price{text-align:right}
+@media(max-width:700px){.qres__price{text-align:left}}
+.qres__price .p{font-family:var(--mono);font-weight:700;font-size:1.6em;letter-spacing:-.02em}
+.qres__price .t{font-family:var(--mono);font-size:.68em;color:var(--muted);letter-spacing:.05em;
+  text-transform:uppercase;margin-top:.25em}
+.qres__cta{display:flex;flex-wrap:wrap;gap:.7em;margin-top:1.4em}
+
+/* ---------- «что вы получите» ---------- */
+.bens{display:grid;grid-template-columns:repeat(5,1fr);gap:1em}
+.bens>*{min-width:0}
+@media(max-width:1020px){.bens{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){.bens{grid-template-columns:1fr}}
+.ben{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5em 1.2em;
+  box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s}
+@media (hover:hover) and (pointer:fine){.ben:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}}
+.ben h3{font-size:.98em !important;margin:.95em 0 .4em !important}
+.ben p{font-size:.87em;color:var(--muted);margin:0;line-height:1.5}
+
+/* ---------- микро-CTA ---------- */
+.mcta{display:flex;flex-wrap:wrap;gap:1em 1.5em;align-items:center;justify-content:space-between;
+  background:var(--accent-soft);border-radius:var(--r-lg);padding:1.3em 1.6em;margin-top:1.6em}
+.mcta p{margin:0;font-weight:600;font-size:.97em;min-width:0;color:var(--ink)}
+.mcta p small{display:block;font-weight:500;color:var(--ink-2);font-size:.87em;margin-top:.2em}
+
+/* ---------- раскрывающийся научный блок ---------- */
+details.acc{border-radius:var(--r-lg)}
+details.acc>summary{padding:1.35em 1.6em;font-size:1.05em}
+details.acc .body{padding:0 1.6em 1.7em}
+@media(max-width:520px){details.acc>summary{padding:1.15em 1.2em}details.acc .body{padding:0 1.2em 1.4em}}
+
+/* ---------- таблица: строка CTA ---------- */
+tfoot td,tfoot th{border-bottom:none;padding-top:1.1em;padding-bottom:1.2em;background:#FCFDFF}
+tfoot .btn-lnipt{width:100%;padding:10px 12px;font-size:13px}
+tbody td.price-cell{font-family:var(--mono);font-weight:700;font-size:.95em;color:var(--ink)}
+
+/* ---------- липкий CTA на мобиле ---------- */
+.sticky-cta{display:none}
+@media(max-width:720px){
+  .sticky-cta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:.55em;
+    padding:.7em 1em calc(.7em + env(safe-area-inset-bottom));background:rgba(255,255,255,.95);
+    backdrop-filter:blur(14px);border-top:1px solid var(--line);box-shadow:0 -4px 20px rgba(10,37,64,.07)}
+  .sticky-cta .btn-lnipt{flex:1;padding:13px 10px;font-size:14px;min-width:0}
+  body{padding-bottom:80px}
+}
+
+/* ============================================================
+   ДОБАВЛЕНИЯ К СТИЛЯМ ЛЕНДИНГА
+   .demobar / .hint — служебные, на боевую страницу не переносятся.
+   Остальное — навигация, форма, таблица, дисклеймер — рабочее.
+   ============================================================ */
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0;
+  -webkit-font-smoothing:antialiased;padding-top:var(--chrome-h)}
+:root{--chrome-h:0px}
+[hidden]{display:none !important}
+section[id],#compare{scroll-margin-top:calc(var(--chrome-h) + 60px)}
+
+/* ——— якорная навигация страницы ——— */
+.lnav{position:sticky;top:var(--chrome-h);z-index:70;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.lnav__in{display:flex;align-items:center;gap:.35em;min-height:60px;overflow-x:auto;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.lnav__in::-webkit-scrollbar{display:none}
+.lnav__logo{font-family:var(--disp);font-weight:800;letter-spacing:-.03em;font-size:1.02em;margin-right:.8em;
+  white-space:nowrap}
+.lnav a:not(.btn-lnipt){padding:.5em .8em;border-radius:100px;font-size:.85em;font-weight:600;color:var(--ink-2);
+  white-space:nowrap;transition:background .16s,color .16s}
+@media (hover:hover) and (pointer:fine){.lnav a:not(.btn-lnipt):hover{background:var(--accent-soft);color:var(--ink)}}
+.lnav a.on{background:var(--accent-soft);color:var(--blue)}
+.lnav .btn-lnipt{margin-left:auto;flex:none}
+@media(max-width:760px){.lnav .btn-lnipt{display:none}.lnav__logo{margin-right:.4em}}
+
+/* ——— форма заявки в блоке #cta ——— */
+.leadform{display:grid;grid-template-columns:1fr 1fr auto;gap:.6em;margin-top:1.6em;align-items:start}
+@media(max-width:720px){.leadform{grid-template-columns:1fr}}
+.leadform input{font-family:var(--body);font-size:.95em;padding:14px 18px;border-radius:100px;
+  border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;min-width:0;width:100%}
+.leadform input::placeholder{color:#8FAECF}
+.leadform input:focus{outline:none;border-color:var(--cyan);background:rgba(255,255,255,.13)}
+.leadform button{white-space:nowrap}
+.leadform__note{grid-column:1/-1;margin:.3em 0 0;font-size:.75em;color:#8FAECF;line-height:1.45}
+
+/* ——— блок-заглушка вместо отзывов ——— */
+.stub{border:2px dashed var(--line);border-radius:var(--r-xl);background:#fff;padding:clamp(1.6em,4vw,2.6em)}
+.stub__tag{display:inline-block;font-family:var(--mono);font-size:.68em;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--warn);background:var(--warn-soft);padding:.3em .7em;border-radius:6px}
+.stub__lead{margin:1em 0 0;font-size:.95em;color:var(--ink-2);max-width:72ch;line-height:1.6}
+.stub__opts{display:grid;grid-template-columns:1fr 1fr;gap:1.4em;margin-top:1.8em;padding-top:1.6em;
+  border-top:1px solid var(--line-soft)}
+@media(max-width:760px){.stub__opts{grid-template-columns:1fr}}
+.stub__opts b{font-family:var(--disp);font-size:.98em;display:block;margin-bottom:.4em}
+.stub__opts p{margin:0 0 1em;font-size:.87em;color:var(--ink-2);line-height:1.55}
+
+/* ——— две панели в результате квиза (ветка «двойня») ——— */
+.qpair{display:grid;grid-template-columns:1fr 1fr;gap:.8em;margin-top:.9em}
+@media(max-width:640px){.qpair{grid-template-columns:1fr}}
+.qpair article{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:1.1em 1.2em;
+  display:flex;flex-direction:column;gap:.5em}
+.qpair h4{font-family:var(--disp);font-weight:800;font-size:1.02em;margin:0;letter-spacing:-.02em}
+.qpair .pp{font-family:var(--mono);font-weight:700;font-size:1.1em}
+.qpair .tt{font-family:var(--mono);font-size:.68em;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.qpair .btn-lnipt{margin-top:auto;width:100%}
+
+/* ——— дисклеймер под страницей ——— */
+.ldisc{background:var(--bg-deep);color:#A9C4E2;padding:clamp(2em,4vw,3em) 0;margin-top:clamp(2.6em,5vw,4em)}
+.ldisc p{margin:0 0 .8em;font-size:.87em;line-height:1.6;max-width:88ch}
+.ldisc b{color:#fff}
+.ldisc__fine{font-size:.78em !important;color:#7E9CBE;margin-bottom:0 !important}
+
+/* ——— сводная таблица ——— */
+.cmp-table thead th:first-child,.cmp-table tbody th{position:sticky;left:0;z-index:2}
+.cmp-table thead th:first-child{z-index:3;background:#FAFCFF}
+.cmp-table tbody th{background:#FCFDFF;box-shadow:1px 0 0 var(--line-soft)}
+.cmp-table td,.cmp-table th{white-space:nowrap}
+.cmp-table tbody th{white-space:normal;min-width:240px}
+.cmp-table tr.grp th{background:var(--accent-soft);color:var(--ink);font-family:var(--disp);font-weight:800;
+  font-size:.78em;text-transform:uppercase;letter-spacing:.06em;padding-block:.6em}
+.cmp-table tr.grp td{background:var(--accent-soft)}
+.cmp-table tr.sum th,.cmp-table tr.sum td{background:#0A2540;color:#fff;border-bottom-color:#1D3C5E}
+.cmp-table tr.sum th{color:#B9CCE4;box-shadow:none}
+.cmp-table tr.sum td{font-family:var(--mono);font-weight:700;font-size:1.15em;color:var(--cyan)}
+.cmp-table tr.sum td small{display:block;font-size:.62em;font-weight:500;color:#8FAECF;text-transform:none;letter-spacing:0}
+.cmp-table td .mono{font-family:var(--mono);font-weight:600;font-size:.86em}
+.cmp-table td.part{color:var(--warn);font-weight:600;font-size:.82em;white-space:normal}
+
+.lists{display:grid;grid-template-columns:1fr 1fr;gap:1em;margin-top:1.2em}
+@media(max-width:820px){.lists{grid-template-columns:1fr}}
+.lists details{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm)}
+.lists summary{padding:1.1em 1.4em;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:.95em;
+  list-style:none;display:flex;justify-content:space-between;gap:1em;align-items:center}
+.lists summary::-webkit-details-marker{display:none}
+.lists summary::after{content:"+";font-family:var(--mono);color:var(--blue);font-size:1.2em}
+.lists details[open] summary::after{content:"–"}
+.lists .body{padding:0 1.4em 1.4em}
+.lists ol,.lists ul{margin:0;padding-left:1.3em;columns:2;column-gap:2em;font-size:.84em;color:var(--ink-2);line-height:1.7}
+@media(max-width:620px){.lists ol,.lists ul{columns:1}}
+.lists li{break-inside:avoid;margin-bottom:.15em}
+.lists .body>p{font-size:.84em;color:var(--muted);margin:0 0 .9em}
+
+/* «светлая» кнопка на светлом фоне — нужна рамка */
+.panel .btn-lnipt--light,.qres__cta .btn-lnipt--light{background:#fff;border:1px solid var(--line);color:var(--ink) !important}
+
+/* ——— журнал правок в конце прототипа ——— */
+.changes{background:#0A2540;color:#A9C4E2;padding:clamp(2.4em,5vw,3.6em) 0}
+.changes h2{color:#fff;font-size:clamp(22px,3vw,32px) !important}
+.changes .section-eyebrow{color:var(--cyan);background:rgba(0,194,255,.12)}
+.changes__grid{display:grid;grid-template-columns:1fr 1fr;gap:1em;margin-top:2em}
+@media(max-width:860px){.changes__grid{grid-template-columns:1fr}}
+.changes__card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-lg);padding:1.3em 1.5em}
+.changes__card b{display:block;font-family:var(--disp);color:#fff;font-size:.98em;margin-bottom:.7em}
+.changes__card ul{margin:0;padding-left:1.1em;font-size:.85em;line-height:1.65}
+.changes__card li{margin-bottom:.4em}
+.changes__card li b{display:inline;font-size:1em;margin:0}
+
+/* ——— ссылка в карточках «где сдать» ——— */
+.wlink{display:inline-flex;align-items:center;margin-top:.9em;font-size:.85em;font-weight:700;color:var(--blue);
+  border-bottom:1px solid rgba(0,87,255,.28);padding-bottom:1px;transition:color .16s,border-color .16s}
+@media (hover:hover) and (pointer:fine){.wlink:hover{color:var(--blue-2);border-color:var(--blue-2)}}
+/* ============================================================
+   ПЕРЕДЕЛКА: список ограничений вместо сетки одинаковых карточек
+   ============================================================ */
+.limlist{display:grid;grid-template-columns:1fr 1fr;gap:0 2.6em;margin-top:.6em}
+@media(max-width:760px){.limlist{grid-template-columns:1fr}}
+.limrow{display:flex;gap:1.1em;padding:1.35em 0;border-top:1px solid rgba(255,255,255,.14)}
+.limlist>.limrow:nth-child(-n+2){border-top:none;padding-top:0}
+@media(max-width:760px){.limlist>.limrow:nth-child(2){border-top:1px solid rgba(255,255,255,.14);padding-top:1.35em}}
+.limrow__ic{flex:none;width:42px;height:42px;border-radius:var(--r-md);background:rgba(0,194,255,.13);
+  border:1px solid rgba(0,194,255,.3);display:flex;align-items:center;justify-content:center;color:var(--cyan)}
+.limrow__ic svg{width:21px;height:21px}
+.limrow h3{font-size:1em !important;color:#fff;margin-bottom:.35em !important}
+.limrow p{font-size:.89em;margin:0;color:#AFC6E0;line-height:1.55}
+
+/* ============================================================
+   ПЕРЕДЕЛКА: журнал правок как список колонок, без карточек
+   ============================================================ */
+.changes__grid{display:grid;grid-template-columns:1fr 1fr;gap:2.4em 3.2em;margin-top:2.2em}
+@media(max-width:760px){.changes__grid{grid-template-columns:1fr;gap:2em}}
+.changes__col{border-top:2px solid var(--dot,var(--cyan));padding-top:1.1em}
+.changes__col b{display:block;font-family:var(--disp);color:#fff;font-size:.92em;font-weight:800;
+  letter-spacing:.04em;text-transform:uppercase;margin-bottom:1em}
+.changes__col ul{margin:0;padding:0;list-style:none;font-size:.87em;line-height:1.6;color:#AFC6E0}
+.changes__col li{padding:.6em 0;border-top:1px solid rgba(255,255,255,.09)}
+.changes__col li:first-child{border-top:none;padding-top:0}
+.changes__col li b{display:inline;text-transform:none;letter-spacing:0;font-size:1em;color:#fff;margin:0}
+
+/* тихая строка с телефоном вместо ряда кнопок связи */
+.cta-phone{margin:1.6em 0 0;font-size:.9em;color:#B9CCE4}
+.cta-phone a{color:#fff;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:1px}
+@media (hover:hover) and (pointer:fine){.cta-phone a:hover{border-color:#fff}}
+/* ============================================================
+   СЛОЙ ФОТОГРАФИЙ + КОМПОНОВКА
+   Точечная правка поверх собственного CSS страницы (сохранён как есть,
+   палитра/тени/шрифты не тронуты — это фирменный house-style Геномед,
+   см. ~/.claude/skills/genomed-landing/references/house-style.md).
+   ============================================================ */
+
+/* ——— hero без карточки-отчёта: один столбец, а не пустая вторая колонка ——— */
+.hero__grid{grid-template-columns:1fr !important}
+.hero__grid>div:first-child{max-width:760px}
+
+/* ——— короткое пояснение «что / для кого / когда» сразу под hero ——— */
+.intro3{display:grid;grid-template-columns:repeat(3,1fr);gap:2em;padding-block:clamp(1.6em,3.4vw,2.4em);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.intro3>*{min-width:0}
+.intro3 .section-eyebrow{margin-bottom:.6em}
+.intro3 p{margin:0;font-size:.93em;color:var(--ink-2);line-height:1.6}
+@media(max-width:760px){.intro3{grid-template-columns:1fr;gap:1.3em}}
+
+/* фото в карточках «где сдать кровь» */
+.wcard{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.wcard__ph{width:100%;height:180px;object-fit:cover;display:block;border-bottom:1px solid var(--line-soft)}
+.wcard h3{margin:1.4rem 1.5rem .5rem !important}
+.wcard p{margin:0 1.5rem 1rem}
+.wcard .tagline{margin:0 1.5rem}
+.wcard .wlink{margin:.9rem 1.5rem 1.6rem}
+
+/* фотополоса во всю ширину после hero */
+.photoband{position:relative;margin:0;width:100vw;margin-left:calc(50% - 50vw);
+  height:clamp(300px,40vw,470px);overflow:hidden;background:var(--bg-deep)}
+.photoband img{width:100%;height:100%;object-fit:cover;object-position:50% 32%;display:block}
+.photoband figcaption{position:absolute;inset:auto 0 0 0;padding:clamp(1.6em,4vw,3em);
+  background:linear-gradient(0deg,rgba(10,37,64,.86) 0%,rgba(10,37,64,.5) 55%,rgba(10,37,64,0) 100%)}
+.photoband figcaption p{margin:0;color:#fff;font-family:var(--disp);font-weight:700;
+  font-size:clamp(1.2em,2.6vw,2em);line-height:1.2;letter-spacing:-.02em;max-width:26ch;text-wrap:balance}
+.photoband figcaption span{display:block;margin-top:.9em;font-family:var(--mono);
+  font-size:.62em;color:var(--cyan-soft);letter-spacing:.03em}
+
+/* портрет генетика рядом с предложением консультации */
+.mcta{gap:1.2em}
+.mcta__face{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:50% 18%;flex:none;
+  border:2px solid #fff;box-shadow:var(--shadow-sm)}
+.mcta__txt{display:flex;align-items:center;gap:1.1em;min-width:0;flex:1}
+
+@media(max-width:760px){
+  .photoband{height:clamp(240px,52vw,340px)}
+  .mcta__txt{flex-wrap:wrap}
+}
+
+/* ——— полоса версий (только для превью) ——— */
+.vbar{background:#0A2540;color:#fff;font-family:var(--body);font-size:13px}
+.vbar__in{display:flex;align-items:center;gap:6px 20px;flex-wrap:wrap;min-height:44px;padding-block:6px}
+.vbar b{font-weight:500;color:#8FAECF}
+.vbar a{color:rgba(255,255,255,.66);text-decoration:none;font-weight:600;padding:3px 0;border-bottom:2px solid transparent}
+.vbar a:hover{color:#fff}
+.vbar a.on{color:#fff;border-bottom-color:var(--cyan)}
+
+/* ——— путь ДНК: плацента → кровь → пробирка → секвенатор → заключение ——— */
+.dnapath{list-style:none;margin:2.2em 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1em;counter-reset:none}
+.dnapath li{position:relative;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4em 1.2em 1.5em}
+.dnapath li:not(:last-child)::after{content:"";position:absolute;right:-.85em;top:2.35em;width:.7em;height:.7em;border-top:2px solid var(--blue);border-right:2px solid var(--blue);transform:rotate(45deg);z-index:1}
+.dnapath__ic{display:grid;place-items:center;width:44px;height:44px;border-radius:var(--r-md);background:var(--accent-soft);color:var(--blue);margin-bottom:1em}
+.dnapath__ic svg{width:24px;height:24px}
+.dnapath__n{display:block;font-size:.72em;font-weight:700;color:var(--blue);letter-spacing:.06em;margin-bottom:.3em}
+.dnapath b{display:block;font-family:var(--disp);font-size:1.02em;font-weight:800;letter-spacing:-.01em}
+.dnapath__t{display:block;margin-top:.45em;font-size:.88em;line-height:1.5;color:var(--ink-2)}
+@media(max-width:1000px){.dnapath{grid-template-columns:minmax(0,1fr)}.dnapath li{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:1em}
+  .dnapath__ic{grid-row:span 3;margin:0}.dnapath li:not(:last-child)::after{right:auto;left:2.2em;top:auto;bottom:-.75em;transform:rotate(135deg)}}
+
+/* ——— окно «способ связи» (превью) ——— */
+.pmodal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:1em}
+.pmodal[hidden]{display:none}
+.pmodal__scrim{position:absolute;inset:0;background:rgba(10,37,64,.5)}
+.pmodal__card{position:relative;width:min(460px,100%);background:#fff;border-radius:var(--r-lg);padding:2em 1.8em 1.6em;box-shadow:var(--shadow-lg)}
+.pmodal__card h3{margin:0 2em .5em 0;font-family:var(--disp);font-size:1.3em;letter-spacing:-.02em}
+.pmodal__card p{margin:0;color:var(--ink-2);font-size:.95em;line-height:1.5}
+.pmodal__row{display:grid;gap:.5em;margin:1.3em 0 1em}
+.pmodal__row .btn-lnipt{width:100%;justify-content:center}
+.pmodal__tel a{color:var(--blue);font-weight:700}
+.pmodal__note{margin-top:1em !important;font-size:.78em !important;color:var(--muted) !important}
+.pmodal__x{position:absolute;top:.7em;right:.8em;width:36px;height:36px;border-radius:50%;border:0;background:var(--line-soft);color:var(--ink);font-size:1.3em;cursor:pointer}
+
+/* ============================================================
+   НАГЛЯДНАЯ ВЕРСИЯ
+   ============================================================ */
+
+/* ——— мобильная доводка (скилл mobile-native) ——— */
+html{-webkit-tap-highlight-color:transparent}
+.btn-lnipt,.qopt,.lnav a,summary,.dnax__stop{touch-action:manipulation}
+.btn-lnipt,.qopt,.dnax__stop{-webkit-user-select:none;user-select:none}
+.btn-lnipt:active,.qopt:active{transform:scale(.97)}
+.leadform input{font-size:16px}
+.sticky-cta{padding-left:max(1em,env(safe-area-inset-left));padding-right:max(1em,env(safe-area-inset-right))}
+
+/* ——— путь ДНК: интерактивная схема ——— */
+.dnax{margin-top:2.2em;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-sm)}
+.dnax__view{position:relative;overflow:hidden;background:linear-gradient(180deg,#FAFCFF 0%,#F2F7FE 100%);border-bottom:1px solid var(--line-soft);
+  touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none}
+.dnax__view.is-drag{cursor:grabbing}
+.dnax__strip{display:block;will-change:transform}
+.dnax__panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:1.2em 3em;align-items:center;
+  padding:1.6em clamp(1.2em,3vw,2.4em) 1.7em}
+.dnax__n{font-size:.72em;font-weight:700;color:var(--blue);letter-spacing:.06em}
+.dnax__cap h3{margin:.3em 0 .35em;font-family:var(--disp);font-size:1.35em;font-weight:800;letter-spacing:-.02em}
+.dnax__cap p{margin:0;color:var(--ink-2);font-size:.95em;line-height:1.55;min-height:4.7em}
+.dnax__track{position:relative;height:44px;margin:0 10%;touch-action:pan-y;cursor:pointer}
+.dnax__track:focus-visible{outline:none}
+.dnax__rail{position:absolute;left:0;right:0;top:19px;height:6px;border-radius:3px;background:var(--line-soft);overflow:hidden}
+.dnax__fill{position:absolute;inset:0;background:linear-gradient(90deg,var(--blue),var(--cyan));transform-origin:left;transform:scaleX(0)}
+.dnax__knob{position:absolute;left:-14px;top:8px;width:28px;height:28px;border-radius:50%;background:#fff;
+  box-shadow:0 0 0 3px var(--blue),0 4px 12px rgba(10,37,64,.2);will-change:transform;transition:box-shadow .12s ease-out}
+.dnax__track.is-drag .dnax__knob{box-shadow:0 0 0 5px var(--blue),0 6px 16px rgba(10,37,64,.26)}
+.dnax__track:focus-visible .dnax__knob{outline:2.5px solid var(--cyan);outline-offset:4px}
+.dnax__stops{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:.1em 0 0}
+.dnax__stop{border:0;background:none;padding:.3em .15em;min-height:2.6em;text-align:center;
+  font:600 .78em/1.2 var(--body);color:var(--muted);cursor:pointer;transition:color .15s ease-out}
+.dnax__stop[aria-current="true"]{color:var(--blue)}
+.dnax__sn{display:none;font-size:1.05em}
+.dnax__sl{display:block}
+.dnax__stop:active{opacity:.6}
+.dnax__hint{margin:.3em 0 0;font-size:.75em;color:var(--muted)}
+@media(max-width:760px){
+  .dnax__panel{grid-template-columns:minmax(0,1fr);padding-top:1.2em}
+  .dnax__ctl{order:-1}
+  .dnax__stop{font-size:.8em;min-height:2em}
+  .dnax__sn{display:block}
+  .dnax__sl{display:none}
+  .dnax__cap p{min-height:6.2em}
+}
+</style>
+</head>
+<body>
+<div class="vbar"><div class="wrap vbar__in"><b>Версии для сравнения:</b><a href="index.html">Исправленная</a><a href="naglyadnaya.html" class="on" aria-current="page">Наглядная · путь ДНК</a></div></div>
+<nav class="lnav" aria-label="Разделы страницы">
+  <div class="wrap lnav__in">
+    <span class="lnav__logo">НИПТ</span>
+    <a href="#safe">Как работает</a>
+    <a href="#accuracy">Точность</a>
+    <a href="#panels">Панели и цены</a>
+    <a href="#compare">Сравнение</a>
+    <a href="#how">Как проходит</a>
+    <a href="#limits">Ограничения</a>
+    <a href="#faq">Вопросы</a>
+    <a href="#doctors">Врачам</a>
+    <a class="btn-lnipt btn-lnipt--primary btn-lnipt--sm" href="#quiz"><span>Подобрать НИПТ</span></a>
+  </div>
+</nav>
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div>
+      <p class="eyebrow">Пренатальный скрининг · с 10 полных недель</p>
+      <h1>НИПТ с 10 недель — точный скрининг <em>хромосомных аномалий</em> по крови мамы</h1>
+      <p class="lead">Исследование выполняется в пяти вариантах — панелях. Ответьте на три вопроса, и мы подскажем подходящую, а врач-генетик подтвердит выбор на бесплатной консультации.</p>
+      <div class="hero-cta">
+        <a class="btn-lnipt btn-lnipt--primary" href="#quiz"><span>Подобрать НИПТ →</span></a>
+        <a class="btn-lnipt btn-lnipt--secondary" href="#panels">Панели и цены</a>
+      </div>
+      <ul class="herofacts">
+        <li><b>Без риска</b> для беременности</li>
+        <li><b class="mono">от 16 000 ₽</b> пять панелей</li>
+        <li><b class="mono">от 8 дней</b> до заключения</li>
+        <li><b>Консультация генетика</b> бесплатно</li>
+      </ul>
+    </div>
+
+    
+  </div>
+</section>
+<section style="padding-top:0;padding-bottom:0">
+  <div class="wrap intro3">
+    <div>
+      <span class="section-eyebrow">Что это</span>
+      <p>Скрининговое исследование по венозной крови матери. Оно анализирует ДНК плода, которая попадает в кровь из плаценты, и оценивает вероятность самых частых хромосомных аномалий — например, синдрома Дауна.</p>
+    </div>
+    <div>
+      <span class="section-eyebrow">Для кого</span>
+      <p>Международные профессиональные сообщества рекомендуют исследование всем беременным. Особенно оно показано после 35 лет, после ЭКО, при повышенном риске по УЗИ или биохимическому скринингу и если ранее была беременность с хромосомной аномалией.</p>
+    </div>
+    <div>
+      <span class="section-eyebrow">Когда</span>
+      <p>С 10 полных недель беременности, верхней границы срока практически нет. Результат — через 8 дней, с разбором врача-генетика.</p>
+    </div>
+  </div>
+</section>
+<section style="padding-top:0;padding-bottom:clamp(2em,4vw,3em)">
+  <div class="wrap">
+    <div class="notice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <p><b>Важно.</b> НИПТ — скрининговое исследование, а не диагноз. Оно оценивает вероятность хромосомных аномалий у плода. При высоком риске результат требует подтверждения диагностическим исследованием — амниоцентезом или биопсией ворсин хориона.</p>
+    </div>
+  </div>
+</section>
+<figure class="photoband">
+  <img src="mother.jpg" alt="Мама держит на руках новорождённого ребёнка" width="910" height="400">
+  <figcaption>
+    <p>Результат — через 8 дней. Заключение врач-генетик разбирает вместе с вами.</p>
+  </figcaption>
+</figure>
+<section id="safe" style="padding-top:0">
+  <div class="wrap section-head">
+    <span class="section-eyebrow">Как работает НИПТ</span>
+    <h2>Почему исследование <em>безопасно</em></h2>
+    <p class="lead">Во время беременности фрагменты ДНК плаценты попадают в кровь матери. Поэтому для анализа достаточно взять кровь из вены: прокол плодных оболочек не нужен, риска для беременности нет.</p>
+  </div>
+  <div class="wrap">
+    <div class="dnax" id="dnax">
+      <div class="dnax__view" aria-hidden="true">
+        <svg class="dnax__strip" viewBox="0 0 3000 360" preserveAspectRatio="xMinYMid meet">
+          <defs>
+            <radialGradient id="dx-pl" cx="50%" cy="55%" r="60%"><stop offset="0" stop-color="#EAF8FF"/><stop offset="1" stop-color="#C9EDFB"/></radialGradient>
+            <symbol id="dx-fr" viewBox="0 0 30 10" overflow="visible"><rect x="0" y="0" width="30" height="10" rx="5"/><path d="M6 5h18" stroke="#fff" stroke-width="1.6" stroke-dasharray="2 2.5" opacity=".75"/></symbol>
+          </defs>
+          <!-- путь: пунктир через все этапы -->
+          <path d="M470 185 C 540 185 560 185 600 185 L 1200 185 C 1260 185 1290 120 1440 120 M 1560 180 C 1650 180 1700 185 1935 185 M 2265 185 C 2330 185 2360 185 2455 185" fill="none" stroke="#B8CCE6" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+
+          <!-- 1. плацента -->
+          <g class="dnax__zone">
+            <path d="M130 190 C120 110 220 70 300 72 C390 74 480 110 475 185 C470 262 385 300 300 298 C205 296 140 262 130 190 Z" fill="url(#dx-pl)" stroke="#9FDFF6" stroke-width="3"/>
+            <g fill="none" stroke="#6CCBEA" stroke-width="4" stroke-linecap="round">
+              <path d="M300 292 C300 250 300 225 300 200"/>
+              <path d="M300 230 C282 212 262 202 238 188"/><path d="M300 230 C318 212 340 202 364 186"/>
+              <path d="M300 200 C290 170 282 150 266 128"/><path d="M300 200 C312 170 322 150 340 128"/>
+              <path d="M238 188 C226 170 220 158 204 150"/><path d="M364 186 C378 168 386 156 404 150"/>
+              <path d="M266 128 C258 116 250 110 238 104"/><path d="M340 128 C350 116 358 110 372 104"/>
+            </g>
+            <g fill="#00C2FF">
+              <use href="#dx-fr" x="400" y="210" width="30" height="10" transform="rotate(18 415 215)"/>
+              <use href="#dx-fr" x="418" y="150" width="30" height="10" transform="rotate(-14 433 155)"/>
+              <use href="#dx-fr" x="486" y="178" width="30" height="10" transform="rotate(6 501 183)"/>
+              <use href="#dx-fr" x="512" y="136" width="30" height="10" transform="rotate(-22 527 141)"/>
+              <use href="#dx-fr" x="530" y="222" width="30" height="10" transform="rotate(14 545 227)"/>
+              <use href="#dx-fr" x="560" y="170" width="30" height="10" transform="rotate(-6 575 175)"/>
+            </g>
+          </g>
+
+          <!-- 2. кровь мамы -->
+          <g class="dnax__zone">
+            <rect x="600" y="108" width="600" height="154" fill="#FFF3F2"/>
+            <path d="M600 108 H1200 M600 262 H1200" stroke="#F3C6C1" stroke-width="7"/>
+            <g fill="#F7BDB7" stroke="#EE9C94" stroke-width="2.5">
+              <ellipse cx="660" cy="150" rx="19" ry="14"/><ellipse cx="760" cy="225" rx="19" ry="14"/><ellipse cx="850" cy="140" rx="19" ry="14"/>
+              <ellipse cx="930" cy="215" rx="19" ry="14"/><ellipse cx="1030" cy="150" rx="19" ry="14"/><ellipse cx="1110" cy="228" rx="19" ry="14"/>
+              <ellipse cx="700" cy="232" rx="17" ry="12"/><ellipse cx="1150" cy="140" rx="17" ry="12"/>
+            </g>
+            <g fill="#8FAEF5">
+              <use href="#dx-fr" x="700" y="180" width="30" height="10" transform="rotate(12 715 185)"/>
+              <use href="#dx-fr" x="730" y="128" width="30" height="10" transform="rotate(-18 745 133)"/>
+              <use href="#dx-fr" x="800" y="182" width="30" height="10" transform="rotate(-8 815 187)"/>
+              <use href="#dx-fr" x="815" y="238" width="30" height="10" transform="rotate(20 830 243)"/>
+              <use href="#dx-fr" x="880" y="190" width="30" height="10" transform="rotate(26 895 195)"/>
+              <use href="#dx-fr" x="905" y="125" width="30" height="10" transform="rotate(-4 920 130)"/>
+              <use href="#dx-fr" x="975" y="185" width="30" height="10" transform="rotate(-24 990 190)"/>
+              <use href="#dx-fr" x="990" y="240" width="30" height="10" transform="rotate(8 1005 245)"/>
+              <use href="#dx-fr" x="1060" y="200" width="30" height="10" transform="rotate(16 1075 205)"/>
+              <use href="#dx-fr" x="1085" y="130" width="30" height="10" transform="rotate(-12 1100 135)"/>
+              <use href="#dx-fr" x="1140" y="185" width="30" height="10" transform="rotate(4 1155 190)"/>
+              <use href="#dx-fr" x="640" y="200" width="30" height="10" transform="rotate(-20 655 205)"/>
+            </g>
+            <g fill="#00C2FF">
+              <use href="#dx-fr" x="760" y="155" width="30" height="10" transform="rotate(-10 775 160)"/>
+              <use href="#dx-fr" x="1020" y="112" width="30" height="10" transform="rotate(14 1035 117)"/>
+            </g>
+            <g font-family="Montserrat, sans-serif" font-size="22" font-weight="600" fill="#2E4A6B">
+              <use href="#dx-fr" x="640" y="50" width="30" height="10" fill="#00C2FF"/><text x="682" y="61">ДНК плаценты</text>
+              <use href="#dx-fr" x="900" y="50" width="30" height="10" fill="#8FAEF5"/><text x="942" y="61">ДНК мамы</text>
+            </g>
+          </g>
+
+          <!-- 3. взятие крови: пробирка -->
+          <g class="dnax__zone">
+            <rect x="1445" y="46" width="110" height="30" rx="9" fill="#0A2540"/>
+            <path d="M1455 76 V255 A45 45 0 0 0 1545 255 V76 Z" fill="#fff" stroke="#C9D8EA" stroke-width="4"/>
+            <rect x="1459" y="92" width="82" height="96" fill="#FFF0C7"/>
+            <path d="M1459 188 V255 A41 41 0 0 0 1541 255 V188 Z" fill="#E8847B"/>
+            <g fill="#8FAEF5">
+              <use href="#dx-fr" x="1468" y="110" width="24" height="8" transform="rotate(-14 1480 114)"/>
+              <use href="#dx-fr" x="1505" y="132" width="24" height="8" transform="rotate(18 1517 136)"/>
+              <use href="#dx-fr" x="1470" y="160" width="24" height="8" transform="rotate(6 1482 164)"/>
+            </g>
+            <use href="#dx-fr" x="1506" y="165" width="24" height="8" fill="#00C2FF" transform="rotate(-20 1518 169)"/>
+            <g font-family="Montserrat, sans-serif" font-size="22" font-weight="600" fill="#2E4A6B">
+              <path d="M1550 140 H1600" stroke="#9FB3CC" stroke-width="2"/><text x="1608" y="147">плазма</text>
+              <path d="M1550 230 H1600" stroke="#9FB3CC" stroke-width="2"/><text x="1608" y="237">клетки крови</text>
+            </g>
+            <text x="1300" y="210" font-family="JetBrains Mono, monospace" font-size="44" font-weight="700" fill="#0057FF">20 мл</text>
+          </g>
+
+          <!-- 4. секвенатор -->
+          <g class="dnax__zone">
+            <g fill="#00C2FF">
+              <use href="#dx-fr" x="1870" y="170" width="30" height="10" transform="rotate(-8 1885 175)"/>
+            </g>
+            <g fill="#8FAEF5">
+              <use href="#dx-fr" x="1830" y="200" width="30" height="10" transform="rotate(12 1845 205)"/>
+              <use href="#dx-fr" x="1850" y="140" width="30" height="10" transform="rotate(-16 1865 145)"/>
+            </g>
+            <rect x="1940" y="78" width="320" height="214" rx="28" fill="#0A2540"/>
+            <rect x="1972" y="108" width="256" height="128" rx="12" fill="#102A4C"/>
+            <g stroke-linecap="round" stroke-width="8">
+              <path d="M1992 128 H2040 M2052 128 H2118 M2130 128 H2160" stroke="#00C2FF"/>
+              <path d="M1992 148 H2070 M2082 148 H2110 M2122 148 H2206" stroke="#4B8EFF"/>
+              <path d="M1992 168 H2026 M2038 168 H2104 M2116 168 H2186" stroke="#4B8EFF"/>
+              <path d="M1992 188 H2060 M2072 188 H2140 M2152 188 H2196" stroke="#00C2FF"/>
+              <path d="M1992 208 H2044 M2056 208 H2090 M2102 208 H2170" stroke="#4B8EFF"/>
+            </g>
+            <rect x="1972" y="254" width="96" height="14" rx="7" fill="#2E4A6B"/>
+            <circle cx="2228" cy="261" r="7" fill="#00C2FF"/>
+          </g>
+
+          <!-- 5. заключение: прочтения по хромосомам -->
+          <g class="dnax__zone">
+            <rect x="2460" y="58" width="480" height="236" rx="20" fill="#fff" stroke="#D8E4F2" stroke-width="3"/>
+            <path d="M2482 140 H2918" stroke="#9FB3CC" stroke-width="2" stroke-dasharray="6 6"/>
+            <g><rect x="2490" y="142" width="13" height="108" rx="3" fill="#B8C9E3"/><rect x="2510" y="138" width="13" height="112" rx="3" fill="#B8C9E3"/><rect x="2530" y="144" width="13" height="106" rx="3" fill="#B8C9E3"/><rect x="2550" y="140" width="13" height="110" rx="3" fill="#B8C9E3"/><rect x="2570" y="141" width="13" height="109" rx="3" fill="#B8C9E3"/><rect x="2590" y="139" width="13" height="111" rx="3" fill="#B8C9E3"/><rect x="2610" y="143" width="13" height="107" rx="3" fill="#B8C9E3"/><rect x="2630" y="140" width="13" height="110" rx="3" fill="#B8C9E3"/><rect x="2650" y="142" width="13" height="108" rx="3" fill="#B8C9E3"/><rect x="2670" y="138" width="13" height="112" rx="3" fill="#B8C9E3"/><rect x="2690" y="141" width="13" height="109" rx="3" fill="#B8C9E3"/><rect x="2710" y="140" width="13" height="110" rx="3" fill="#B8C9E3"/><rect x="2730" y="144" width="13" height="106" rx="3" fill="#0057FF"/><rect x="2750" y="139" width="13" height="111" rx="3" fill="#B8C9E3"/><rect x="2770" y="142" width="13" height="108" rx="3" fill="#B8C9E3"/><rect x="2790" y="140" width="13" height="110" rx="3" fill="#B8C9E3"/><rect x="2810" y="141" width="13" height="109" rx="3" fill="#B8C9E3"/><rect x="2830" y="143" width="13" height="107" rx="3" fill="#0057FF"/><rect x="2850" y="140" width="13" height="110" rx="3" fill="#B8C9E3"/><rect x="2870" y="139" width="13" height="111" rx="3" fill="#B8C9E3"/><rect x="2890" y="141" width="13" height="109" rx="3" fill="#0057FF"/><rect x="2910" y="142" width="13" height="108" rx="3" fill="#B8C9E3"/></g>
+            <rect x="2890" y="106" width="13" height="34" rx="3" fill="none" stroke="#D2453E" stroke-width="2.5" stroke-dasharray="5 4"/>
+            <g font-family="JetBrains Mono, monospace" font-size="19" font-weight="700" fill="#0057FF" text-anchor="middle">
+              <text x="2736.5" y="278">13</text><text x="2836.5" y="278">18</text><text x="2896.5" y="278">21</text>
+            </g>
+            <text x="2482" y="96" font-family="Montserrat, sans-serif" font-size="21" font-weight="600" fill="#2E4A6B">прочтений по хромосомам</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="dnax__panel">
+        <div class="dnax__cap" aria-live="polite"><span class="dnax__n mono">01 / 05</span><h3>Плацента</h3><p>Во время беременности фрагменты ДНК плаценты постоянно попадают в кровь матери.</p></div>
+        <div class="dnax__ctl">
+          <div class="dnax__track" role="slider" tabindex="0" aria-label="Этап пути ДНК" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" aria-valuetext="Плацента">
+            <div class="dnax__rail"><i class="dnax__fill"></i></div>
+            <span class="dnax__knob"></span>
+          </div>
+          <div class="dnax__stops">
+            <button class="dnax__stop" type="button" aria-current="true"><span class="dnax__sn mono">01</span><span class="dnax__sl">Плацента</span></button>
+            <button class="dnax__stop" type="button"><span class="dnax__sn mono">02</span><span class="dnax__sl">Кровь мамы</span></button>
+            <button class="dnax__stop" type="button"><span class="dnax__sn mono">03</span><span class="dnax__sl">Взятие крови</span></button>
+            <button class="dnax__stop" type="button"><span class="dnax__sn mono">04</span><span class="dnax__sl">Секвенатор</span></button>
+            <button class="dnax__stop" type="button"><span class="dnax__sn mono">05</span><span class="dnax__sl">Заключение</span></button>
+          </div>
+          <p class="dnax__hint">Потяните ползунок или картинку, либо нажмите на этап. Схема, не масштаб.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="about" style="padding-top:0">
+  <div class="wrap section-head" style="max-width:1240px">
+    <span class="section-eyebrow">Почему НИПТ</span>
+    <h2>Что вы <em>получаете</em></h2>
+    <p class="lead">Для исследования достаточно взять кровь из вены — без инвазивной процедуры. Заключение врач-генетик разбирает вместе с вами.</p>
+  </div>
+  <div class="wrap bens" style="max-width:1240px;margin-top:2.4em">
+    <div class="ben">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><rect x="7" y="12" width="3" height="6" rx="1"/><rect x="13" y="8" width="3" height="10" rx="1"/><rect x="19" y="5" width="2" height="13" rx="1"/></svg></span>
+      <h3>Скрининг основных хромосомных аномалий</h3>
+      <p>Трисомии 21, 18, 13 и половые хромосомы</p>
+    </div>
+    <div class="ben">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7Z"/></svg></span>
+      <h3>Только венозная кровь матери</h3>
+      <p>20 мл из вены, без подготовки</p>
+    </div>
+    <div class="ben">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+      <h3>С 10 полных недель</h3>
+      <p>Раньше биохимического скрининга</p>
+    </div>
+    <div class="ben">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg></span>
+      <h3>Заключение врача-генетика</h3>
+      <p>С разбором результата, входит в стоимость</p>
+    </div>
+    <div class="ben">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      <h3>Без вмешательства в полость матки</h3>
+      <p>Без амниоцентеза и биопсии ворсин хориона</p>
+    </div>
+  </div>
+
+</section>
+<section id="accuracy" style="padding-top:0">
+  <div class="wrap cmp">
+    <div>
+      <span class="section-eyebrow">Насколько точен НИПТ</span>
+      <h2>Более точный скрининг <em>частых трисомий</em></h2>
+      <p class="lead">НИПТ и комбинированный биохимический скрининг решают разные задачи. НИПТ отличается более высокой выявляемостью частых трисомий и меньшей частотой ложноположительных результатов — то есть реже направляет женщину на инвазивную процедуру без необходимости.</p>
+      <p class="lead" style="font-size:1em">Оба метода безопасны для беременности. НИПТ можно пройти раньше — с 10 полных недель, биохимический скрининг проводят на 11–13-й неделе.</p>
+    </div>
+
+    <div class="cmp-card">
+      <div class="cmp-item">
+        <div class="t"><b>Трисомия 21 · синдром Дауна</b><small>выявляемость</small></div>
+        <div class="cmp-line a"><div class="bar2"><i style="width:99%"></i></div><div class="v">&gt; 99 %</div></div>
+        <div class="cmp-line b"><div class="bar2"><i style="width:85%"></i></div><div class="v">85 %</div></div>
+      </div>
+      <div class="cmp-item">
+        <div class="t"><b>Трисомия 18 · синдром Эдвардса</b><small>выявляемость</small></div>
+        <div class="cmp-line a"><div class="bar2"><i style="width:98%"></i></div><div class="v">&gt; 98 %</div></div>
+        <div class="cmp-line b"><div class="bar2"><i style="width:75%"></i></div><div class="v">75 %</div></div>
+      </div>
+      <div class="cmp-item">
+        <div class="t"><b>Ложноположительные результаты</b><small>меньше — лучше</small></div>
+        <div class="cmp-line a"><div class="bar2"><i style="width:2%"></i></div><div class="v">&lt; 0,1 %</div></div>
+        <div class="cmp-line b"><div class="bar2"><i style="width:100%"></i></div><div class="v">до 5 %</div></div>
+      </div>
+      <div class="cmp-legend">
+        <span><i style="background:linear-gradient(90deg,var(--blue),var(--cyan))"></i> НИПТ</span>
+        <span><i style="background:#A9BDD6"></i> биохимический скрининг</span>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="panels" style="background:linear-gradient(180deg,#FFFFFF 0%,#F4F8FE 100%)">
+  <div class="wrap section-head center" style="max-width:1240px">
+    <span class="section-eyebrow">Панели и цены</span>
+    <h2>Пять вариантов <em>одного</em> исследования</h2>
+    <p class="lead">Кровь для всех панелей берут одинаково — 20 мл из вены. Панели различаются объёмом анализа, сроком и стоимостью.</p>
+  </div>
+
+  <div class="wrap panels" style="max-width:1240px;margin-top:2.6em">
+
+    <article class="panel">
+      <div class="code">Код 1110</div>
+      <h3>НИПТ Т21</h3>
+      <p class="desc">Базовый скрининг на синдром Дауна</p>
+      <ul>
+        <li>Трисомия 21 · синдром Дауна</li>
+        <li>Определение пола плода</li>
+        <li>Выполняется при двойне и после редукции одного эмбриона</li>
+      </ul>
+      <div class="price">
+        <div class="p">16 000 ₽</div>
+        <div class="term">8 календарных дней</div>
+      </div>
+      <a class="btn-lnipt btn-lnipt--secondary btn-lnipt--sm" href="https://price.genomed.ru/basket/add?id=802&amp;oneClick=1" data-panel="НИПТ Т21">Заказать · 16 000 ₽</a>
+      <a class="btn-lnipt btn-lnipt--light btn-lnipt--sm" href="#compare" style="margin-top:.5em">Что входит</a>
+    </article>
+
+    <article class="panel">
+      <div class="code">Код 2255</div>
+      <h3>НИПТ Базовая</h3>
+      <p class="desc">Три основные трисомии и пол плода</p>
+      <ul>
+        <li>Трисомия 21 · синдром Дауна</li>
+        <li>Трисомия 18 · синдром Эдвардса</li>
+        <li>Трисомия 13 · синдром Патау</li>
+        <li>Определение пола плода</li>
+        <li>Выполняется при двойне и после редукции одного эмбриона</li>
+      </ul>
+      <div class="price">
+        <div class="p">19 000 ₽</div>
+        <div class="term">8 календарных дней</div>
+      </div>
+      <a class="btn-lnipt btn-lnipt--secondary btn-lnipt--sm" href="https://price.genomed.ru/basket/add?id=1934&amp;oneClick=1" data-panel="НИПТ Базовая">Заказать · 19 000 ₽</a>
+      <a class="btn-lnipt btn-lnipt--light btn-lnipt--sm" href="#compare" style="margin-top:.5em">Что входит</a>
+    </article>
+
+    <article class="panel pop">
+      <span class="flag">Оптимальный баланс</span>
+      <div class="code">Код 1438</div>
+      <h3>НИПТ Стандартная</h3>
+      <p class="desc">Трисомии и анеуплоидии половых хромосом</p>
+      <ul>
+        <li>Трисомии 21, 18 и 13</li>
+        <li>Синдром Тернера · моносомия X</li>
+        <li>Синдром Клайнфельтера · 47,XXY</li>
+        <li>Трисомия X · 47,XXX</li>
+        <li>Синдром Якобс · 47,XYY</li>
+        <li>Определение пола плода</li>
+      </ul>
+      <div class="price">
+        <div class="p">23 000 ₽</div>
+        <div class="term">8 календарных дней</div>
+      </div>
+      <a class="btn-lnipt btn-lnipt--primary btn-lnipt--sm" href="https://price.genomed.ru/basket/add?id=1115&amp;oneClick=1" data-panel="НИПТ Стандартная"><span>Заказать · 23 000 ₽</span></a>
+      <a class="btn-lnipt btn-lnipt--light btn-lnipt--sm" href="#compare" style="margin-top:.5em">Что входит</a>
+    </article>
+
+    <article class="panel">
+      <div class="code">Код 1724</div>
+      <h3>НИПТ Расширенная</h3>
+      <p class="desc">Микроделеции и носительство у будущей мамы</p>
+      <ul>
+        <li>Всё из стандартной панели</li>
+        <li>6 микроделеционных синдромов</li>
+        <li>Носительство 18 рецессивных заболеваний у будущей мамы</li>
+        <li class="plus">Подтверждающий ХМА при высоком риске — бесплатно</li>
+      </ul>
+      <div class="price">
+        <div class="p">34 000 ₽</div>
+        <div class="term">8 рабочих дней</div>
+      </div>
+      <a class="btn-lnipt btn-lnipt--secondary btn-lnipt--sm" href="https://price.genomed.ru/basket/add?id=1400&amp;oneClick=1" data-panel="НИПТ Расширенная">Заказать · 34 000 ₽</a>
+      <a class="btn-lnipt btn-lnipt--light btn-lnipt--sm" href="#compare" style="margin-top:.5em">Что входит</a>
+    </article>
+
+    <article class="panel">
+      <div class="code">Код 2789</div>
+      <h3>НИПТ Экспертная</h3>
+      <p class="desc">Все хромосомы плода и 31 синдром</p>
+      <ul>
+        <li>Анеуплоидии всех хромосом плода</li>
+        <li>31 микроделеционный и микродупликационный синдром</li>
+        <li>Крупные перестройки · CNV более 5 млн п.н.</li>
+        <li>Носительство 18 рецессивных заболеваний у будущей мамы</li>
+        <li class="plus">Подтверждающий ХМА при высоком риске — бесплатно</li>
+      </ul>
+      <div class="price">
+        <div class="p">40 000 ₽</div>
+        <div class="term">8 рабочих дней</div>
+      </div>
+      <a class="btn-lnipt btn-lnipt--secondary btn-lnipt--sm" href="https://price.genomed.ru/basket/add?id=2468&amp;oneClick=1" data-panel="НИПТ Экспертная">Заказать · 40 000 ₽</a>
+      <a class="btn-lnipt btn-lnipt--light btn-lnipt--sm" href="#compare" style="margin-top:.5em">Что входит</a>
+    </article>
+
+  </div>
+
+  <div class="wrap" style="max-width:1240px">
+    <div class="mcta">
+      <div class="mcta__txt"><img class="mcta__face" src="doctor.jpg" alt="Врач-генетик лаборатории Геномед" width="200" height="244"><p>Сомневаетесь между двумя панелями?<small>Врач-генетик разберёт вашу ситуацию и подскажет объём исследования — бесплатно, до оплаты.</small></p></div>
+      <a class="btn-lnipt btn-lnipt--primary" href="#quiz"><span>Подобрать с генетиком →</span></a>
+    </div>
+    <div class="faq" style="margin-top:2.2em;max-width:100%">
+      <details>
+        <summary><span class="faq__n">01</span><span class="q">Чем стандартная панель отличается от расширенной?</span></summary>
+        <p class="a">Стандартная панель охватывает трисомии 21, 18 и 13, анеуплоидии половых хромосом и определение пола плода. Расширенная добавляет к этому скрининг шести микроделеционных синдромов и скрининг носительства рецессивных заболеваний у будущей мамы, а при высоком риске — бесплатную подтверждающую диагностику. Срок при этом считается в рабочих днях, а не в календарных.</p>
+      </details>
+      <details>
+        <summary><span class="faq__n">02</span><span class="q">Что будет, если результат покажет высокий риск?</span></summary>
+        <p class="a">Высокий риск по НИПТ — не диагноз, а основание для подтверждающего исследования: амниоцентеза или биопсии ворсин хориона с последующим хромосомным анализом. Врач-генетик разбирает заключение вместе с вами и объясняет, какие шаги возможны. В расширенной и экспертной панелях хромосомный микроматричный анализ при высоком риске выполняется бесплатно.</p>
+      </details>
+      <details>
+        <summary><span class="faq__n">03</span><span class="q">Можно ли сдать НИПТ после ЭКО?</span></summary>
+        <p class="a">Да, исследование выполняется и при беременности, наступившей после экстракорпорального оплодотворения, в том числе с донорской яйцеклеткой. Сообщите об этом при записи — генетик учтёт это при выборе панели и интерпретации результата.</p>
+      </details>
+      <details>
+        <summary><span class="faq__n">04</span><span class="q">Нужен ещё более широкий охват, чем в экспертной панели?</span></summary>
+        <p class="a">В лаборатории Геномед также доступны импортные панели: Panorama (Natera, США) — от 32 000 ₽, и Vistara — скрининг на 25 моногенных синдромов. Это отдельные тесты, не входящие в линейку из пяти панелей выше. Подберём вариант на консультации.</p>
+      </details>
+    </div>
+  </div>
+</section>
+<section id="compare" style="padding-top:0">
+  <div class="wrap section-head" style="max-width:1240px">
+    <span class="section-eyebrow">Сравнение</span>
+    <h2>Чем панели <em>отличаются</em></h2>
+    <p class="lead">Состав каждой панели по синдромам и итоговое число синдромов.</p>
+  </div>
+  <div class="wrap" style="max-width:1240px;margin-top:2em">
+<div class="tablewrap">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;min-width:240px">Что входит в исследование</th>
+            <th>Т21<span class="pr">16 000 ₽</span></th>
+            <th>Базовая<span class="pr">19 000 ₽</span></th>
+            <th>Стандартная<span class="pr">23 000 ₽</span></th>
+            <th>Расширенная<span class="pr">34 000 ₽</span></th>
+            <th>Экспертная<span class="pr">40 000 ₽</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sum">
+            <th>Хромосомных синдромов в панели</th>
+            <td>1</td><td>3</td><td>7</td><td>13</td><td>38<small>+ все хромосомы</small></td>
+          </tr>
+
+          <tr class="grp"><th>Аутосомные трисомии</th><td colspan="5"></td></tr>
+          <tr><th>Синдром Дауна · трисомия 21</th><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Эдвардса · трисомия 18</th><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Патау · трисомия 13</th><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+
+          <tr class="grp"><th>Половые хромосомы</th><td colspan="5"></td></tr>
+          <tr><th>Синдром Шерешевского—Тернера · моносомия X</th><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Клайнфельтера · 47,XXY</th><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Трисомия X · 47,XXX</th><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Якобс · 47,XYY</th><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Определение пола плода</th><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+
+          <tr class="grp"><th>Остальные хромосомы плода</th><td colspan="5"></td></tr>
+          <tr><th>Анеуплоидии прочих аутосом · 1—12, 14—17, 19, 20, 22</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><th>Крупные перестройки · CNV более 5 млн п.н.</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+
+          <tr class="grp"><th>Микроделеционные синдромы</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td><span class="mono">6</span></td><td><span class="mono">31</span></td></tr>
+          <tr><th>Синдром Ди Джорджи · делеция 22q11.2</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Прадера—Вилли · 15q11.2-q13</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Ангельмана · 15q11.2-q13</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Синдром кошачьего крика · 5p15.2</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Вольфа—Хиршхорна · 4p16.3</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Синдром делеции 1p36</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Миллера—Дикера · 17p13.3</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Вильямса · 7q11.23</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Смита—Магениса · 17p11.2</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Клифстра · 9q34.3</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><th>Сотос-подобный синдром · 5q35</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Якобсена · 11q24-q25</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><th>Синдром Алажилля · 20p12</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><th>Ещё 18 клинически значимых синдромов</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+
+          <tr class="grp"><th>Репродуктивные риски семьи</th><td colspan="5"></td></tr>
+          <tr><th>Носительство рецессивных заболеваний у будущей мамы</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td><span class="mono">18</span></td><td><span class="mono">18</span></td></tr>
+
+          <tr class="grp"><th>Условия и сервис</th><td colspan="5"></td></tr>
+          <tr><th>Двойня и редукция одного эмбриона</th><td class="y">✓</td><td class="y">✓</td><td class="part">на консультации</td><td class="part">на консультации</td><td class="part">на консультации</td></tr>
+          <tr><th>Подтверждающий ХМА при высоком риске</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">бесплатно</td><td class="y">бесплатно</td></tr>
+          <tr><th>Заключение врача-генетика с разбором</th><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><th>Срок выполнения</th><td><span class="mono">8 кал. дн.</span></td><td><span class="mono">8 кал. дн.</span></td><td><span class="mono">8 кал. дн.</span></td><td><span class="mono">8 раб. дн.</span></td><td><span class="mono">8 раб. дн.</span></td></tr>
+          <tr><th>Стоимость</th><td class="price-cell">16 000 ₽</td><td class="price-cell">19 000 ₽</td><td class="price-cell">23 000 ₽</td><td class="price-cell">34 000 ₽</td><td class="price-cell">40 000 ₽</td></tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <td><a class="btn-lnipt btn-lnipt--secondary" href="https://price.genomed.ru/basket/add?id=802&amp;oneClick=1" data-panel="НИПТ Т21">Заказать</a></td>
+            <td><a class="btn-lnipt btn-lnipt--secondary" href="https://price.genomed.ru/basket/add?id=1934&amp;oneClick=1" data-panel="НИПТ Базовая">Заказать</a></td>
+            <td><a class="btn-lnipt btn-lnipt--primary" href="https://price.genomed.ru/basket/add?id=1115&amp;oneClick=1" data-panel="НИПТ Стандартная"><span>Заказать</span></a></td>
+            <td><a class="btn-lnipt btn-lnipt--secondary" href="https://price.genomed.ru/basket/add?id=1400&amp;oneClick=1" data-panel="НИПТ Расширенная">Заказать</a></td>
+            <td><a class="btn-lnipt btn-lnipt--secondary" href="https://price.genomed.ru/basket/add?id=2468&amp;oneClick=1" data-panel="НИПТ Экспертная">Заказать</a></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <p class="thint">«Хромосомных синдромов в панели» — сумма отдельных нозологий: 3 трисомии + 4 анеуплоидии половых хромосом + микроделеционные синдромы. Носительство у мамы считается отдельно и в это число не входит. Состав панелей — по разделу НИПТ на genomed.ru, цены, коды и сроки — по прайсу.</p>
+
+    <div class="lists">
+      <details>
+        <summary>31 микроделеционный синдром · экспертная панель</summary>
+        <div class="body">
+          <p>Ниже — 13 синдромов из 31. Полный перечень можно уточнить у врача-генетика.</p>
+          <ol>
+            <li>Ди Джорджи · 22q11.2</li>
+            <li>Миллера—Дикера · 17p13.3</li>
+            <li>Прадера—Вилли · 15q11.2-q13</li>
+            <li>Ангельмана · 15q11.2-q13</li>
+            <li>Вольфа—Хиршхорна · 4p16.3</li>
+            <li>Кошачьего крика · 5p15.2</li>
+            <li>Вильямса · 7q11.23</li>
+            <li>Смита—Магениса · 17p11.2</li>
+            <li>Клифстра · 9q34.3</li>
+            <li>Сотос-подобный · 5q35</li>
+            <li>Якобсена · 11q24-q25</li>
+            <li>Алажилля · 20p12</li>
+            <li>Делеция 1p36</li>
+          </ol>
+        </div>
+      </details>
+      <details>
+        <summary>18 заболеваний · носительство у будущей мамы</summary>
+        <div class="body">
+          <p>Скрининг носительства патогенных вариантов у будущей мамы. Важен, если носителями вариантов в одном и том же гене окажутся оба родителя: тогда вероятность заболевания у ребёнка составляет 25 %. Входит в расширенную и экспертную панели.</p>
+          <ul>
+            <li>Муковисцидоз · CFTR</li>
+            <li>Фенилкетонурия · PAH</li>
+            <li>Галактоземия · GALT</li>
+            <li>Тугоухость · SLC26A4</li>
+            <li>Тугоухость · GJB2</li>
+            <li>Нейрональный цероидный липофусциноз</li>
+            <li>Болезнь Вильсона · ATP7B</li>
+            <li>Лейкоэнцефалопатия с поражением ствола мозга</li>
+            <li>Синдром Смита—Лемли—Опица</li>
+            <li>Болезнь Тея—Сакса</li>
+            <li>Мукополисахаридоз тип I</li>
+            <li>Синдром множественных врождённых аномалий, гипотонии и судорог тип I</li>
+            <li>Поликистоз почек тип 4</li>
+            <li>Врождённое нарушение гликозилирования тип Ia</li>
+            <li>Диастрофическая дисплазия</li>
+            <li>Иммунокостная дисплазия Шимке</li>
+            <li>Синдром Ушера тип 2a</li>
+            <li>Врождённая непереносимость фруктозы</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+<section id="quiz" style="padding-top:0">
+  <div class="wrap section-head">
+    <span class="section-eyebrow">Подбор исследования</span>
+    <h2>Не знаете, какой НИПТ <em>выбрать</em>?</h2>
+    <p class="lead">Ответьте на три вопроса — подскажем подходящую панель. Это займёт меньше минуты, контакты вводить не нужно.</p>
+  </div>
+
+  <div class="wrap" style="margin-top:2.2em">
+    <div class="quiz" id="q">
+      <div class="quiz__prog" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+
+      <div class="qstep on" data-step="1">
+        <div class="qn">Вопрос 1 из 3</div>
+        <h3>Какой у вас срок беременности?</h3>
+        <div class="qopts">
+          <button class="qopt" data-k="term" data-v="lt10"><span class="k">01</span><span class="tx">Меньше 10 недель<small>Ещё не наступил минимальный срок для исследования</small></span></button>
+          <button class="qopt" data-k="term" data-v="ok"><span class="k">02</span><span class="tx">10–13 недель<small>Оптимальное время для пренатального скрининга</small></span></button>
+          <button class="qopt" data-k="term" data-v="ok"><span class="k">03</span><span class="tx">14 недель и больше<small>Исследование выполняется, верхней границы срока практически нет</small></span></button>
+        </div>
+      </div>
+
+      <div class="qstep" data-step="2">
+        <div class="qn">Вопрос 2 из 3</div>
+        <h3>Сколько плодов?</h3>
+        <div class="qopts">
+          <button class="qopt" data-k="fetus" data-v="one"><span class="k">01</span><span class="tx">Одноплодная беременность</span></button>
+          <button class="qopt" data-k="fetus" data-v="twin"><span class="k">02</span><span class="tx">Двойня</span></button>
+          <button class="qopt" data-k="fetus" data-v="multi"><span class="k">03</span><span class="tx">Тройня и больше</span></button>
+          <button class="qopt" data-k="fetus" data-v="unknown"><span class="k">04</span><span class="tx">Пока не знаю<small>УЗИ ещё не делали</small></span></button>
+        </div>
+        <div class="qfoot"><button class="qlink" data-back="1">← Назад</button></div>
+      </div>
+
+      <div class="qstep" data-step="3">
+        <div class="qn">Вопрос 3 из 3</div>
+        <h3>Что важнее всего в вашей ситуации?</h3>
+        <div class="qopts">
+          <button class="qopt" data-k="case" data-v="first"><span class="k">01</span><span class="tx">Обычный скрининг, ничего не настораживает<small>Плановое обследование при нормально протекающей беременности</small></span></button>
+          <button class="qopt" data-k="case" data-v="risk"><span class="k">02</span><span class="tx">Скрининг или УЗИ показали повышенный риск<small>Нужно уточнить риск без инвазивной процедуры</small></span></button>
+          <button class="qopt" data-k="case" data-v="anamnesis"><span class="k">03</span><span class="tx">Возраст 35+, беременность после ЭКО или потери в анамнезе</span></button>
+          <button class="qopt" data-k="case" data-v="max"><span class="k">04</span><span class="tx">Хочу максимально широкий анализ<small>Все хромосомы плода и носительство у будущей мамы</small></span></button>
+          <button class="qopt" data-k="case" data-v="budget"><span class="k">05</span><span class="tx">Нужен базовый скрининг по минимальной цене</span></button>
+        </div>
+        <div class="qfoot"><button class="qlink" data-back="2">← Назад</button></div>
+      </div>
+
+      <div class="qres" id="qres" role="status" aria-live="polite">
+        <div class="qn" id="qres-eyebrow">Рекомендация</div>
+        <h3 id="qres-title">Подходящий вариант</h3>
+        <div class="qres__box" id="qres-box">
+          <div>
+            <div class="qres__tag" id="qres-tag">Рекомендуем</div>
+            <div class="qres__name" id="qres-name"></div>
+            <p class="qres__why" id="qres-why"></p>
+          </div>
+          <div class="qres__price" id="qres-price"></div>
+        </div>
+        <div class="qpair" id="qres-pair" hidden></div>
+        <div class="qres__cta">
+          <a class="btn-lnipt btn-lnipt--primary" id="qres-cta" href="#modal-callback"><span>Записаться на консультацию</span></a>
+          <a class="btn-lnipt btn-lnipt--secondary" href="#compare">Сравнить все панели</a>
+          <a class="btn-lnipt btn-lnipt--light" id="qres-alt" href="#modal-callback">Сначала обсудить с генетиком</a>
+        </div>
+        <div class="qfoot">
+          <button class="qlink" id="qrestart">← Пройти заново</button>
+          <p>Рекомендация носит справочный характер и не заменяет консультацию врача-генетика. Окончательный объём исследования определяет врач.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="how" style="padding-top:0">
+  <div class="wrap section-head">
+    <span class="section-eyebrow">Как проходит</span>
+    <h2>От записи до заключения — <em>четыре</em> шага</h2>
+    <p class="lead">Специальная подготовка не требуется, сдавать кровь можно не натощак.</p>
+  </div>
+  <div class="wrap steps" style="margin-top:2.4em">
+    <div class="step"><div class="n">01</div><h3>Консультация</h3><p>Запись по телефону или онлайн. Врач-генетик помогает выбрать панель под срок беременности и анамнез.</p></div>
+    <div class="step"><div class="n">02</div><h3>Взятие крови</h3><p>20 мл венозной крови с 10 полных недель беременности. Процедура ничем не отличается от обычного анализа.</p></div>
+    <div class="step"><div class="n">03</div><h3>Секвенирование ДНК</h3><p>В лаборатории из плазмы выделяют внеклеточную ДНК и прочитывают её на секвенаторе. Каждый этап проходит контроль качества.</p></div>
+    <div class="step"><div class="n">04</div><h3>Заключение генетика</h3><p>Через 8 дней результат приходит на электронную почту, указанную в договоре. При необходимости — разбор заключения с врачом.</p></div>
+  </div>
+
+  <div class="wrap where">
+    <div class="wcard">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+      <h3>В медицинском офисе Геномед</h3>
+      <p>Кровь берёт персонал лаборатории. Здесь же можно задать вопросы врачу перед исследованием.</p>
+      <div class="tagline">50+ офисов по России</div>
+      <a class="wlink" href="https://genomed.ru/gde-sdat-test/">Найти офис →</a>
+    </div>
+    <div class="wcard">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></span>
+      <h3>У партнёра в вашем городе</h3>
+      <p>Партнёрская сеть медицинских центров позволяет сдать кровь рядом с домом — ехать в Москву не нужно.</p>
+      <div class="tagline">40+ городов</div>
+      <a class="wlink" href="https://genomed.ru/gde-sdat-test/">Города-партнёры →</a>
+    </div>
+    <div class="wcard">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z"/><path d="M9 21v-6h6v6"/></svg></span>
+      <h3>С выездом медсестры на дом</h3>
+      <p>Удобный вариант при токсикозе, угрозе прерывания или ограниченной мобильности. Медсестра приезжает с набором для взятия крови.</p>
+      <div class="tagline">Выезд по договорённости</div>
+      <a class="wlink" href="https://genomed.ru/gde-sdat-test/">Условия выезда →</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="mcta">
+      <p>Готовы записаться?<small>Подскажем ближайший медицинский офис и удобное время.</small></p>
+      <a class="btn-lnipt btn-lnipt--primary" href="#cta"><span>Записаться →</span></a>
+    </div>
+  </div>
+</section>
+<section id="limits" style="padding-top:0">
+  <div class="wrap">
+    <div class="deep">
+      <span class="section-eyebrow" style="color:var(--cyan)">Ограничения</span>
+      <h2 style="font-size:clamp(26px,3.4vw,42px) !important">Когда исследование <em style="color:var(--cyan)">не выполняется</em></h2>
+      <p style="max-width:66ch;margin:1em 0 2.2em">Часть ограничений связана с биологией метода: в этих ситуациях внеклеточная ДНК в крови не отражает генотип плода или её недостаточно для надёжного анализа.</p>
+      <div class="limlist">
+    <div class="limrow">
+      <span class="limrow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a3.5 3.5 0 0 0-2.5-3.37"/><path d="M16.5 3.16a3.5 3.5 0 0 1 0 6.68"/></svg></span>
+      <div><h3>Тройня и больше</h3><p>При тройне и большем числе плодов исследование не проводится: ДНК разных плодов в крови матери разделить невозможно.</p></div>
+    </div>
+    <div class="limrow">
+      <span class="limrow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+      <div><h3>Онкологическое заболевание у матери</h3><p>Опухолевая ДНК попадает в кровоток и искажает результат подсчёта хромосом.</p></div>
+    </div>
+    <div class="limrow">
+      <span class="limrow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7Z"/></svg></span>
+      <div><h3>Недавние трансплантация органа или переливание крови</h3><p>В крови присутствует чужеродная ДНК донора, поэтому корректно интерпретировать результат нельзя.</p></div>
+    </div>
+    <div class="limrow">
+      <span class="limrow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span>
+      <div><h3>Плодная фракция ниже 4 %</h3><p>Доля ДНК плода определяется в процессе исследования. Если её меньше 4 %, результат не выдаётся — повторное взятие крови на большем сроке бесплатно.</p></div>
+    </div>
+    <div class="limrow">
+      <span class="limrow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="6"/><circle cx="15.5" cy="12" r="5" opacity=".4"/></svg></span>
+      <div><h3>Синдром исчезнувшего близнеца</h3><p>Если один эмбрион из двойни остановился в развитии, его ДНК определяется в крови ещё около шести недель и может дать ложноположительный результат.</p></div>
+    </div>
+    <div class="limrow">
+      <span class="limrow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M4 8h6"/><path d="M14 8h6"/><path d="M4 8 1.5 14a3 3 0 0 0 6 0Z"/><path d="M20 8 17.5 14a3 3 0 0 0 6 0Z"/><path d="M8 21h8"/></svg></span>
+      <div><h3>Индекс массы тела выше 30</h3><p>При избытке жировой ткани доля ДНК плода в крови снижается, и плодной фракции может не хватить для надёжного результата.</p></div>
+    </div>
+</div>
+      <p style="margin-top:1.8em;font-size:.92em">Все ограничения врач-генетик разбирает индивидуально на консультации перед исследованием.</p>
+    </div>
+  </div>
+</section>
+<section id="why" style="padding-top:0">
+  <div class="wrap">
+    <div class="deep">
+      <span class="section-eyebrow" style="color:var(--cyan)">Почему Геномед</span>
+      <h2 style="font-size:clamp(26px,3.4vw,42px) !important;margin-bottom:1em !important">Лаборатория, которая <em style="color:var(--cyan)">объясняет</em> результат</h2>
+      <div class="trust">
+        <div><div class="n">с 2013</div><div class="c">года в медико-генетической диагностике</div></div>
+        <div><div class="n">ISO 15189</div><div class="c">международный стандарт медицинских лабораторий</div></div>
+        <div><div class="n">Генетик</div><div class="c">интерпретирует заключение и отвечает на вопросы</div></div>
+        <div><div class="n">50+</div><div class="c">медицинских офисов и партнёры в 40+ городах</div></div>
+      </div>
+      <p style="margin-top:2em;font-size:.95em">Более 100 000 исследований выполнено с 2013 года. Сдать кровь можно в медицинском офисе, у партнёра в вашем городе или дома — с выездом медсестры.</p>
+    </div>
+  </div>
+</section>
+<section id="faq" style="padding-top:0">
+  <div class="wrap section-head">
+    <span class="section-eyebrow">Вопросы</span>
+    <h2>Что чаще всего <em>спрашивают</em></h2>
+  </div>
+  <div class="wrap faq" style="margin-top:2em">
+    <details open>
+      <summary><span class="faq__n">01</span><span class="q">НИПТ действительно безопасен для беременности?</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+      <p class="a">Да. Для исследования берут венозную кровь у матери — процедура ничем не отличается от обычного анализа крови. Фрагменты ДНК плаценты сами попадают в кровь матери, поэтому прокол плодных оболочек, как при амниоцентезе или биопсии ворсин хориона, не нужен и риска для беременности нет.</p>
+    </details>
+    <details>
+      <summary><span class="faq__n">02</span><span class="q">С какого срока можно сдавать?</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+      <p class="a">С 10 полных недель беременности: к этому сроку доля ДНК плода в материнской крови обычно достигает необходимых 4 % и выше. Верхней границы срока практически нет. Плодная фракция определяется в процессе исследования — если она оказалась ниже 4 %, кровь потребуется сдать повторно на более позднем сроке.</p>
+    </details>
+    <details>
+      <summary><span class="faq__n">03</span><span class="q">Заменяет ли НИПТ инвазивную диагностику?</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+      <p class="a">Нет. НИПТ — скрининговое исследование: оно оценивает вероятность хромосомной аномалии, но не устанавливает диагноз. При высоком риске результат подтверждают инвазивной диагностикой с последующим хромосомным анализом. В расширенной и экспертной панелях Геномед такое подтверждение выполняется бесплатно.</p>
+    </details>
+    <details>
+      <summary><span class="faq__n">04</span><span class="q">Что означает «остаточный риск» в заключении?</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+      <p class="a">Это вероятность того, что при низком риске по результату хромосомная аномалия у плода всё же есть. Для НИПТ она очень мала: надёжность низкого результата (NPV) превышает 99,9 %, но формально остаточный риск не равен нулю.</p>
+    </details>
+    <details>
+      <summary><span class="faq__n">05</span><span class="q">Нужно ли готовиться к сдаче крови?</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+      <p class="a">Специальная подготовка не требуется. Сдавать кровь можно не натощак, диета и отмена препаратов не нужны. Для исследования берут 20 мл венозной крови.</p>
+    </details>
+    <details>
+      <summary><span class="faq__n">06</span><span class="q">Когда и как приходит результат?</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+      <p class="a">Через 8 дней после взятия крови заключение врача-генетика приходит на электронную почту, указанную в договоре. Для панелей Т21, базовой и стандартной срок считается в календарных днях, для расширенной и экспертной — в рабочих. Разбор заключения с врачом-генетиком входит в стоимость.</p>
+    </details>
+      <details>
+        <summary><span class="faq__n">07</span><span class="q">Можно ли сдать НИПТ при двойне?</span>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <p class="a">При двуплодной беременности и после редукции одного эмбриона выполняются панели Т21 и базовая. Панели с анеуплоидиями половых хромосом при двойне не применяются: ДНК каждого плода в крови матери разделить нельзя. При тройне и большем числе плодов исследование не проводится.</p>
+      </details>
+      <details>
+        <summary><span class="faq__n">08</span><span class="q">Определяется ли пол ребёнка?</span>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <p class="a">Да, определение пола плода входит во все пять панелей. Если вы не хотите знать пол до родов, скажите об этом при записи — врач не назовёт его при разборе заключения.</p>
+      </details>
+      <details>
+        <summary><span class="faq__n">09</span><span class="q">Что будет, если плодной фракции не хватит?</span>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <p class="a">Доля ДНК плода определяется уже в ходе исследования. Если она ниже 4 %, достоверный результат получить нельзя — лаборатория бесплатно выполняет анализ нового образца крови на большем сроке. Низкая плодная фракция сама по себе считается поводом обсудить с генетиком дальнейшую тактику.</p>
+      </details>
+
+  </div>
+</section>
+<section id="doctors" style="padding-top:0">
+  <div class="wrap section-head">
+    <span class="section-eyebrow">Для врачей</span>
+    <h2>Интерпретация <em>заключения</em></h2>
+    <p class="lead">Рекомендация предлагать скрининг по внеклеточной ДНК всем беременным — ACOG, SMFM, ISPD, ACMG. Показатели выявляемости на странице приведены по опубликованным данным для комбинированного скрининга первого триместра и скрининга по внеклеточной ДНК.</p>
+  </div>
+  <div class="wrap faq" style="margin-top:2.4em;">
+    <details class="acc">
+      <summary><span class="faq__n">01</span><span class="q">Как читается заключение: высокий и низкий риск, PPV и NPV</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+      <div class="body">
+        <p style="margin:0 0 1.5em;color:var(--ink-2);font-size:.97em;line-height:1.65">Результатом исследования является заключение врача-генетика, в котором определён высокий или низкий риск по каждой исследованной хромосоме. Граница между высоким и низким риском — <b>1 : 100</b>.</p>
+
+        <div class="risk-grid">
+          <div class="risk hi">
+            <span class="tag">Высокий риск</span>
+            <div class="thr">1 : 100 и выше</div>
+            <p>Такие значения выражаются в виде положительной прогностической ценности (PPV, positive predictive value) — вероятности того, что при высоком риске по тесту аномалия действительно есть у плода.</p>
+            <div class="metric">Требует подтверждения инвазивной диагностикой — амниоцентезом или биопсией ворсин хориона с последующим хромосомным анализом.</div>
+          </div>
+          <div class="risk lo">
+            <span class="tag">Низкий риск</span>
+            <div class="thr">ниже 1 : 100</div>
+            <p>Такие значения выражаются в виде отрицательной прогностической ценности (NPV, negative predictive value). В заключении NPV представлен как остаточный риск — вероятность ложноотрицательного результата.</p>
+            <div class="metric">NPV исследования составляет <b>&gt; 99,9 %</b> — то есть остаточный риск при низком результате крайне мал.</div>
+          </div>
+        </div>
+
+        <div class="ppv" style="box-shadow:none;background:#FAFCFF">
+          <h3>PPV — уверенность в положительном результате</h3>
+          <p class="sub">Значения различаются по нозологиям: чем реже встречается аномалия, тем ниже прогностическая ценность положительного результата.</p>
+          <div class="ppv-row">
+            <div class="lbl">Трисомия 21 <small>синдром Дауна</small></div>
+            <div class="val">&gt; 97 %</div>
+            <div class="track"><i style="width:97%"></i></div>
+          </div>
+          <div class="ppv-row">
+            <div class="lbl">Трисомия 18 <small>синдром Эдвардса</small></div>
+            <div class="val">&gt; 91 %</div>
+            <div class="track"><i style="width:91%"></i></div>
+          </div>
+          <div class="ppv-row">
+            <div class="lbl">Трисомия 13 и анеуплоидии половых хромосом <small>синдром Патау, синдромы Тернера, Клайнфельтера, Якобс, трисомия X</small></div>
+            <div class="val">&gt; 60 %</div>
+            <div class="track"><i style="width:60%"></i></div>
+          </div>
+          <div class="ppv-row">
+            <div class="lbl">Микроделеционные синдромы <small>доступны в расширенной и экспертной панелях</small></div>
+            <div class="val" style="font-size:.8em;color:var(--muted)">индивид.</div>
+            <div class="track"><i style="width:0"></i></div>
+          </div>
+          <p class="src" style="margin-top:1.4em">Значения высокого риска микроделеционных синдромов определяются индивидуально. NPV по всем позициям — более 99,9 %.</p>
+          <div class="note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+            <p><b>Важно.</b> Вычисленный риск может не отражать реальный PPV для конкретной пациентки: в исследовании не учитываются дополнительные факторы риска — результаты других скринингов, данные УЗИ, личный и семейный анамнез. Итоговую интерпретацию всегда делает врач.</p>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary><span class="faq__n">02</span><span class="q">Как устроен анализ</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+      <div class="body">
+        <div class="cards">
+          <div class="fcard" style="box-shadow:none;background:#FAFCFF">
+            <div class="n mono">01 · биология</div>
+            <h3>Внеклеточная ДНК в крови матери</h3>
+            <p>С ранних сроков беременности в материнском кровотоке циркулируют фрагменты внеклеточной ДНК плацентарного происхождения. Их доля называется плодной фракцией и определяется в ходе исследования.</p>
+          </div>
+          <div class="fcard" style="box-shadow:none;background:#FAFCFF">
+            <div class="n mono">02 · технология</div>
+            <h3>Секвенирование пересчитывает хромосомы</h3>
+            <p>ДНК выделяют из плазмы и читают методом высокопроизводительного секвенирования. Программа считает, сколько прочтений приходится на каждую хромосому.</p>
+          </div>
+          <div class="fcard" style="box-shadow:none;background:#FAFCFF">
+            <div class="n mono">03 · результат</div>
+            <h3>Отклонение видно в цифрах</h3>
+            <p>Если прочтений по хромосоме больше или меньше ожидаемого, это указывает на вероятную анеуплоидию. Дополнительная копия 21-й хромосомы — признак синдрома Дауна, 18-й — синдрома Эдвардса.</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+<section id="cta" style="padding-top:0">
+  <div class="wrap">
+    <div class="deep cta-grid">
+      <div>
+        <span class="section-eyebrow" style="color:var(--cyan)">Записаться</span>
+        <h2 style="font-size:clamp(26px,3.4vw,42px) !important">Подберём НИПТ <em style="color:var(--cyan)">под ваш срок</em> беременности</h2>
+        <p style="max-width:58ch;margin-top:1em">Оставьте телефон — перезвоним, поможем выбрать панель, подскажем ближайший медицинский офис и ответим на вопросы. Консультация перед исследованием бесплатна.</p>
+
+        <form class="leadform" id="leadform">
+          <input type="text" name="fio" placeholder="Ваше имя" autocomplete="name">
+          <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+          <button type="submit" class="btn-lnipt btn-lnipt--light"><span>Получить консультацию</span></button>
+          <p class="leadform__note">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных.</p>
+        </form>
+
+        <p class="cta-phone">Удобнее по телефону — <a href="tel:+74956608377" class="mono">8 (495) 660-83-77</a>, клиентский сервис работает круглосуточно.</p>
+      </div>
+      <div class="pricebox">
+        <div class="l">Панели НИПТ</div>
+        <div class="p">от 16 000 ₽</div>
+        <p>Т21 — базовый скрининг на синдром Дауна. До 40 000 ₽ за экспертную панель с анализом всех хромосом плода.</p>
+        <a class="btn-lnipt btn-lnipt--light" href="#quiz" style="margin-top:1.4em;width:100%">Подобрать НИПТ →</a>
+        <a class="btn-lnipt btn-lnipt--light" href="#compare" style="margin-top:.6em;width:100%">Сравнить панели</a>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="ldisc">
+  <div class="wrap">
+    <p><b>НИПТ — скрининговое исследование.</b> Оно оценивает вероятность хромосомных аномалий у плода и не является окончательным диагнозом. При высоком риске требуется подтверждающая инвазивная диагностика. Объём исследования определяет врач-генетик.</p>
+    <p>Имеются противопоказания, необходима консультация специалиста.</p>
+    <p class="ldisc__fine">Информация на странице носит справочный характер и не является публичной офертой. Цены и сроки указаны на момент публикации; актуальные — в прайсе на price.genomed.ru. ООО Геномед, лаборатория сертифицирована по стандарту ISO 15189.</p>
+  </div>
+</footer>
+<div class="sticky-cta">
+  <a class="btn-lnipt btn-lnipt--primary" href="#quiz"><span>Подобрать НИПТ</span></a>
+  <a class="btn-lnipt btn-lnipt--secondary" href="#panels">Панели и цены</a>
+</div>
+<div class="pmodal" id="modal-callback" hidden>
+  <div class="pmodal__scrim" data-pm-close></div>
+  <div class="pmodal__card" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+    <button class="pmodal__x" type="button" aria-label="Закрыть" data-pm-close>×</button>
+    <h3 id="pm-title">Выберите удобный способ связи</h3>
+    <p>Поможем выбрать панель, подскажем ближайший медицинский офис и ответим на вопросы.</p>
+    <div class="pmodal__row">
+      <a class="btn-lnipt btn-lnipt--primary" href="https://t.me/genomed_b2c_bot" target="_blank" rel="noopener"><span>Telegram</span></a>
+      <a class="btn-lnipt btn-lnipt--primary" href="https://wa.me/74956608377" target="_blank" rel="noopener"><span>WhatsApp</span></a>
+      <a class="btn-lnipt btn-lnipt--primary" href="https://max.ru/id7701759381_bot" target="_blank" rel="noopener"><span>MAX</span></a>
+    </div>
+    <p class="pmodal__tel">или по телефону <a href="tel:+74956608377" class="mono">8 (495) 660-83-77</a></p>
+    <p class="pmodal__note">Превью: на сайте здесь открывается штатная форма заявки.</p>
+  </div>
+</div>
+<script>
+/* ============================================================
+   1. КВИЗ — подбор панели
+   Отличия от текущей версии на nipt-test:
+   — у панелей появился id корзины, кнопка результата ведёт в заказ;
+   — ветка «двойня» больше не тупик: показываем две доступные панели;
+   — ветка «меньше 10 недель» ведёт на запись, а не в никуда.
+   ============================================================ */
+(function () {
+  var q = document.getElementById('q');
+  if (!q) return;
+
+  var answers = {}, current = 1;
+  var steps = q.querySelectorAll('.qstep');
+  var res = document.getElementById('qres');
+  var prog = q.querySelectorAll('.quiz__prog i');
+  var box = document.getElementById('qres-box');
+  var pair = document.getElementById('qres-pair');
+  var cta = document.getElementById('qres-cta');
+  var alt = document.getElementById('qres-alt');
+
+  var BASKET = 'https://price.genomed.ru/basket/add?id=';
+
+  var PANELS = {
+    t21: {
+      name: 'НИПТ Т21', price: '16 000 ₽', term: '8 календарных дней', id: 802,
+      why: 'Скрининг на самую частую трисомию — синдром Дауна, плюс определение пола плода. Выполняется в том числе при двуплодной беременности.'
+    },
+    basic: {
+      name: 'НИПТ Базовая', price: '19 000 ₽', term: '8 календарных дней', id: 1934,
+      why: 'Скрининг трёх основных трисомий — синдромов Дауна, Эдвардса и Патау — плюс определение пола плода. Самый доступный вариант, покрывающий все частые трисомии.'
+    },
+    standard: {
+      name: 'НИПТ Стандартная', price: '23 000 ₽', term: '8 календарных дней', id: 1115,
+      why: 'Покрывает трисомии 21, 18 и 13, анеуплоидии половых хромосом и определение пола плода. Самый широкий вариант из тех, что выполняются за 8 календарных дней.'
+    },
+    extended: {
+      name: 'НИПТ Расширенная', price: '34 000 ₽', term: '8 рабочих дней', id: 1400,
+      why: 'Дополнительно к стандартной панели — шесть микроделеционных синдромов и скрининг носительства рецессивных заболеваний у будущей мамы. Главное для вашей ситуации: при высоком риске подтверждающая диагностика выполняется бесплатно.'
+    },
+    expert: {
+      name: 'НИПТ Экспертная', price: '40 000 ₽', term: '8 рабочих дней', id: 2468,
+      why: 'Анеуплоидии всех хромосом плода, 31 микроделеционный синдром и скрининг носительства рецессивных заболеваний у будущей мамы. Подтверждающая диагностика при высоком риске — бесплатно.'
+    }
+  };
+
+  function show(el) {
+    steps.forEach(function (s) { s.classList.remove('on'); });
+    res.classList.remove('on');
+    if (el === 'res') { res.classList.add('on'); setProg(3); }
+    else {
+      q.querySelector('.qstep[data-step="' + el + '"]').classList.add('on');
+      current = el;
+      setProg(el);
+    }
+  }
+
+  function setProg(n) {
+    prog.forEach(function (p, i) { p.classList.toggle('on', i < n); });
+  }
+
+  function goal(name, params) {
+    if (typeof window.ym === 'function') window.ym(21728914, 'reachGoal', name, params);
+  }
+
+  function render(kind, data) {
+    var eb = document.getElementById('qres-eyebrow');
+    var ti = document.getElementById('qres-title');
+    var tg = document.getElementById('qres-tag');
+    var nm = document.getElementById('qres-name');
+    var wh = document.getElementById('qres-why');
+    var pr = document.getElementById('qres-price');
+
+    pair.hidden = true;
+    pair.innerHTML = '';
+    box.hidden = false;
+    alt.hidden = false;
+
+    if (kind === 'panel') {
+      eb.textContent = 'Рекомендация';
+      ti.textContent = 'Скорее всего, вам подойдёт';
+      tg.textContent = 'Рекомендуем';
+      nm.textContent = data.name;
+      wh.textContent = data.why;
+      pr.innerHTML = '<div class="p">' + data.price + '</div><div class="t">' + data.term + '</div>';
+      cta.href = BASKET + data.id + '&oneClick=1';
+      cta.dataset.panel = data.name;
+      cta.querySelector('span').textContent = 'Заказать · ' + data.price;
+      goal('nipt_quiz_result', { panel: data.name });
+      return;
+    }
+
+    if (kind === 'pair') {
+      eb.textContent = 'Подходят две панели';
+      ti.textContent = data.title;
+      tg.textContent = 'Доступно при двойне';
+      nm.textContent = data.name;
+      wh.textContent = data.why;
+      pr.innerHTML = '';
+      data.items.forEach(function (p) {
+        var a = document.createElement('article');
+        a.innerHTML = '<h4>' + p.name + '</h4>' +
+          '<div class="pp">' + p.price + '</div>' +
+          '<div class="tt">' + p.term + '</div>' +
+          '<a class="btn-lnipt btn-lnipt--secondary btn-lnipt--sm" data-panel="' + p.name +
+          '" href="' + BASKET + p.id + '&oneClick=1">Заказать</a>';
+        pair.appendChild(a);
+      });
+      pair.hidden = false;
+      cta.href = '#modal-callback';
+      cta.querySelector('span').textContent = 'Записаться на консультацию';
+      alt.hidden = true;
+      goal('nipt_quiz_result', { panel: 'двойня — Т21 и базовая' });
+      return;
+    }
+
+    eb.textContent = 'Нужна консультация';
+    ti.textContent = data.title;
+    tg.textContent = 'Что делать';
+    nm.textContent = data.name;
+    wh.textContent = data.why;
+    pr.innerHTML = '';
+    cta.href = '#modal-callback';
+    cta.querySelector('span').textContent = 'Записаться на консультацию';
+    alt.hidden = true;
+    goal('nipt_quiz_result', { panel: 'консультация' });
+  }
+
+  function terminal() {
+    return answers.term === 'lt10' ||
+      answers.fetus === 'multi' ||
+      answers.fetus === 'twin' ||
+      answers.fetus === 'unknown';
+  }
+
+  function finish() {
+    if (answers.term === 'lt10') {
+      render('info', {
+        title: 'Пока рано сдавать',
+        name: 'НИПТ выполняется с 10 полных недель',
+        why: 'До этого срока доля ДНК плода в крови матери обычно меньше 4 %, и надёжный результат получить нельзя. Запишитесь на консультацию — генетик подскажет, когда прийти, и заранее подберёт панель, чтобы в нужную неделю осталось только сдать кровь.'
+      });
+      return show('res');
+    }
+    if (answers.fetus === 'multi') {
+      render('info', {
+        title: 'Исследование не выполняется',
+        name: 'При тройне и большем числе плодов НИПТ не проводится',
+        why: 'Разделить вклад каждого плода в общий пул внеклеточной ДНК невозможно. Обсудите с врачом-генетиком, какие методы пренатального обследования подойдут в вашем случае.'
+      });
+      return show('res');
+    }
+    if (answers.fetus === 'twin') {
+      render('pair', {
+        title: 'При двойне выполняются две панели',
+        name: 'НИПТ Т21 и НИПТ Базовая',
+        why: 'Обе панели проводятся при двуплодной беременности и после редукции одного эмбриона. Панели с анеуплоидиями половых хромосом при двойне не применяются — разделить вклад плодов нельзя. Окончательный объём подтвердит генетик на бесплатной консультации.',
+        items: [PANELS.t21, PANELS.basic]
+      });
+      return show('res');
+    }
+    if (answers.fetus === 'unknown') {
+      render('info', {
+        title: 'Подберём панель после УЗИ',
+        name: 'Нужно подтвердить число плодов',
+        why: 'От числа плодов зависит, какие панели доступны: при двойне это Т21 и базовая, при тройне исследование не проводится. Запишитесь на консультацию — генетик подберёт панель по результату ближайшего УЗИ.'
+      });
+      return show('res');
+    }
+    var map = { first: 'standard', risk: 'extended', anamnesis: 'extended', max: 'expert', budget: 'basic' };
+    render('panel', PANELS[map[answers.case] || 'standard']);
+    show('res');
+  }
+
+  q.addEventListener('click', function (e) {
+    var opt = e.target.closest('.qopt');
+    if (opt) {
+      if (!Object.keys(answers).length) goal('nipt_quiz_start');
+      answers[opt.dataset.k] = opt.dataset.v;
+      if (terminal() || current === 3) finish(); else show(current + 1);
+      var next = q.querySelector('.qstep.on h3, .qres.on h3');
+      if (next) { next.setAttribute('tabindex', '-1'); next.focus({ preventScroll: true }); }
+      return;
+    }
+    var back = e.target.closest('[data-back]');
+    if (back) { show(parseInt(back.dataset.back, 10)); return; }
+    if (e.target.closest('#qrestart')) { answers = {}; show(1); }
+  });
+})();
+
+
+/* ============================================================
+   2. ЯКОРНАЯ НАВИГАЦИЯ — подсветка текущего раздела
+   ============================================================ */
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.lnav a[href^="#"]'));
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function (a) {
+    var el = document.querySelector(a.getAttribute('href'));
+    if (el) map[el.id] = a;
+  });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (map[en.target.id]) map[en.target.id].classList.add('on');
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  Object.keys(map).forEach(function (id) { io.observe(document.getElementById(id)); });
+})();
+
+
+
+/* ============================================================
+   3. ПРЕВЬЮ: окно «способ связи» вместо сайтовой формы #modal-callback
+   На genomed.ru эту роль выполняет штатная форма темы — блок не переносится.
+   ============================================================ */
+(function () {
+  var m = document.getElementById('modal-callback');
+  if (!m) return;
+  var last = null;
+  function open(from) { last = from; m.hidden = false; document.documentElement.style.overflow = 'hidden'; m.querySelector('.pmodal__x').focus(); }
+  function close() { m.hidden = true; document.documentElement.style.overflow = ''; if (last) last.focus(); }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href="#modal-callback"]');
+    if (a) { e.preventDefault(); open(a); return; }
+    if (e.target.closest('[data-pm-close]')) close();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !m.hidden) close(); });
+  var form = document.getElementById('leadform');
+  if (form) form.addEventListener('submit', function (e) { e.preventDefault(); open(form.querySelector('button')); });
+})();
+
+
+/* ============================================================
+   4. ПУТЬ ДНК — единственная анимация страницы.
+   Ползунок и саму картинку можно тянуть: схема идёт за пальцем 1:1,
+   после отпускания докатывается по инерции до ближайшего этапа
+   (пружина с параметрами Apple: damping ratio + response).
+   ============================================================ */
+(function () {
+  var root = document.getElementById('dnax');
+  if (!root) return;
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var view = root.querySelector('.dnax__view');
+  var strip = root.querySelector('.dnax__strip');
+  var zones = Array.prototype.slice.call(strip.querySelectorAll('.dnax__zone'));
+  var track = root.querySelector('.dnax__track');
+  var fill = root.querySelector('.dnax__fill');
+  var knob = root.querySelector('.dnax__knob');
+  var stops = Array.prototype.slice.call(root.querySelectorAll('.dnax__stop'));
+  var cap = root.querySelector('.dnax__cap');
+  var MAX = zones.length - 1;
+  var STAGES = [
+    ['Плацента', 'Во время беременности фрагменты ДНК плаценты постоянно попадают в кровь матери.'],
+    ['Кровь мамы', 'Там они смешиваются с ДНК самой мамы. Доля ДНК плода — плодная фракция — к 10 неделям обычно достигает 4 % и выше.'],
+    ['Взятие крови', 'Поэтому достаточно взять 20 мл крови из вены, как при обычном анализе: прокол плодных оболочек не нужен. Из плазмы выделяют внеклеточную ДНК.'],
+    ['Секвенатор', 'Прочитывает фрагменты ДНК, а программа считает, сколько прочтений приходится на каждую хромосому.'],
+    ['Заключение', 'Больше прочтений по хромосоме, чем ожидается, — признак анеуплоидии, например трисомии 21. Врач-генетик оформляет заключение: высокий или низкий риск.']
+  ];
+
+  function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
+  function rubber(over, dim) { var c = 0.55; return (over * dim * c) / (dim + c * Math.abs(over)); }
+  function project(v) { var d = 0.998; return (v / 1000) * d / (1 - d); }   // проекция инерции, px
+
+  // пружина: k = (2π/response)², c = 4πζ/response; стартует с текущего значения и скорости
+  var s = { x: 0, v: 0, target: 0, raf: 0, last: 0, k: 0, c: 0 };
+  function sset(x) { stop(); s.x = x; s.target = x; s.v = 0; render(x); }
+  function stop() { if (s.raf) { cancelAnimationFrame(s.raf); s.raf = 0; } }
+  function sto(target, velocity, damping) {
+    s.target = target;
+    if (velocity !== undefined) s.v = velocity;
+    if (RM.matches) { sset(target); return; }
+    var w = 2 * Math.PI / 0.45;
+    s.k = w * w; s.c = 2 * (damping || 1) * w;
+    if (!s.raf) { s.last = performance.now(); s.raf = requestAnimationFrame(tick); }
+  }
+  function tick(now) {
+    var dt = Math.min((now - s.last) / 1000, 0.064); s.last = now;
+    var n = Math.max(1, Math.ceil(dt / 0.004)), h = dt / n;
+    for (var i = 0; i < n; i++) { var a = -s.k * (s.x - s.target) - s.c * s.v; s.v += a * h; s.x += s.v * h; }
+    if (Math.abs(s.x - s.target) < 0.0005 && Math.abs(s.v) < 0.005) { s.x = s.target; s.v = 0; s.raf = 0; render(s.x); return; }
+    render(s.x);
+    s.raf = requestAnimationFrame(tick);
+  }
+
+  var viewW = 1, zoneW = 1, trackW = 1, cur = -1;
+  function layout() {
+    viewW = view.clientWidth;
+    zoneW = viewW * (viewW < 600 ? 0.86 : 0.6);
+    strip.style.width = zoneW * zones.length + 'px';
+    strip.style.height = zoneW * 0.6 + 'px';
+    trackW = track.clientWidth;
+    render(s.x);
+  }
+  function render(p) {
+    strip.style.transform = 'translate3d(' + (viewW / 2 - (p + 0.5) * zoneW) + 'px,0,0)';
+    zones.forEach(function (z, i) { z.style.opacity = String(1 - 0.62 * Math.min(Math.abs(i - p), 1)); });
+    var f = clamp(p / MAX, 0, 1);
+    fill.style.transform = 'scaleX(' + f + ')';
+    knob.style.transform = 'translate3d(' + (f * trackW) + 'px,0,0)';
+    var i = Math.round(clamp(p, 0, MAX));
+    if (i !== cur) setStage(i);
+  }
+  function setStage(i) {
+    var first = cur < 0; cur = i;
+    stops.forEach(function (b, j) { b.setAttribute('aria-current', String(j === i)); });
+    track.setAttribute('aria-valuenow', String(i + 1));
+    track.setAttribute('aria-valuetext', STAGES[i][0]);
+    var html = '<span class="dnax__n mono">0' + (i + 1) + ' / 0' + (MAX + 1) + '</span><h3>' + STAGES[i][0] + '</h3><p>' + STAGES[i][1] + '</p>';
+    if (first || RM.matches || !cap.animate) { cap.innerHTML = html; return; }
+    cap.animate([{ opacity: 1, filter: 'blur(0px)' }, { opacity: 0, filter: 'blur(3px)' }], { duration: 90, easing: 'ease-out', fill: 'forwards' })
+      .finished.then(function () {
+        if (cur !== i) return;
+        cap.innerHTML = html;
+        cap.animate([{ opacity: 0, filter: 'blur(3px)' }, { opacity: 1, filter: 'blur(0px)' }], { duration: 200, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'forwards' });
+      });
+  }
+  function go(i) { sto(clamp(i, 0, MAX), undefined, 1); }
+
+  // скорость по короткой истории движений
+  var hist = [];
+  function push(x) { var t = performance.now(); hist.push([x, t]); while (hist.length > 2 && t - hist[0][1] > 100) hist.shift(); }
+  function velocity() {
+    if (hist.length < 2) return 0;
+    var a = hist[0], b = hist[hist.length - 1];
+    if (performance.now() - b[1] > 80) return 0;
+    var dt = (b[1] - a[1]) / 1000; return dt > 0 ? (b[0] - a[0]) / dt : 0;
+  }
+  function settle(pxVel, pxPerStage, sign) {
+    var vStage = sign * pxVel / pxPerStage;                         // этапов в секунду
+    var target = Math.round(clamp(s.x + sign * project(pxVel) / pxPerStage, 0, MAX));
+    sto(target, vStage, Math.abs(vStage) > 1.5 ? 0.85 : 1);
+  }
+
+  // ползунок: схватить кнопку — тянуть с учётом точки захвата; нажать на дорожку — перейти туда
+  var drag = null;
+  track.addEventListener('pointerdown', function (e) {
+    if (drag || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    var r = track.getBoundingClientRect(), pAt = (e.clientX - r.left) / trackW * MAX;
+    var onKnob = Math.abs(pAt - s.x) * trackW / MAX < 24;
+    stop();
+    drag = { el: track, id: e.pointerId, offset: onKnob ? pAt - s.x : 0, left: r.left };
+    track.setPointerCapture(e.pointerId); track.classList.add('is-drag');
+    hist = []; push(e.clientX);
+    if (!onKnob) sto(clamp(pAt, 0, MAX), 0, 1);
+  });
+  track.addEventListener('pointermove', function (e) {
+    if (!drag || drag.el !== track || e.pointerId !== drag.id) return;
+    push(e.clientX);
+    var p = (e.clientX - drag.left) / trackW * MAX - drag.offset;
+    if (p < 0) p = -rubber(-p, 1); else if (p > MAX) p = MAX + rubber(p - MAX, 1);
+    stop(); s.x = p; s.v = 0; render(p);
+  });
+  function endTrack() {
+    if (!drag || drag.el !== track) return;
+    track.classList.remove('is-drag'); drag = null;
+    settle(velocity(), trackW / MAX, 1);
+  }
+  track.addEventListener('pointerup', endTrack);
+  track.addEventListener('pointercancel', endTrack);
+
+  // картинка: горизонтальный жест после порога 10 px, вертикальный остаётся прокрутке страницы
+  var vs = null;
+  view.addEventListener('pointerdown', function (e) {
+    if (drag || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    vs = { id: e.pointerId, x: e.clientX, y: e.clientY, p: s.x, on: false };
+    hist = []; push(e.clientX);
+    if (e.pointerType === 'mouse') e.preventDefault();
+  });
+  view.addEventListener('pointermove', function (e) {
+    if (!vs || e.pointerId !== vs.id) return;
+    var dx = e.clientX - vs.x, dy = e.clientY - vs.y;
+    if (!vs.on) {
+      if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) { vs.on = true; stop(); vs.p = s.x + dx / zoneW; view.setPointerCapture(vs.id); view.classList.add('is-drag'); }
+      else if (Math.abs(dy) > 10) { vs = null; return; }
+      else return;
+    }
+    push(e.clientX);
+    var p = vs.p - dx / zoneW;
+    if (p < 0) p = -rubber(-p, 1); else if (p > MAX) p = MAX + rubber(p - MAX, 1);
+    s.x = p; s.v = 0; render(p);
+  });
+  function endView() {
+    if (vs && vs.on) { view.classList.remove('is-drag'); settle(velocity(), zoneW, -1); }
+    vs = null;
+  }
+  view.addEventListener('pointerup', endView);
+  view.addEventListener('pointercancel', endView);
+
+  stops.forEach(function (b, i) { b.addEventListener('click', function () { go(i); }); });
+  track.addEventListener('keydown', function (e) {
+    var k = e.key, i = Math.round(s.target);
+    if (k === 'ArrowRight' || k === 'ArrowUp') go(i + 1);
+    else if (k === 'ArrowLeft' || k === 'ArrowDown') go(i - 1);
+    else if (k === 'Home') go(0);
+    else if (k === 'End') go(MAX);
+    else return;
+    e.preventDefault();
+  });
+
+  if ('ResizeObserver' in window) new ResizeObserver(layout).observe(view); else window.addEventListener('resize', layout);
+  layout();
+})();
+</script>
+</body>
+</html>
