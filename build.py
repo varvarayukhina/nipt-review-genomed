@@ -54,7 +54,7 @@ EDITS = [
     ("Скрининговый тест по венозной крови мамы: анализирует внеклеточную ДНК плода и оценивает вероятность самых частых хромосомных аномалий — например, синдрома Дауна.",
      "Скрининговое исследование по венозной крови матери. Оно анализирует ДНК плода, которая попадает в кровь из плаценты, и оценивает вероятность самых частых хромосомных аномалий — например, синдрома Дауна."),
     ("Рекомендован всем беременным (ACOG, SMFM, ISPD, ACMG). Особенно — после 35 лет, после ЭКО, при повышенном риске по УЗИ или скринингу, если раньше была беременность с хромосомной аномалией.",
-     "Международные профессиональные сообщества рекомендуют исследование всем беременным. Особенно оно показано после 35 лет, после ЭКО, при повышенном риске по УЗИ или биохимическому скринингу и если ранее была беременность с хромосомной аномалией."),
+     "Международные профессиональные сообщества рекомендуют исследование всем беременным. Особенно оно показано после 35 лет, после ЭКО, при повышенном риске по биохимическому скринингу и если ранее была беременность с хромосомной аномалией."),
     # фотополоса
     ("<p>Восемь дней ожидания — самая длинная неделя за всю беременность. Заключение разбирает генетик, строку за строкой.</p>\n    <span>Фото — из медиатеки Геномеда</span>",
      "<p>Результат — через 8 дней. Заключение врач-генетик разбирает вместе с вами.</p>"),
@@ -77,6 +77,9 @@ EDITS = [
     # квиз
     ("Это займёт меньше минуты, никаких контактов вводить не нужно.", "Это займёт меньше минуты, контакты вводить не нужно."),
     ("<small>Нужно уточнить картину без прокола</small>", "<small>Нужно уточнить риск без инвазивной процедуры</small>"),
+    ("Скрининг или УЗИ показали повышенный риск<small>", "Биохимический скрининг показал повышенный риск<small>"),
+    ("<p>Запись по телефону или онлайн. Врач-генетик помогает выбрать панель под срок беременности и анамнез.</p>",
+     "<p>Запись по телефону или онлайн. Врач-генетик — в центре или онлайн — помогает выбрать панель под срок беременности и анамнез.</p>"),
     ("<small>Все хромосомы плода и носительство у родителей</small>", "<small>Все хромосомы плода и носительство у будущей мамы</small>"),
     # почему Геномед
     ("Забор крови доступен в медицинском офисе, у партнёра в вашем городе или с выездом медсестры на дом.",
@@ -84,11 +87,13 @@ EDITS = [
     # как проходит
     ("<h3>Забор крови</h3><p>20 мл венозной крови с 10 полных недель беременности.",
      "<h3>Взятие крови</h3><p>20 мл венозной крови с 10 полных недель беременности."),
+    ("<h3>Взятие крови</h3><p>20 мл венозной крови с 10 полных недель беременности. Процедура ничем не отличается от обычного анализа.",
+     "<h3>Взятие крови</h3><p>20 мл венозной крови с 10 полных недель беременности, как при обычном анализе. Перед этим подписывается договор информированного согласия."),
     ("<p>Выделение внеклеточной ДНК из плазмы и высокопроизводительное секвенирование. Каждый этап проходит внутрилабораторный контроль качества.</p>",
      "<p>В лаборатории из плазмы выделяют внеклеточную ДНК и прочитывают её на секвенаторе. Каждый этап проходит контроль качества.</p>"),
     ("Забор крови выполняет персонал лаборатории.", "Кровь берёт персонал лаборатории."),
     ("Набор для забора крови привозит медсестра.", "Медсестра приезжает с набором для взятия крови."),
-    ("Подскажем ближайшее место сдачи и время — по телефону или в мессенджере.", "Подскажем ближайший медицинский офис и удобное время."),
+    ("Подскажем ближайшее место сдачи и время — по телефону или в мессенджере.", "Подскажем ближайший медицинский офис и удобное время. Работаем по всей России, тест можно заказать и в другую страну."),
     # точность
     ("Оба метода безопасны для беременности и оба остаются скринингом: ни один из них не ставит диагноз. Разница — в сроке начала (с 10 полных недель против 11–13 недель) и в цене ошибки.",
      "Оба метода безопасны для беременности. НИПТ можно пройти раньше — с 10 полных недель, биохимический скрининг проводят на 11–13-й неделе."),
@@ -155,8 +160,8 @@ NAV = """<nav class="lnav" aria-label="Разделы страницы">
     <a href="#safe">Как работает</a>
     <a href="#accuracy">Точность</a>
     <a href="#panels">Панели и цены</a>
-    <a href="#compare">Сравнение</a>
     <a href="#how">Как проходит</a>
+    <a href="#results">Результат</a>
     <a href="#limits">Ограничения</a>
     <a href="#faq">Вопросы</a>
     <a href="#doctors">Врачам</a>
@@ -280,30 +285,28 @@ EXTRA_CSS = """
 
 
 def vbar(active: str) -> str:
-    a1 = ' class="on" aria-current="page"' if active == "v1" else ""
-    a2 = ' class="on" aria-current="page"' if active == "v2" else ""
-    return (f'<div class="vbar"><div class="wrap vbar__in"><b>Версии для сравнения:</b>'
-            f'<a href="index.html"{a1}>Исправленная</a><a href="naglyadnaya.html"{a2}>Наглядная · путь ДНК</a></div></div>')
+    tabs = [("anim", "index.html", "С анимацией"), ("static", "bez-animacii.html", "Без анимации")]
+    links = "".join(f'<a href="{href}"' + (' class="on" aria-current="page"' if key == active else "") + f">{label}</a>"
+                    for key, href, label in tabs)
+    return f'<div class="vbar"><div class="wrap vbar__in"><b>Версии для сравнения:</b>{links}</div></div>'
 
 
-def page(version: str, safe_block: str, css_extra: str = "", js_extra: str = "", head_extra: str = "",
-         hero_block: str | None = None, photo_block: str | None = "", acc_block: str | None = None,
-         panels_block: str | None = None, how_block: str | None = None) -> str:
-    title = "НИПТ — Геномед · исправленная версия" if version == "v1" else "НИПТ — Геномед · наглядная версия"
-    viewport = "width=device-width, initial-scale=1" + (", viewport-fit=cover" if version == "v2" else "")
+def page(version: str, blocks_in: dict, css_all: str, js_extra: str = "") -> str:
+    title = "НИПТ — Геномед · с анимацией" if version == "anim" else "НИПТ — Геномед · без анимации"
+    head_extra = '<meta name="theme-color" content="#0A2540">\n'
     order = [
-        vbar(version), NAV, hero_block or hero, intro, notice, photo if photo_block == "" else photo_block, safe_block, about,
-        acc_block or acc_main, panels_block or blocks["panels"], blocks["compare"], blocks["quiz"], how_block or blocks["how"], blocks["limits"],
+        vbar(version), NAV, blocks_in["hero"], intro, notice, blocks_in["safe"], blocks_in["about"], blocks_in["acc"],
+        blocks_in["panels"], blocks["compare"], blocks["quiz"], blocks_in["how"], RESULTS, LIMITS,
         blocks["why"], blocks["faq"], DOCTORS, blocks["cta"], footer, sticky, MODAL,
     ]
     return f"""<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="{viewport}">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 {head_extra}<title>{title}</title>
-{head_links}<style>{css}{EXTRA_CSS}{css_extra}</style>
+{head_links}<style>{css_all}</style>
 </head>
 <body>
 {chr(10).join(x for x in order if x)}
@@ -313,55 +316,82 @@ def page(version: str, safe_block: str, css_extra: str = "", js_extra: str = "",
 """
 
 
-# ---------------------------------------------------------------- версия 1
-v1 = page("v1", SAFE_STATIC)
-(HERE / "index.html").write_text(v1, encoding="utf-8")
-
-# ---------------------------------------------------------------- версия 2
+PARTS = HERE / "parts"
 V2 = HERE / "v2"
-v2_css = (V2 / "v2.css").read_text(encoding="utf-8")
-v2_js = (V2 / "fx.js").read_text(encoding="utf-8")
+RESULTS = (PARTS / "results.html").read_text(encoding="utf-8")
+LIMITS = (PARTS / "limits.html").read_text(encoding="utf-8")
+common_css = (PARTS / "common.css").read_text(encoding="utf-8")
+static_css = (PARTS / "static.css").read_text(encoding="utf-8")
+anim_css = (V2 / "v2.css").read_text(encoding="utf-8")
+anim_js = (V2 / "fx.js").read_text(encoding="utf-8")
 scene = (V2 / "scene.html").read_text(encoding="utf-8")
 fpv = (V2 / "fpv.html").read_text(encoding="utf-8")
 
-# первый экран: текст слева, фото справа (фотополоса больше не нужна)
-hero_v2 = sub1(hero, '<div class="wrap hero__grid">', '<div class="wrap hv2">')
-hero_v2 = sub1(hero_v2, "\n\n    \n  </div>\n</section>",
-    '\n    <figure class="hv2__img"><img src="mother.jpg" alt="Мама держит на руках новорождённого ребёнка" width="910" height="400">'
-    '<figcaption><b>Результат — через 8 дней.</b> Заключение врач-генетик разбирает вместе с вами.</figcaption></figure>\n  </div>\n</section>')
+# ---------------------------------------------------------------- общее для обеих вкладок
+# первый экран: текст слева, 3D-пробирка справа (фото с поцелуем малыша убрано)
+hero_new = sub1(hero, '<div class="wrap hero__grid">', '<div class="wrap hv2">')
+hero_new = sub1(hero_new, "\n\n    \n  </div>\n</section>",
+    '\n    <figure class="hv2__tube"><img src="img/hero-tube.webp" alt="Пробирка с кровью: в плазме — фрагменты ДНК" width="279" height="1100" fetchpriority="high">'
+    '<figcaption class="l"><b>20 мл крови из вены</b>без прокола и подготовки</figcaption>'
+    '<figcaption><b>Результат — через 8 дней</b>заключение врач-генетик разбирает вместе с вами</figcaption></figure>\n  </div>\n</section>')
 
-# точность: вместо полосок — 1000 беременных и ложные тревоги
-ci = acc_main.index('<div class="cmp-card">')
-cj = acc_main.rindex("  </div>\n</section>")
-acc_v2 = acc_main[:ci] + fpv.strip() + "\n" + acc_main[cj:]
 
-# панели: число синдромов точками (1 / 3 / 7 / 13 / 38+ — как в сводной таблице)
+def swap_badges(block: str, scope_start: str, images: list[tuple[str, str]]) -> str:
+    """Плоские значки <span class="badge">…</span> → 3D-картинки, по порядку."""
+    head, tail = block[: block.index(scope_start)], block[block.index(scope_start):]
+    for name, cls in images:
+        m = re.search(r'<span class="badge"><svg.*?</svg></span>', tail, re.S)
+        if not m:
+            raise SystemExit(f"не нашла значок для {name}")
+        tail = tail[: m.start()] + f'<img class="{cls}" src="img/{name}.webp" alt="" loading="lazy">' + tail[m.end():]
+    return head + tail
+
+
+about_new = swap_badges(about, '<div class="wrap bens"', [(n, "ben__img") for n in
+                        ("ic-chromosomes", "ic-drop", "ic-calendar", "ic-doctor", "ic-shield")])
+
+# панели: число синдромов точками + для чего результаты экспертной
 LADDER = [(1, "1 синдром"), (3, "3 синдрома"), (7, "7 синдромов"), (13, "13 синдромов"), (38, "38+ синдромов")]
 parts = re.split(r'(<p class="desc">[^<]*</p>)', blocks["panels"])
 if len(parts) != 11:
     raise SystemExit(f"ожидалось 5 карточек панелей, найдено {(len(parts) - 1) // 2}")
-k = 0
 for n, (cnt, label) in enumerate(LADDER):
-    idx = 1 + n * 2
-    parts[idx] += f'\n      <div class="ladder" aria-label="{label}">' + "<i></i>" * cnt + f"<b>{label}</b></div>"
-panels_v2 = "".join(parts)
+    parts[1 + n * 2] += f'\n      <div class="ladder" aria-label="{label}">' + "<i></i>" * cnt + f"<b>{label}</b></div>"
+parts[9] += ('\n      <p class="use">Результаты пригодятся и&nbsp;при планировании следующих беременностей,'
+             ' и&nbsp;чтобы решить, нужно ли обследовать партнёра.</p>')
+panels_new = "".join(parts)
 
-# как проходит: восемь дней полосой
+# как проходит: 3D-иконки «где сдать» и восемь дней полосой
 DAYS8 = """
   <div class="wrap days8" aria-label="Восемь дней: день 0 — взятие крови, дни 1–7 — лаборатория, день 8 — заключение">
     <div class="days8__row"><div class="d0"><b>День 0</b><span>Взятие крови</span></div>""" + "".join(f"<i>{d}</i>" for d in range(1, 8)) + """<div class="d8"><b>День 8</b><span>Заключение на почте</span></div></div>
     <div class="days8__lab"><span></span><span>лаборатория: выделение ДНК, секвенирование, расчёт риска</span><span></span></div>
     <p class="days8__note">Т21, базовая и стандартная панели — 8 календарных дней, расширенная и экспертная — 8 рабочих.</p>
   </div>"""
-how_v2 = sub1(blocks["how"], '\n\n  <div class="wrap where">', DAYS8 + '\n\n  <div class="wrap where">')
+how_new = sub1(blocks["how"], '\n\n  <div class="wrap where">', DAYS8 + '\n\n  <div class="wrap where">')
+how_new = swap_badges(how_new, '<div class="wrap where">', [(n, "wcard__img") for n in ("ic-office", "ic-partner", "ic-home")])
 
-# доводка по mobile-native: hover только у мыши (иначе залипает после тапа)
-css_v2 = re.sub(r"(?m)^([^@\n{]*:hover[^{\n]*\{[^}\n]*\})\s*$", r"@media (hover:hover) and (pointer:fine){\1}", css)
-v2 = page("v2", scene, css_extra=v2_css, js_extra=v2_js, head_extra='<meta name="theme-color" content="#0A2540">\n',
-          hero_block=hero_v2, photo_block=None, acc_block=acc_v2, panels_block=panels_v2, how_block=how_v2)
-v2 = v2.replace(f"<style>{css}", f"<style>{css_v2}", 1)
-(HERE / "naglyadnaya.html").write_text(v2, encoding="utf-8")
+# hover только у мыши (mobile-native): иначе на телефоне залипает после тапа
+css_base = re.sub(r"(?m)^([^@\n{]*:hover[^{\n]*\{[^}\n]*\})\s*$", r"@media (hover:hover) and (pointer:fine){\1}", css) + EXTRA_CSS + common_css
 
-for img in ("mother.jpg", "doctor.jpg"):
-    shutil.copy(SRC / img, HERE / img)
-print("ok:", len(v1), len(v2))
+# ---------------------------------------------------------------- вкладка «С анимацией»
+ci = acc_main.index('<div class="cmp-card">')
+cj = acc_main.rindex("  </div>\n</section>")
+acc_anim = acc_main[:ci] + fpv.strip() + "\n" + acc_main[cj:]
+anim = page("anim", {"hero": hero_new, "safe": scene, "about": about_new, "acc": acc_anim, "panels": panels_new, "how": how_new},
+            css_base + anim_css, anim_js)
+(HERE / "index.html").write_text(anim, encoding="utf-8")
+
+# ---------------------------------------------------------------- вкладка «Без анимации»
+static = page("static", {"hero": hero_new, "safe": SAFE_STATIC, "about": about_new, "acc": acc_main, "panels": panels_new, "how": how_new},
+              css_base + static_css)
+(HERE / "bez-animacii.html").write_text(static, encoding="utf-8")
+
+# старый адрес наглядной версии ведёт на вкладку с анимацией
+(HERE / "naglyadnaya.html").write_text(
+    '<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow">'
+    '<meta http-equiv="refresh" content="0; url=index.html"><link rel="canonical" href="index.html"><title>НИПТ — Геномед</title></head>'
+    '<body><a href="index.html">Открыть страницу</a></body></html>\n', encoding="utf-8")
+
+shutil.copy(SRC / "doctor.jpg", HERE / "doctor.jpg")
+print("ok:", len(anim), len(static))

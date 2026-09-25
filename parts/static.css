@@ -1,0 +1,6 @@
+
+/* ============================================================
+   ВКЛАДКА «БЕЗ АНИМАЦИИ»: никакого движения на странице
+   ============================================================ */
+*,*::before,*::after{animation:none !important;transition:none !important}
+.btn-lnipt:hover,.panel:hover,.ben:hover,.fcard:hover,.qopt:hover{transform:none !important}

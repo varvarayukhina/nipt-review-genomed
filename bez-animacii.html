@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0A2540">
-<title>НИПТ — Геномед · с анимацией</title>
+<title>НИПТ — Геномед · без анимации</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
@@ -733,66 +733,14 @@ html{-webkit-tap-highlight-color:transparent}
   .days8__lab{grid-template-columns:minmax(0,1fr);text-align:center}.days8__lab span:empty{display:none}}
 
 /* ============================================================
-   НАГЛЯДНАЯ ВЕРСИЯ
+   ВКЛАДКА «БЕЗ АНИМАЦИИ»: никакого движения на странице
    ============================================================ */
-
-/* ——— отклик на нажатие ——— */
-.btn-lnipt:active,.qopt:active{transform:scale(.97)}
-
-/* ——— сцена «путь ДНК», привязанная к прокрутке ——— */
-.nscene{position:relative;height:180vh;color:#fff;
-  background:radial-gradient(ellipse at top right,rgba(0,194,255,.14),transparent 60%),radial-gradient(ellipse at bottom left,rgba(0,87,255,.22),transparent 60%),var(--bg-deep)}
-.nscene__sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center;padding:76px 0 18px}
-.nscene__inner{width:100%;display:grid;gap:clamp(12px,2.2vh,24px)}
-.nscene__head h2{color:#fff;font-size:clamp(26px,3.2vw,40px) !important;margin:0 !important}
-.nscene__head h2 em{color:var(--cyan)}
-.ncaps{display:grid;min-height:7.4em}
-.ncap{grid-area:1/1;max-width:44em;will-change:transform,opacity}
-.ncap__k{display:block;font-size:.72em;font-weight:700;letter-spacing:.06em;color:var(--cyan);margin-bottom:.45em}
-.ncap h3{margin:0;font-family:var(--disp);font-size:clamp(20px,2.2vw,28px);font-weight:800;letter-spacing:-.02em;line-height:1.15;color:#fff}
-.ncap p{margin:.45em 0 0;color:#B9CCE4;font-size:.98em;line-height:1.5;max-width:40em}
-.nstage canvas{display:block;width:100%}
-.nleg{display:grid;font-size:.8em;color:#B9CCE4;min-height:1.6em}
-.nleg>span{grid-area:1/1;display:flex;flex-wrap:wrap;gap:.4em 1.4em;align-items:center}
-.nleg span span{display:inline-flex;align-items:center;gap:.5em}
-.nleg i{width:9px;height:9px;border-radius:50%}
-.nleg__fine{color:#7E9CBE}
-@media(max-width:760px){.nscene__sticky{padding-top:70px}.ncaps{min-height:9.6em}.ncap p{font-size:.92em}}
-
-/* ——— точность: 1000 беременных ——— */
-.fpv{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5em 1.5em 1.3em;box-shadow:var(--shadow-md)}
-.fpv__seg{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;padding:4px;background:var(--line-soft);border-radius:100px;isolation:isolate}
-.fpv__thumb{position:absolute;top:4px;left:4px;bottom:4px;width:calc(50% - 4px);background:#fff;border-radius:100px;
-  box-shadow:0 1px 2px rgba(10,37,64,.06),0 3px 10px rgba(10,37,64,.1);z-index:-1;will-change:transform}
-.fpv__seg button{border:0;background:none;cursor:pointer;padding:.65em 1.1em;border-radius:100px;font:700 .82em/1.2 var(--body);color:var(--muted);
-  transition:color .2s ease-out,transform .1s ease-out}
-.fpv__seg button[aria-pressed="true"]{color:var(--ink)}
-.fpv__seg button:active{transform:scale(.96)}
-.fpv__lead{margin:1em 0 .9em;font-size:.88em;color:var(--ink-2);line-height:1.5}
-.fpv__lead b{color:#B7650A}
-.fpv__dots{display:block;width:100%}
-.fpv__val{display:grid;margin-top:.8em}
-.fpv__val>span{grid-area:1/1;font-size:.95em;color:var(--ink-2)}
-.fpv__val b{font-size:1.6em;color:#C8791B;letter-spacing:-.02em;margin-right:.2em}
-.fpv__v1 b{color:var(--blue)}
-.fpv__v1{opacity:0}
-.fpv__tbl{width:100%;min-width:0;margin-top:1.2em;border-collapse:collapse;font-size:.82em;table-layout:auto}
-.fpv__tbl th,.fpv__tbl td{border-bottom:0;background:none}
-.fpv__tbl td:first-child{text-align:left}
-.fpv__tbl th{font-weight:700;color:var(--muted);text-align:right;padding:.4em .3em;font-size:.9em;line-height:1.25}
-.fpv__tbl th:first-child{text-align:left}
-.fpv__tbl td{padding:.55em .3em;border-top:1px solid var(--line-soft);color:var(--ink-2)}
-.fpv__tbl td.mono{text-align:right;font-weight:700;color:var(--ink);white-space:nowrap}
-.fpv__tbl td:nth-child(2){color:var(--blue)}
-.fpv__s{display:none}
-@media(max-width:480px){.fpv{padding:1.2em 1em 1em}.fpv__seg button{padding:.6em .8em;font-size:.76em}
-  .fpv__tbl{font-size:.74em}.fpv__l{display:none}.fpv__s{display:inline}.fpv__tbl td,.fpv__tbl th{padding-inline:.2em}}
-
-@media(prefers-reduced-motion:reduce){.btn-lnipt:active,.qopt:active{transform:none}}
+*,*::before,*::after{animation:none !important;transition:none !important}
+.btn-lnipt:hover,.panel:hover,.ben:hover,.fcard:hover,.qopt:hover{transform:none !important}
 </style>
 </head>
 <body>
-<div class="vbar"><div class="wrap vbar__in"><b>Версии для сравнения:</b><a href="index.html" class="on" aria-current="page">С анимацией</a><a href="bez-animacii.html">Без анимации</a></div></div>
+<div class="vbar"><div class="wrap vbar__in"><b>Версии для сравнения:</b><a href="index.html">С анимацией</a><a href="bez-animacii.html" class="on" aria-current="page">Без анимации</a></div></div>
 <nav class="lnav" aria-label="Разделы страницы">
   <div class="wrap lnav__in">
     <span class="lnav__logo">НИПТ</span>
@@ -851,28 +799,20 @@ html{-webkit-tap-highlight-color:transparent}
     </div>
   </div>
 </section>
-<section class="nscene" id="safe" aria-labelledby="nscene-title">
-  <div class="nscene__sticky">
-    <div class="wrap nscene__inner">
-      <div class="nscene__head">
-        <span class="section-eyebrow" style="color:var(--cyan)">Как работает НИПТ</span>
-        <h2 id="nscene-title">Почему исследование <em>безопасно</em></h2>
-      </div>
-      <div class="ncaps">
-        <div class="ncap"><span class="ncap__k mono">01 · кровь мамы</span><h3>В&nbsp;крови мамы есть фрагменты ДНК плаценты.</h3><p>С&nbsp;10-й недели беременности их доля&nbsp;— плодная фракция&nbsp;— обычно достигает 4&nbsp;% и&nbsp;больше. Этого достаточно для анализа.</p></div>
-        <div class="ncap"><span class="ncap__k mono">02 · взятие крови</span><h3>Достаточно 20&nbsp;мл крови из&nbsp;вены.</h3><p>Как для обычного анализа&nbsp;— без прокола и&nbsp;риска для беременности. Из&nbsp;плазмы выделяют внеклеточную ДНК.</p></div>
-        <div class="ncap"><span class="ncap__k mono">03 · секвенирование</span><h3>Секвенатор прочитывает фрагменты ДНК.</h3><p>Программа определяет, с&nbsp;какой хромосомы пришёл каждый фрагмент.</p></div>
-        <div class="ncap"><span class="ncap__k mono">04 · подсчёт</span><h3>Фрагменты раскладываются по&nbsp;хромосомам.</h3><p>Для каждой хромосомы считается, сколько фрагментов пришлось на&nbsp;неё, и&nbsp;это число сравнивается с&nbsp;ожидаемым.</p></div>
-        <div class="ncap"><span class="ncap__k mono">05 · результат</span><h3>Лишняя хромосома видна в&nbsp;цифрах.</h3><p>Если фрагментов 21-й хромосомы больше ожидаемого, это признак синдрома Дауна. Врач-генетик оценивает риск; высокий риск подтверждают диагностическим исследованием.</p></div>
-      </div>
-      <div class="nstage">
-        <canvas role="img" aria-label="Схема: фрагменты ДНК мамы и плаценты в крови собираются в пробирку, прочитываются секвенатором и раскладываются по 22 хромосомам; при трисомии 21 фрагментов 21-й хромосомы больше ожидаемого."></canvas>
-      </div>
-      <div class="nleg" aria-hidden="true">
-        <span class="nleg__a"><span><i style="background:#4B8EFF"></i>ДНК мамы</span><span><i style="background:#00C2FF"></i>ДНК плаценты</span></span>
-        <span class="nleg__b" style="opacity:0"><span><i style="background:#FFB547"></i>лишняя копия 21-й хромосомы</span><span class="nleg__fine">схема: разница показана крупнее, чем в&nbsp;реальности</span></span>
-      </div>
-    </div>
+<section id="safe" style="padding-top:0">
+  <div class="wrap section-head">
+    <span class="section-eyebrow">Как работает НИПТ</span>
+    <h2>Почему исследование <em>безопасно</em></h2>
+    <p class="lead">Во время беременности фрагменты ДНК плаценты попадают в кровь матери. Поэтому для анализа достаточно взять кровь из вены: прокол плодных оболочек не нужен, риска для беременности нет.</p>
+  </div>
+  <div class="wrap">
+    <ol class="dnapath">
+      <li><span class="dnapath__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 12V7"/><path d="m12 12 4 2.5"/><path d="m12 12-4 2.5"/><path d="M12 7l-2-2"/><path d="m12 7 2-2"/></svg></span><span class="dnapath__n mono">01</span><b>Плацента</b><span class="dnapath__t">Во время беременности фрагменты ДНК плаценты постоянно попадают в кровь матери.</span></li>
+      <li><span class="dnapath__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7Z"/></svg></span><span class="dnapath__n mono">02</span><b>Кровь мамы</b><span class="dnapath__t">Там они смешиваются с ДНК самой мамы. Доля ДНК плода — плодная фракция — к 10 неделям обычно достигает 4 % и выше.</span></li>
+      <li><span class="dnapath__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 2 4 4"/><path d="m17 7 3-3"/><path d="M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5"/><path d="m9 11 4 4"/><path d="m5 19-3 3"/><path d="m14 4 6 6"/></svg></span><span class="dnapath__n mono">03</span><b>Взятие крови</b><span class="dnapath__t">Поэтому достаточно взять 20 мл крови из вены, как при обычном анализе. Из плазмы выделяют внеклеточную ДНК.</span></li>
+      <li><span class="dnapath__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 16 1.5 1.5"/><path d="m14 8-1.5-1.5"/><path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993"/><path d="m16.5 10.5 1 1"/><path d="m17 6-2.891-2.891"/><path d="M2 15c6.667-6 13.333 0 20-6"/><path d="m20 9 .891.891"/><path d="M3.109 14.109 4 15"/><path d="m6.5 12.5 1 1"/><path d="m7 18 2.891 2.891"/><path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg></span><span class="dnapath__n mono">04</span><b>Секвенатор</b><span class="dnapath__t">Прочитывает фрагменты ДНК, а программа считает, сколько прочтений приходится на каждую хромосому.</span></li>
+      <li><span class="dnapath__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m9 15 2 2 4-4"/></svg></span><span class="dnapath__n mono">05</span><b>Заключение</b><span class="dnapath__t">Больше прочтений по хромосоме, чем ожидается, — признак анеуплоидии. Врач-генетик оформляет заключение: высокий или низкий риск.</span></li>
+    </ol>
   </div>
 </section>
 <section id="about" style="padding-top:0">
@@ -919,25 +859,26 @@ html{-webkit-tap-highlight-color:transparent}
       <p class="lead" style="font-size:1em">Оба метода безопасны для беременности. НИПТ можно пройти раньше — с 10 полных недель, биохимический скрининг проводят на 11–13-й неделе.</p>
     </div>
 
-    <div class="fpv" id="fpv">
-      <div class="fpv__top">
-        <div class="fpv__seg" role="group" aria-label="Метод скрининга">
-          <span class="fpv__thumb" aria-hidden="true"></span>
-          <button type="button" data-m="0" aria-pressed="true">Биохимический скрининг</button>
-          <button type="button" data-m="1" aria-pressed="false">НИПТ</button>
-        </div>
+    <div class="cmp-card">
+      <div class="cmp-item">
+        <div class="t"><b>Трисомия 21 · синдром Дауна</b><small>выявляемость</small></div>
+        <div class="cmp-line a"><div class="bar2"><i style="width:99%"></i></div><div class="v">&gt; 99 %</div></div>
+        <div class="cmp-line b"><div class="bar2"><i style="width:85%"></i></div><div class="v">85 %</div></div>
       </div>
-      <p class="fpv__lead">1000 беременных, у&nbsp;плода нет хромосомных аномалий. <b>Ложный «высокий риск»</b> и&nbsp;направление на&nbsp;инвазивную процедуру без необходимости:</p>
-      <canvas class="fpv__dots" role="img" aria-label="Из 1000 беременных без хромосомных аномалий у плода ложноположительный результат получат до 50 при биохимическом скрининге и меньше 1 при НИПТ."></canvas>
-      <div class="fpv__val" aria-live="polite"><span class="fpv__v0"><b class="mono">до&nbsp;50</b> из&nbsp;1000</span><span class="fpv__v1"><b class="mono">меньше&nbsp;1</b> из&nbsp;1000</span></div>
-      <table class="fpv__tbl">
-        <thead><tr><th></th><th>НИПТ</th><th><span class="fpv__l">Биохимический скрининг</span><span class="fpv__s">Биохим.<br>скрининг</span></th></tr></thead>
-        <tbody>
-          <tr><td>Выявляемость трисомии 21</td><td class="mono">&gt;&nbsp;99&nbsp;%</td><td class="mono">85&nbsp;%</td></tr>
-          <tr><td>Выявляемость трисомии 18</td><td class="mono">&gt;&nbsp;98&nbsp;%</td><td class="mono">75&nbsp;%</td></tr>
-          <tr><td>Ложноположительные результаты</td><td class="mono">&lt;&nbsp;0,1&nbsp;%</td><td class="mono">до&nbsp;5&nbsp;%</td></tr>
-        </tbody>
-      </table>
+      <div class="cmp-item">
+        <div class="t"><b>Трисомия 18 · синдром Эдвардса</b><small>выявляемость</small></div>
+        <div class="cmp-line a"><div class="bar2"><i style="width:98%"></i></div><div class="v">&gt; 98 %</div></div>
+        <div class="cmp-line b"><div class="bar2"><i style="width:75%"></i></div><div class="v">75 %</div></div>
+      </div>
+      <div class="cmp-item">
+        <div class="t"><b>Ложноположительные результаты</b><small>меньше — лучше</small></div>
+        <div class="cmp-line a"><div class="bar2"><i style="width:2%"></i></div><div class="v">&lt; 0,1 %</div></div>
+        <div class="cmp-line b"><div class="bar2"><i style="width:100%"></i></div><div class="v">до 5 %</div></div>
+      </div>
+      <div class="cmp-legend">
+        <span><i style="background:linear-gradient(90deg,var(--blue),var(--cyan))"></i> НИПТ</span>
+        <span><i style="background:#A9BDD6"></i> биохимический скрининг</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1834,305 +1775,6 @@ html{-webkit-tap-highlight-color:transparent}
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !m.hidden) close(); });
   var form = document.getElementById('leadform');
   if (form) form.addEventListener('submit', function (e) { e.preventDefault(); open(form.querySelector('button')); });
-})();
-
-
-/* ============================================================
-   4. ПУТЬ ДНК — сцена, привязанная к прокрутке.
-   Одни и те же точки-фрагменты текут в крови, собираются в пробирку,
-   выстраиваются в прочтения секвенатора и раскладываются по хромосомам.
-   Прокрутка назад отматывает сцену назад.
-   ============================================================ */
-(function () {
-  var sec = document.getElementById('safe');
-  if (!sec || !sec.querySelector('.nstage canvas')) return;
-  var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var canvas = sec.querySelector('.nstage canvas');
-  var ctx = canvas.getContext('2d');
-  var caps = Array.prototype.slice.call(sec.querySelectorAll('.ncap'));
-  var legA = sec.querySelector('.nleg__a'), legB = sec.querySelector('.nleg__b');
-  // относительные размеры хромосом 1–22 — только для пропорций схемы
-  var SIZE = [248, 242, 198, 190, 181, 171, 159, 145, 138, 134, 135, 133, 114, 107, 102, 90, 83, 80, 59, 64, 47, 51];
-  var MOM = [75, 142, 255], PLA = [0, 194, 255], XTR = [255, 181, 71];
-
-  function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
-  function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-  function smooth(t) { return t * t * (3 - 2 * t); }
-  var seed = 21;
-  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
-
-  var W = 0, H = 0, dpr = 1, parts = [], extras = [], cells = [], tube = null, cols = [], perRow = 2, step = 6, base = 0, rCol = 3;
-
-  function build() {
-    if (canvas.clientWidth === W && W) return;
-    W = canvas.clientWidth;
-    H = Math.round(clamp(W * (W < 600 ? 0.78 : 0.42), 240, 400));
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); canvas.style.height = H + 'px';
-    seed = 21;
-    var N = W < 600 ? 300 : 520;
-
-    // пробирка
-    var tw = clamp(W * 0.12, 54, 96), th = H * 0.84, tx = W / 2 - tw / 2, ty = H * 0.08;
-    tube = { x: tx, y: ty, w: tw, h: th, plasma: ty + th * 0.5 };
-
-    // колонки хромосом
-    var total = SIZE.reduce(function (a, b) { return a + b; }, 0);
-    var counts = SIZE.map(function (s) { return Math.round(N * s / total); });
-    N = counts.reduce(function (a, b) { return a + b; }, 0);
-    var areaW = W * (W < 600 ? 0.94 : 0.86), x0 = (W - areaW) / 2, cw = areaW / 22;
-    perRow = W < 600 ? 2 : 3;
-    var maxRows = Math.ceil(Math.max.apply(null, counts) / perRow) + 3;
-    base = H * 0.86;
-    step = Math.min((H * 0.72) / maxRows, (cw * 0.84) / perRow);
-    rCol = step * 0.4;
-    cols = counts.map(function (c, k) { return { x: x0 + k * cw, w: cw, n: c, top: base - Math.ceil(c / perRow) * step }; });
-
-    // порядок частиц перемешан, чтобы в колонках цвета смешались
-    var order = [];
-    counts.forEach(function (c, k) { for (var j = 0; j < c; j++) order.push([k, j]); });
-    for (var i = order.length - 1; i > 0; i--) { var r = Math.floor(rnd() * (i + 1)); var t = order[i]; order[i] = order[r]; order[r] = t; }
-
-    var rows = W < 600 ? 11 : 13, per = Math.ceil(N / rows), rx0 = W * 0.08, rdx = (W * 0.84) / per;
-    parts = order.map(function (kj, i) {
-      var k = kj[0], j = kj[1], col = cols[k];
-      var inX = tube.x + 5 + rnd() * (tube.w - 10), inY = tube.y + 14 + rnd() * (tube.plasma - tube.y - 20);
-      var row = Math.floor(i / per), inRow = i % per;
-      return {
-        type: rnd() < 0.12 ? 1 : 0,
-        s0: [-0.25 * W + rnd() * 1.25 * W, H * 0.16 + rnd() * H * 0.68],
-        s1: [inX, inY],
-        s2: [rx0 + (inRow + 0.5) * rdx + (row % 2) * rdx * 0.35, H * 0.1 + row * ((H * 0.8) / (rows - 1))],
-        s3: [col.x + col.w * 0.08 + ((j % perRow) + 0.5) * (col.w * 0.84 / perRow), base - (Math.floor(j / perRow) + 0.5) * step],
-        st: rnd()
-      };
-    });
-    // лишняя копия 21-й: столбец выше ожидаемого (схематично крупнее, чем в реальности)
-    var c21 = cols[20], nx = Math.max(3, Math.round(c21.n * 0.45));
-    extras = [];
-    for (var e = 0; e < nx; e++) {
-      var jj = c21.n + e;
-      extras.push({ s4: [c21.x + c21.w * 0.08 + ((jj % perRow) + 0.5) * (c21.w * 0.84 / perRow), base - (Math.floor(jj / perRow) + 0.5) * step], st: rnd() });
-    }
-    // эритроциты в первом кадре — просто фон
-    cells = [];
-    for (var c = 0; c < 16; c++) cells.push([rnd() * W, H * 0.16 + rnd() * H * 0.68, 9 + rnd() * 7]);
-    draw();
-  }
-
-  function seg(P, a, b) { return clamp((P - a) / (b - a), 0, 1); }
-  function lerp(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]; }
-  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
-
-  function tubePath(x, y, w, h) {
-    var r = w / 2;
-    ctx.beginPath();
-    ctx.moveTo(x, y); ctx.lineTo(x, y + h - r);
-    ctx.arc(x + r, y + h - r, r, Math.PI, 0, true);
-    ctx.lineTo(x + w, y);
-  }
-
-  function draw() {
-    var P = progress();
-    var u1, u2, u3, u4;
-    if (RM.matches) {
-      u1 = P > 0.16 ? 1 : 0; u2 = P > 0.4 ? 1 : 0; u3 = P > 0.64 ? 1 : 0; u4 = P > 0.84 ? 1 : 0;
-    } else {
-      u1 = seg(P, 0.14, 0.3); u2 = seg(P, 0.4, 0.56); u3 = seg(P, 0.64, 0.78); u4 = seg(P, 0.84, 0.94);
-    }
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, W, H);
-
-    // кадр 1: кровоток
-    var a0 = 1 - smooth(u1);
-    if (a0 > 0.01) {
-      ctx.fillStyle = 'rgba(255,255,255,' + (0.035 * a0) + ')';
-      ctx.fillRect(0, H * 0.12, W, H * 0.76);
-      ctx.strokeStyle = 'rgba(255,138,128,' + (0.35 * a0) + ')'; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(0, H * 0.12); ctx.lineTo(W, H * 0.12); ctx.moveTo(0, H * 0.88); ctx.lineTo(W, H * 0.88); ctx.stroke();
-      cells.forEach(function (c) {
-        ctx.fillStyle = 'rgba(255,120,110,' + (0.24 * a0) + ')';
-        ctx.beginPath(); ctx.ellipse(c[0] + P * W * 0.5, c[1], c[2], c[2] * 0.72, 0, 0, 6.2832); ctx.fill();
-      });
-    }
-    // кадр 2: пробирка — плазма сверху, клетки крови снизу
-    var aT = smooth(u1) * (1 - smooth(u2));
-    if (aT > 0.01) {
-      var t = tube;
-      ctx.save(); tubePath(t.x, t.y, t.w, t.h); ctx.closePath(); ctx.clip();
-      ctx.fillStyle = 'rgba(255,224,160,' + (0.12 * aT) + ')'; ctx.fillRect(t.x, t.y, t.w, t.plasma - t.y);
-      ctx.fillStyle = 'rgba(232,112,100,' + (0.75 * aT) + ')'; ctx.fillRect(t.x, t.plasma, t.w, t.h);
-      ctx.restore();
-      ctx.strokeStyle = 'rgba(255,255,255,' + (0.7 * aT) + ')'; ctx.lineWidth = 2.5;
-      tubePath(t.x, t.y, t.w, t.h); ctx.stroke();
-      ctx.fillStyle = 'rgba(184,236,255,' + (0.9 * aT) + ')';
-      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(t.x - 6, t.y - 16, t.w + 12, 18, 6) : ctx.rect(t.x - 6, t.y - 16, t.w + 12, 18); ctx.fill();
-    }
-    // кадр 4–5: ожидаемый уровень и номера хромосом
-    var aC = smooth(u3);
-    if (aC > 0.01) {
-      ctx.font = '600 ' + (W < 600 ? 9 : 11) + 'px "JetBrains Mono", monospace';
-      ctx.textAlign = 'center';
-      cols.forEach(function (c, k) {
-        var hi = k === 12 || k === 17 || k === 20;
-        ctx.strokeStyle = 'rgba(255,255,255,' + (0.35 * aC) + ')'; ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.moveTo(c.x + c.w * 0.04, c.top - 2); ctx.lineTo(c.x + c.w * 0.96, c.top - 2); ctx.stroke();
-        if (W >= 600 || hi || k % 2 === 0) {
-          ctx.fillStyle = hi ? 'rgba(0,194,255,' + aC + ')' : 'rgba(169,196,226,' + (0.7 * aC) + ')';
-          ctx.fillText(String(k + 1), c.x + c.w / 2, base + (W < 600 ? 13 : 17));
-        }
-      });
-    }
-    // частицы
-    var dash = smooth(u2) * (1 - smooth(u3));
-    parts.forEach(function (p) {
-      var s0 = [p.s0[0] + Math.min(P, 0.14) / 0.14 * W * 0.25, p.s0[1]];
-      var t1 = ease(clamp(u1 * 1.35 - p.st * 0.35, 0, 1));
-      var t2 = ease(clamp(u2 * 1.35 - p.st * 0.35, 0, 1));
-      var t3 = ease(clamp(u3 * 1.35 - p.st * 0.35, 0, 1));
-      var pos = lerp(lerp(lerp(s0, p.s1, t1), p.s2, t2), p.s3, t3);
-      var r = 3.1 + (2.3 - 3.1) * t1;
-      r = r + (2.6 - r) * t2;
-      r = r + (rCol - r) * t3;
-      ctx.fillStyle = rgba(p.type ? PLA : MOM, p.type ? 1 : 0.9);
-      if (dash > 0.02) {
-        var w = r * 2 + dash * r * 2.6;
-        ctx.beginPath();
-        if (ctx.roundRect) ctx.roundRect(pos[0] - w / 2, pos[1] - r, w, r * 2, r); else ctx.rect(pos[0] - w / 2, pos[1] - r, w, r * 2);
-        ctx.fill();
-      } else {
-        ctx.beginPath(); ctx.arc(pos[0], pos[1], r, 0, 6.2832); ctx.fill();
-      }
-    });
-    // лишняя копия 21-й
-    if (u4 > 0) {
-      var c21 = cols[20];
-      extras.forEach(function (e) {
-        var te = ease(clamp(u4 * 1.4 - e.st * 0.4, 0, 1));
-        if (te <= 0) return;
-        var pos = lerp([e.s4[0], -20], e.s4, te);
-        ctx.fillStyle = rgba(XTR, clamp(te * 3, 0, 1));
-        ctx.beginPath(); ctx.arc(pos[0], pos[1], rCol, 0, 6.2832); ctx.fill();
-      });
-      var topX = base - Math.ceil((c21.n + extras.length) / perRow) * step;
-      ctx.strokeStyle = rgba(XTR, 0.85 * smooth(u4)); ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
-      ctx.strokeRect(c21.x + 1, topX - 3, c21.w - 2, c21.top - topX + 2);
-      ctx.setLineDash([]);
-    }
-
-    // подписи: у каждой свой отрезок прокрутки
-    var win = [[-1, 0.15], [0.19, 0.39], [0.43, 0.63], [0.67, 0.83], [0.87, 2]];
-    caps.forEach(function (cap, j) {
-      var a = win[j][0], b = win[j][1];
-      var o = RM.matches ? (P >= a && P < b ? 1 : 0) : clamp((P - a) / 0.04, 0, 1) * clamp((b - P) / 0.04, 0, 1);
-      cap.style.opacity = String(o);
-      cap.style.transform = RM.matches ? '' : 'translate3d(0,' + ((1 - o) * (P < (a + b) / 2 ? 12 : -12)) + 'px,0)';
-      cap.setAttribute('aria-hidden', String(o < 0.5));
-    });
-    legA.style.opacity = String(1 - smooth(u4));
-    legB.style.opacity = String(smooth(u4));
-  }
-
-  function progress() {
-    var r = sec.getBoundingClientRect();
-    return clamp(-r.top / (sec.offsetHeight - window.innerHeight), 0, 1);
-  }
-  var queued = false;
-  window.addEventListener('scroll', function () {
-    if (queued) return; queued = true;
-    requestAnimationFrame(function () { queued = false; draw(); });
-  }, { passive: true });
-  if ('ResizeObserver' in window) new ResizeObserver(function () { requestAnimationFrame(build); }).observe(canvas); else { window.addEventListener('resize', build); build(); }
-})();
-
-
-/* ============================================================
-   5. ТОЧНОСТЬ — 1000 беременных: ложные тревоги скрининга и НИПТ.
-   Переключатель на пружине (damping 1), точки гаснут волной.
-   ============================================================ */
-(function () {
-  var root = document.getElementById('fpv');
-  if (!root) return;
-  var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var canvas = root.querySelector('canvas'), ctx = canvas.getContext('2d');
-  var thumb = root.querySelector('.fpv__thumb');
-  var btns = Array.prototype.slice.call(root.querySelectorAll('.fpv__seg button'));
-  var v0 = root.querySelector('.fpv__v0'), v1 = root.querySelector('.fpv__v1');
-  var N = 1000, cols = 50, W = 0, H = 0, cell = 10, dpr = 1, touched = false;
-  var seed = 5;
-  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
-  var fp = [], keep = -1;
-  while (fp.length < 50) { var i = Math.floor(rnd() * N); if (fp.indexOf(i) < 0) fp.push(i); }
-  keep = fp[0];
-  var fpSet = {}; fp.forEach(function (i, k) { fpSet[i] = k; });
-  function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
-
-  // пружина: значение 0 — скрининг, 1 — НИПТ; стартует с текущей точки и скорости
-  function Spring(x, on) { this.x = x; this.v = 0; this.t = x; this.raf = 0; this.on = on; this.tick = this.tick.bind(this); }
-  Spring.prototype.to = function (t, response) {
-    this.t = t;
-    if (RM.matches) { this.x = t; this.v = 0; this.on(t); return; }
-    var w = 2 * Math.PI / response; this.k = w * w; this.c = 2 * w;
-    if (!this.raf) { this.last = performance.now(); this.raf = requestAnimationFrame(this.tick); }
-  };
-  Spring.prototype.tick = function (now) {
-    var dt = Math.min((now - this.last) / 1000, 0.064); this.last = now;
-    var n = Math.max(1, Math.ceil(dt / 0.004)), h = dt / n;
-    for (var i = 0; i < n; i++) { var a = -this.k * (this.x - this.t) - this.c * this.v; this.v += a * h; this.x += this.v * h; }
-    if (Math.abs(this.x - this.t) < 0.001 && Math.abs(this.v) < 0.01) { this.x = this.t; this.v = 0; this.raf = 0; this.on(this.x); return; }
-    this.on(this.x); this.raf = requestAnimationFrame(this.tick);
-  };
-
-  function layout() {
-    if (canvas.clientWidth === W && W) return;
-    W = canvas.clientWidth;
-    cols = W < 480 ? 40 : 50;
-    cell = W / cols;
-    H = Math.ceil(N / cols) * cell;
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); canvas.style.height = H + 'px';
-    draw(m.x);
-  }
-  function draw(x) {
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, W, H);
-    for (var i = 0; i < N; i++) {
-      var c = i % cols, r = Math.floor(i / cols);
-      var on = 0;
-      if (i in fpSet) {
-        if (i === keep) on = 1;
-        else on = 1 - clamp(x * 1.5 - (fpSet[i] / 50) * 0.5, 0, 1);   // гаснут по очереди
-      }
-      var rad = cell * (0.3 + 0.08 * on);
-      ctx.fillStyle = on > 0.01 ? 'rgba(245,165,36,' + (0.35 + 0.65 * on) + ')' : '#C9D6E8';
-      if (on <= 0.01) ctx.fillStyle = '#C9D6E8';
-      ctx.beginPath(); ctx.arc((c + 0.5) * cell, (r + 0.5) * cell, rad, 0, 6.2832); ctx.fill();
-    }
-    v0.style.opacity = String(clamp(1 - x * 1.4, 0, 1));
-    v1.style.opacity = String(clamp(x * 1.4 - 0.4, 0, 1));
-  }
-  var m = new Spring(0, draw);
-  var th = new Spring(0, function (x) { thumb.style.transform = 'translate3d(' + (x * 100) + '%,0,0)'; });
-  function set(mode, response) {
-    btns.forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.m === mode)); });
-    th.to(mode, 0.32);
-    m.to(mode, response);
-  }
-  btns.forEach(function (b) {
-    b.addEventListener('pointerdown', function () { touched = true; });
-    b.addEventListener('click', function () { set(+b.dataset.m, 0.9); });
-  });
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (ents) {
-      ents.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        io.disconnect();
-        setTimeout(function () { if (!touched) set(1, 1.4); }, 700);
-      });
-    }, { threshold: 0.5 });
-    io.observe(canvas);
-  }
-  if ('ResizeObserver' in window) new ResizeObserver(function () { requestAnimationFrame(layout); }).observe(canvas); else { window.addEventListener('resize', layout); layout(); }
 })();
 </script>
 </body>
