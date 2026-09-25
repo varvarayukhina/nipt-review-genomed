@@ -295,9 +295,9 @@ def page(version: str, blocks_in: dict, css_all: str, js_extra: str = "") -> str
     title = "НИПТ — Геномед · с анимацией" if version == "anim" else "НИПТ — Геномед · без анимации"
     head_extra = '<meta name="theme-color" content="#0A2540">\n'
     order = [
-        vbar(version), NAV, blocks_in["hero"], intro, notice, blocks_in["safe"], blocks_in["about"], blocks_in["acc"],
+        vbar(version), SITE_HEADER, NAV, blocks_in["hero"], intro, notice, blocks_in["safe"], blocks_in["about"], blocks_in["acc"],
         blocks_in["panels"], blocks["compare"], blocks["quiz"], blocks_in["how"], RESULTS, LIMITS,
-        blocks["why"], blocks["faq"], DOCTORS, blocks["cta"], footer, sticky, MODAL,
+        blocks["why"], blocks["faq"], DOCTORS, blocks["cta"], ldisc, SITE_FOOTER, sticky, MODAL,
     ]
     return f"""<!DOCTYPE html>
 <html lang="ru">
@@ -319,6 +319,13 @@ def page(version: str, blocks_in: dict, css_all: str, js_extra: str = "") -> str
 PARTS = HERE / "parts"
 V2 = HERE / "v2"
 RESULTS = (PARTS / "results.html").read_text(encoding="utf-8")
+SITE_HEADER = (PARTS / "site-header.html").read_text(encoding="utf-8")   # как на превью MEMA
+SITE_FOOTER = (PARTS / "site-footer.html").read_text(encoding="utf-8")
+chrome_css = (PARTS / "site-chrome.css").read_text(encoding="utf-8")
+# дисклеймер страницы: только про скрининг — противопоказания и «не оферта» уже есть в подвале
+ldisc = re.sub(r"\s*<p>Имеются противопоказания[^<]*</p>\s*<p class=\"ldisc__fine\">.*?</p>", "", footer, flags=re.S)
+if ldisc == footer:
+    raise SystemExit("не удалось сократить дисклеймер страницы")
 LIMITS = (PARTS / "limits.html").read_text(encoding="utf-8")
 common_css = (PARTS / "common.css").read_text(encoding="utf-8")
 static_css = (PARTS / "static.css").read_text(encoding="utf-8")
@@ -372,7 +379,7 @@ how_new = sub1(blocks["how"], '\n\n  <div class="wrap where">', DAYS8 + '\n\n  <
 how_new = swap_badges(how_new, '<div class="wrap where">', [(n, "wcard__img") for n in ("ic-office", "ic-partner", "ic-home")])
 
 # hover только у мыши (mobile-native): иначе на телефоне залипает после тапа
-css_base = re.sub(r"(?m)^([^@\n{]*:hover[^{\n]*\{[^}\n]*\})\s*$", r"@media (hover:hover) and (pointer:fine){\1}", css) + EXTRA_CSS + common_css
+css_base = re.sub(r"(?m)^([^@\n{]*:hover[^{\n]*\{[^}\n]*\})\s*$", r"@media (hover:hover) and (pointer:fine){\1}", css) + EXTRA_CSS + common_css + chrome_css
 
 # ---------------------------------------------------------------- вкладка «С анимацией»
 ci = acc_main.index('<div class="cmp-card">')
