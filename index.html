@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0A2540">
-<title>НИПТ — Геномед · с анимацией</title>
+<title>НИПТ — Геномед · сцена на прокрутке</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
@@ -773,6 +773,59 @@ html{-webkit-tap-highlight-color:transparent}
 @media(max-width:900px){.ftr-top{grid-template-columns:1fr 1fr;gap:28px}}
 @media(max-width:560px){.ftr-top{grid-template-columns:1fr}}
 
+/* ===== v3 ===== */
+.nstat{background:#fff;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.nstat__in{max-width:1320px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr)}
+.nstat__i{display:flex;align-items:center;gap:16px;padding:26px 24px;border-left:1px solid var(--line-soft);min-width:0}
+.nstat__i:first-child{border-left:none;padding-left:0}
+.nstat__i b{font-family:var(--disp);font-weight:900;font-size:clamp(40px,4.2vw,58px);letter-spacing:-.045em;line-height:1;flex:none;font-variant-numeric:tabular-nums;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.nstat__i span{font-size:14px;font-weight:600;line-height:1.35;color:var(--ink-2)}
+@media(max-width:1020px){.nstat__in{grid-template-columns:1fr 1fr}.nstat__i:nth-child(3){border-left:none;padding-left:0}.nstat__i:nth-child(n+3){border-top:1px solid var(--line-soft)}}
+@media(max-width:600px){.nstat__in{padding:0 16px}.nstat__i{flex-direction:column;align-items:flex-start;gap:8px;padding:18px 12px}.nstat__i:nth-child(odd){padding-left:0}.nstat__i span{font-size:13px}}
+
+.intro3{border:none;gap:18px}
+.intro3>div{background:#fff;border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:24px 24px 22px;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s}
+.intro3>div:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.intro3__ic{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--accent-soft);color:var(--blue);margin-bottom:14px;border:1px solid #C9DDFF}
+.intro3__ic .v3ic{width:22px;height:22px}
+@media(max-width:900px){.intro3{grid-template-columns:1fr}}
+
+.v3band{background:#fff;padding-block:clamp(3em,6vw,5.5em) !important}
+.v3band + section{padding-top:clamp(3em,6vw,5.5em) !important}
+.v3src{font-family:var(--mono);font-size:11.5px;line-height:1.5;color:var(--muted);margin:12px 0 0}
+
+.v3chat{display:flex;flex-wrap:wrap;gap:10px;margin-top:1.6em}
+.v3chat .btn-lnipt{display:inline-flex;align-items:center;gap:9px}
+.v3chat svg,.v3chat img{width:22px;height:22px;display:block;flex:none}
+.v3tel{margin:1.1em 0 0;font-size:13px;color:rgba(255,255,255,.6)}
+.v3tel a{color:#fff;text-decoration:none}
+
+.fqg{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;margin-top:2em}
+.fqc{display:grid;gap:14px;min-width:0}
+.fq{background:var(--bg);border:1px solid var(--line-soft);border-radius:var(--r-md);transition:border-color .2s,box-shadow .2s,background-color .2s}
+.fq[open]{background:#fff;border-color:var(--cyan-soft);box-shadow:var(--shadow-md)}
+.fq summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:center;padding:16px 18px;font-weight:700;font-size:16px;letter-spacing:-.01em;line-height:1.35}
+.fq summary::-webkit-details-marker{display:none}
+.fq summary::after{content:"";width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);flex:none;margin:0 4px 4px 0;transition:transform .2s}
+.fq[open] summary::after{transform:rotate(-135deg);margin-bottom:-4px;border-color:var(--blue)}
+.fq__ic{width:42px;height:42px;border-radius:12px;background:var(--accent-soft);color:var(--blue);display:grid;place-items:center;flex:none;transition:background-color .2s,color .2s}
+.fq__ic .v3ic{width:20px;height:20px}
+.fq[open] .fq__ic{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff}
+.fq__q{flex:1;min-width:0}
+.fq__n{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:2px}
+.fq__a{padding:0 20px 18px 74px;font-size:15px;color:var(--ink-2);line-height:1.6}
+.fq__a p{margin:0}
+@media(max-width:900px){.fqg{grid-template-columns:1fr}.fqc{display:contents}}
+@media(max-width:600px){.fq__a{padding:0 18px 18px}}
+
+/* появление при прокрутке, полоски точности, путь ДНК по очереди */
+.v3rv{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0) * 90ms)}
+.v3rv.in{opacity:1;transform:none}
+.cmp-line .bar2 i{transform:scaleX(0);transform-origin:left;transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.cmp-card.in .cmp-line .bar2 i{transform:scaleX(1)}
+@media (prefers-reduced-motion:reduce){.v3rv{opacity:1;transform:none;transition:none}.cmp-line .bar2 i{transform:none;transition:none}}
+
 /* ============================================================
    НАГЛЯДНАЯ ВЕРСИЯ
    ============================================================ */
@@ -833,7 +886,7 @@ html{-webkit-tap-highlight-color:transparent}
 </style>
 </head>
 <body>
-<div class="vbar"><div class="wrap vbar__in"><b>Версии для сравнения:</b><a href="index.html" class="on" aria-current="page">С анимацией</a><a href="bez-animacii.html">Без анимации</a></div></div>
+<div class="vbar"><div class="wrap vbar__in"><b>Версии для сравнения:</b><a href="index.html" class="on" aria-current="page">Сцена на прокрутке</a><a href="bez-animacii.html">Компактный</a></div></div>
 <header class="hdr">
   <div class="wrap hdr-in">
     <a class="hdr-logo" href="https://genomed.ru/"><img src="img/logo.svg" alt="Геномед"></a>
@@ -867,7 +920,6 @@ html{-webkit-tap-highlight-color:transparent}
     <a href="#results">Результат</a>
     <a href="#limits">Ограничения</a>
     <a href="#faq">Вопросы</a>
-    <a href="#doctors">Врачам</a>
     <a class="btn-lnipt btn-lnipt--primary btn-lnipt--sm" href="#quiz"><span>Подобрать НИПТ</span></a>
   </div>
 </nav>
@@ -881,28 +933,30 @@ html{-webkit-tap-highlight-color:transparent}
         <a class="btn-lnipt btn-lnipt--primary" href="#quiz"><span>Подобрать НИПТ →</span></a>
         <a class="btn-lnipt btn-lnipt--secondary" href="#panels">Панели и цены</a>
       </div>
-      <ul class="herofacts">
-        <li><b>Без риска</b> для беременности</li>
-        <li><b class="mono">от 16 000 ₽</b> пять панелей</li>
-        <li><b class="mono">от 8 дней</b> до заключения</li>
-        <li><b>Консультация генетика</b> бесплатно</li>
-      </ul>
     </div>
     <figure class="hv2__tube"><img src="img/hero-tube.webp" alt="Пробирка с кровью: в плазме — фрагменты ДНК" width="279" height="1100" fetchpriority="high"><figcaption class="l"><b>20 мл крови из вены</b>без прокола и подготовки</figcaption><figcaption><b>Результат — через 8 дней</b>заключение врач-генетик разбирает вместе с вами</figcaption></figure>
+  </div>
+</section>
+<section class="nstat" aria-label="Коротко о НИПТ">
+  <div class="nstat__in">
+    <div class="nstat__i"><b data-count="10">10</b><span>недель — с этого срока можно сдать кровь</span></div>
+    <div class="nstat__i"><b data-count="20">20</b><span>мл крови из вены — без прокола и риска для беременности</span></div>
+    <div class="nstat__i"><b data-count="8">8</b><span>дней до заключения врача-генетика</span></div>
+    <div class="nstat__i"><b data-count="5">5</b><span>панелей от 16 000 до 40 000 ₽, консультация генетика бесплатно</span></div>
   </div>
 </section>
 <section style="padding-top:0;padding-bottom:0">
   <div class="wrap intro3">
     <div>
-      <span class="section-eyebrow">Что это</span>
+      <span class="intro3__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span><span class="section-eyebrow">Что это</span>
       <p>Скрининговое исследование по венозной крови матери. Оно анализирует ДНК плода, которая попадает в кровь из плаценты, и оценивает вероятность самых частых хромосомных аномалий — например, синдрома Дауна.</p>
     </div>
     <div>
-      <span class="section-eyebrow">Для кого</span>
+      <span class="intro3__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span><span class="section-eyebrow">Для кого</span>
       <p>Международные профессиональные сообщества рекомендуют исследование всем беременным. Особенно оно показано после 35 лет, после ЭКО, при повышенном риске по биохимическому скринингу и если ранее была беременность с хромосомной аномалией.</p>
     </div>
     <div>
-      <span class="section-eyebrow">Когда</span>
+      <span class="intro3__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span><span class="section-eyebrow">Когда</span>
       <p>С 10 полных недель беременности, верхней границы срока практически нет. Результат — через 8 дней, с разбором врача-генетика.</p>
     </div>
   </div>
@@ -919,8 +973,8 @@ html{-webkit-tap-highlight-color:transparent}
   <div class="nscene__sticky">
     <div class="wrap nscene__inner">
       <div class="nscene__head">
-        <span class="section-eyebrow" style="color:var(--cyan)">Как работает НИПТ</span>
-        <h2 id="nscene-title">Почему исследование <em>безопасно</em></h2>
+        <span class="section-eyebrow" style="color:var(--cyan)">Безопасно для беременности</span>
+        <h2 id="nscene-title">Как работает <em>НИПТ</em></h2>
       </div>
       <div class="ncaps">
         <div class="ncap"><span class="ncap__k mono">01 · кровь мамы</span><h3>В&nbsp;крови мамы есть фрагменты ДНК плаценты.</h3><p>С&nbsp;10-й недели беременности их доля&nbsp;— плодная фракция&nbsp;— обычно достигает 4&nbsp;% и&nbsp;больше. Этого достаточно для анализа.</p></div>
@@ -974,34 +1028,35 @@ html{-webkit-tap-highlight-color:transparent}
   </div>
 
 </section>
-<section id="accuracy" style="padding-top:0">
+<section id="accuracy" class="v3band">
   <div class="wrap cmp">
     <div>
       <span class="section-eyebrow">Насколько точен НИПТ</span>
       <h2>Более точный скрининг <em>частых трисомий</em></h2>
-      <p class="lead">НИПТ и комбинированный биохимический скрининг решают разные задачи. НИПТ отличается более высокой выявляемостью частых трисомий и меньшей частотой ложноположительных результатов — то есть реже направляет женщину на инвазивную процедуру без необходимости.</p>
-      <p class="lead" style="font-size:1em">Оба метода безопасны для беременности. НИПТ можно пройти раньше — с 10 полных недель, биохимический скрининг проводят на 11–13-й неделе.</p>
+      <p class="lead">НИПТ и комбинированный скрининг первого триместра (УЗИ и анализ крови) решают разные задачи. НИПТ отличается более высокой выявляемостью частых трисомий и меньшей частотой ложноположительных результатов — то есть реже направляет женщину на инвазивную процедуру без необходимости.</p>
+      <p class="lead" style="font-size:1em">Оба метода безопасны для беременности. НИПТ можно пройти раньше — с 10 полных недель, скрининг первого триместра проводят на 11–13-й неделе.</p>
     </div>
 
     <div class="fpv" id="fpv">
       <div class="fpv__top">
         <div class="fpv__seg" role="group" aria-label="Метод скрининга">
           <span class="fpv__thumb" aria-hidden="true"></span>
-          <button type="button" data-m="0" aria-pressed="true">Биохимический скрининг</button>
+          <button type="button" data-m="0" aria-pressed="true">Скрининг I триместра</button>
           <button type="button" data-m="1" aria-pressed="false">НИПТ</button>
         </div>
       </div>
       <p class="fpv__lead">1000 беременных, у&nbsp;плода нет хромосомных аномалий. <b>Ложный «высокий риск»</b> и&nbsp;направление на&nbsp;инвазивную процедуру без необходимости:</p>
-      <canvas class="fpv__dots" role="img" aria-label="Из 1000 беременных без хромосомных аномалий у плода ложноположительный результат получат до 50 при биохимическом скрининге и меньше 1 при НИПТ."></canvas>
-      <div class="fpv__val" aria-live="polite"><span class="fpv__v0"><b class="mono">до&nbsp;50</b> из&nbsp;1000</span><span class="fpv__v1"><b class="mono">меньше&nbsp;1</b> из&nbsp;1000</span></div>
+      <canvas class="fpv__dots" role="img" aria-label="Из 1000 беременных без хромосомных аномалий у плода ложноположительный результат получат около 50 при скрининге первого триместра и меньше 1 при НИПТ."></canvas>
+      <div class="fpv__val" aria-live="polite"><span class="fpv__v0"><b class="mono">около&nbsp;50</b> из&nbsp;1000</span><span class="fpv__v1"><b class="mono">меньше&nbsp;1</b> из&nbsp;1000</span></div>
       <table class="fpv__tbl">
-        <thead><tr><th></th><th>НИПТ</th><th><span class="fpv__l">Биохимический скрининг</span><span class="fpv__s">Биохим.<br>скрининг</span></th></tr></thead>
+        <thead><tr><th></th><th>НИПТ</th><th><span class="fpv__l">Скрининг I триместра</span><span class="fpv__s">Скрининг<br>I&nbsp;трим.</span></th></tr></thead>
         <tbody>
-          <tr><td>Выявляемость трисомии 21</td><td class="mono">&gt;&nbsp;99&nbsp;%</td><td class="mono">85&nbsp;%</td></tr>
-          <tr><td>Выявляемость трисомии 18</td><td class="mono">&gt;&nbsp;98&nbsp;%</td><td class="mono">75&nbsp;%</td></tr>
-          <tr><td>Ложноположительные результаты</td><td class="mono">&lt;&nbsp;0,1&nbsp;%</td><td class="mono">до&nbsp;5&nbsp;%</td></tr>
+          <tr><td>Выявляемость трисомии 21</td><td class="mono">99,7&nbsp;%</td><td class="mono">≈&nbsp;85&nbsp;%</td></tr>
+          <tr><td>Выявляемость трисомии 18</td><td class="mono">97,9&nbsp;%</td><td class="mono">≈&nbsp;91&nbsp;%</td></tr>
+          <tr><td>Ложноположительные результаты</td><td class="mono">0,04&nbsp;%</td><td class="mono">≈&nbsp;5&nbsp;%</td></tr>
         </tbody>
       </table>
+      <p class="v3src">НИПТ — метаанализ Gil и соавт., Ultrasound Obstet Gynecol, 2017; скрининг I триместра — Wapner и соавт., N Engl J Med, 2003.</p>
     </div>
   </div>
 </section>
@@ -1141,7 +1196,7 @@ html{-webkit-tap-highlight-color:transparent}
     </div>
   </div>
 </section>
-<section id="compare" style="padding-top:0">
+<section id="compare" class="v3band">
   <div class="wrap section-head" style="max-width:1240px">
     <span class="section-eyebrow">Сравнение</span>
     <h2>Чем панели <em>отличаются</em></h2>
@@ -1344,14 +1399,14 @@ html{-webkit-tap-highlight-color:transparent}
     </div>
   </div>
 </section>
-<section id="how" style="padding-top:0">
+<section id="how" class="v3band">
   <div class="wrap section-head">
     <span class="section-eyebrow">Как проходит</span>
     <h2>От записи до заключения — <em>четыре</em> шага</h2>
     <p class="lead">Специальная подготовка не требуется, сдавать кровь можно не натощак.</p>
   </div>
   <div class="wrap steps" style="margin-top:2.4em">
-    <div class="step"><div class="n">01</div><h3>Консультация</h3><p>Запись по телефону или онлайн. Врач-генетик — в центре или онлайн — помогает выбрать панель под срок беременности и анамнез.</p></div>
+    <div class="step"><div class="n">01</div><h3>Консультация</h3><p>Запись онлайн или в мессенджере. Врач-генетик — в центре или онлайн — помогает выбрать панель под срок беременности и анамнез.</p></div>
     <div class="step"><div class="n">02</div><h3>Взятие крови</h3><p>20 мл венозной крови с 10 полных недель беременности, как при обычном анализе. Перед этим подписывается договор информированного согласия.</p></div>
     <div class="step"><div class="n">03</div><h3>Секвенирование ДНК</h3><p>В лаборатории из плазмы выделяют внеклеточную ДНК и прочитывают её на секвенаторе. Каждый этап проходит контроль качества.</p></div>
     <div class="step"><div class="n">04</div><h3>Заключение генетика</h3><p>Через 8 дней результат приходит на электронную почту, указанную в договоре. При необходимости — разбор заключения с врачом.</p></div>
@@ -1475,143 +1530,24 @@ html{-webkit-tap-highlight-color:transparent}
     </div>
   </div>
 </section>
-<section id="faq" style="padding-top:0">
+<section id="faq" class="v3band">
   <div class="wrap section-head">
     <span class="section-eyebrow">Вопросы</span>
     <h2>Что чаще всего <em>спрашивают</em></h2>
   </div>
-  <div class="wrap faq" style="margin-top:2em">
-    <details open>
-      <summary><span class="faq__n">01</span><span class="q">НИПТ действительно безопасен для беременности?</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
-      <p class="a">Да. Для исследования берут венозную кровь у матери — процедура ничем не отличается от обычного анализа крови. Фрагменты ДНК плаценты сами попадают в кровь матери, поэтому прокол плодных оболочек, как при амниоцентезе или биопсии ворсин хориона, не нужен и риска для беременности нет.</p>
-    </details>
-    <details>
-      <summary><span class="faq__n">02</span><span class="q">С какого срока можно сдавать?</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
-      <p class="a">С 10 полных недель беременности: к этому сроку доля ДНК плода в материнской крови обычно достигает необходимых 4 % и выше. Верхней границы срока практически нет. Плодная фракция определяется в процессе исследования — если она оказалась ниже 4 %, кровь потребуется сдать повторно на более позднем сроке.</p>
-    </details>
-    <details>
-      <summary><span class="faq__n">03</span><span class="q">Заменяет ли НИПТ инвазивную диагностику?</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
-      <p class="a">Нет. НИПТ — скрининговое исследование: оно оценивает вероятность хромосомной аномалии, но не устанавливает диагноз. При высоком риске результат подтверждают инвазивной диагностикой с последующим хромосомным анализом. В расширенной и экспертной панелях Геномед такое подтверждение выполняется бесплатно.</p>
-    </details>
-    <details>
-      <summary><span class="faq__n">04</span><span class="q">Что означает «остаточный риск» в заключении?</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
-      <p class="a">Это вероятность того, что при низком риске по результату хромосомная аномалия у плода всё же есть. Для НИПТ она очень мала: надёжность низкого результата (NPV) превышает 99,9 %, но формально остаточный риск не равен нулю.</p>
-    </details>
-    <details>
-      <summary><span class="faq__n">05</span><span class="q">Нужно ли готовиться к сдаче крови?</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
-      <p class="a">Специальная подготовка не требуется. Сдавать кровь можно не натощак, диета и отмена препаратов не нужны. Для исследования берут 20 мл венозной крови.</p>
-    </details>
-    <details>
-      <summary><span class="faq__n">06</span><span class="q">Когда и как приходит результат?</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
-      <p class="a">Через 8 дней после взятия крови заключение врача-генетика приходит на электронную почту, указанную в договоре. Для панелей Т21, базовой и стандартной срок считается в календарных днях, для расширенной и экспертной — в рабочих. Разбор заключения с врачом-генетиком входит в стоимость.</p>
-    </details>
-      <details>
-        <summary><span class="faq__n">07</span><span class="q">Можно ли сдать НИПТ при двойне?</span>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <p class="a">При двуплодной беременности и после редукции одного эмбриона выполняются панели Т21 и базовая. Панели с анеуплоидиями половых хромосом при двойне не применяются: ДНК каждого плода в крови матери разделить нельзя. При тройне и большем числе плодов исследование не проводится.</p>
-      </details>
-      <details>
-        <summary><span class="faq__n">08</span><span class="q">Определяется ли пол ребёнка?</span>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <p class="a">Да, определение пола плода входит во все пять панелей. Если вы не хотите знать пол до родов, скажите об этом при записи — врач не назовёт его при разборе заключения.</p>
-      </details>
-      <details>
-        <summary><span class="faq__n">09</span><span class="q">Что будет, если плодной фракции не хватит?</span>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <p class="a">Доля ДНК плода определяется уже в ходе исследования. Если она ниже 4 %, достоверный результат получить нельзя — лаборатория бесплатно выполняет анализ нового образца крови на большем сроке. Низкая плодная фракция сама по себе считается поводом обсудить с генетиком дальнейшую тактику.</p>
-      </details>
-
-  </div>
-</section>
-<section id="doctors" style="padding-top:0">
-  <div class="wrap section-head">
-    <span class="section-eyebrow">Для врачей</span>
-    <h2>Интерпретация <em>заключения</em></h2>
-    <p class="lead">Рекомендация предлагать скрининг по внеклеточной ДНК всем беременным — ACOG, SMFM, ISPD, ACMG. Показатели выявляемости на странице приведены по опубликованным данным для комбинированного скрининга первого триместра и скрининга по внеклеточной ДНК.</p>
-  </div>
-  <div class="wrap faq" style="margin-top:2.4em;">
-    <details class="acc">
-      <summary><span class="faq__n">01</span><span class="q">Как читается заключение: высокий и низкий риск, PPV и NPV</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
-      <div class="body">
-        <p style="margin:0 0 1.5em;color:var(--ink-2);font-size:.97em;line-height:1.65">Результатом исследования является заключение врача-генетика, в котором определён высокий или низкий риск по каждой исследованной хромосоме. Граница между высоким и низким риском — <b>1 : 100</b>.</p>
-
-        <div class="risk-grid">
-          <div class="risk hi">
-            <span class="tag">Высокий риск</span>
-            <div class="thr">1 : 100 и выше</div>
-            <p>Такие значения выражаются в виде положительной прогностической ценности (PPV, positive predictive value) — вероятности того, что при высоком риске по тесту аномалия действительно есть у плода.</p>
-            <div class="metric">Требует подтверждения инвазивной диагностикой — амниоцентезом или биопсией ворсин хориона с последующим хромосомным анализом.</div>
-          </div>
-          <div class="risk lo">
-            <span class="tag">Низкий риск</span>
-            <div class="thr">ниже 1 : 100</div>
-            <p>Такие значения выражаются в виде отрицательной прогностической ценности (NPV, negative predictive value). В заключении NPV представлен как остаточный риск — вероятность ложноотрицательного результата.</p>
-            <div class="metric">NPV исследования составляет <b>&gt; 99,9 %</b> — то есть остаточный риск при низком результате крайне мал.</div>
-          </div>
-        </div>
-
-        <div class="ppv" style="box-shadow:none;background:#FAFCFF">
-          <h3>PPV — уверенность в положительном результате</h3>
-          <p class="sub">Значения различаются по нозологиям: чем реже встречается аномалия, тем ниже прогностическая ценность положительного результата.</p>
-          <div class="ppv-row">
-            <div class="lbl">Трисомия 21 <small>синдром Дауна</small></div>
-            <div class="val">&gt; 97 %</div>
-            <div class="track"><i style="width:97%"></i></div>
-          </div>
-          <div class="ppv-row">
-            <div class="lbl">Трисомия 18 <small>синдром Эдвардса</small></div>
-            <div class="val">&gt; 91 %</div>
-            <div class="track"><i style="width:91%"></i></div>
-          </div>
-          <div class="ppv-row">
-            <div class="lbl">Трисомия 13 и анеуплоидии половых хромосом <small>синдром Патау, синдромы Тернера, Клайнфельтера, Якобс, трисомия X</small></div>
-            <div class="val">&gt; 60 %</div>
-            <div class="track"><i style="width:60%"></i></div>
-          </div>
-          <div class="ppv-row">
-            <div class="lbl">Микроделеционные синдромы <small>доступны в расширенной и экспертной панелях</small></div>
-            <div class="val" style="font-size:.8em;color:var(--muted)">индивид.</div>
-            <div class="track"><i style="width:0"></i></div>
-          </div>
-          <p class="src" style="margin-top:1.4em">Значения высокого риска микроделеционных синдромов определяются индивидуально. NPV по всем позициям — более 99,9 %.</p>
-          <div class="note">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
-            <p><b>Важно.</b> Вычисленный риск может не отражать реальный PPV для конкретной пациентки: в исследовании не учитываются дополнительные факторы риска — результаты других скринингов, данные УЗИ, личный и семейный анамнез. Итоговую интерпретацию всегда делает врач.</p>
-          </div>
-        </div>
-      </div>
-    </details>
-
-    <details class="acc">
-      <summary><span class="faq__n">02</span><span class="q">Как устроен анализ</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
-      <div class="body">
-        <div class="cards">
-          <div class="fcard" style="box-shadow:none;background:#FAFCFF">
-            <div class="n mono">01 · биология</div>
-            <h3>Внеклеточная ДНК в крови матери</h3>
-            <p>С ранних сроков беременности в материнском кровотоке циркулируют фрагменты внеклеточной ДНК плацентарного происхождения. Их доля называется плодной фракцией и определяется в ходе исследования.</p>
-          </div>
-          <div class="fcard" style="box-shadow:none;background:#FAFCFF">
-            <div class="n mono">02 · технология</div>
-            <h3>Секвенирование пересчитывает хромосомы</h3>
-            <p>ДНК выделяют из плазмы и читают методом высокопроизводительного секвенирования. Программа считает, сколько прочтений приходится на каждую хромосому.</p>
-          </div>
-          <div class="fcard" style="box-shadow:none;background:#FAFCFF">
-            <div class="n mono">03 · результат</div>
-            <h3>Отклонение видно в цифрах</h3>
-            <p>Если прочтений по хромосоме больше или меньше ожидаемого, это указывает на вероятную анеуплоидию. Дополнительная копия 21-й хромосомы — признак синдрома Дауна, 18-й — синдрома Эдвардса.</p>
-          </div>
-        </div>
-      </div>
-    </details>
+  <div class="wrap fqg">
+<div class="fqc">
+<details class="fq" style="order:1" open><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="fq__q"><span class="fq__n mono">01</span>НИПТ действительно безопасен для беременности?</span></summary><div class="fq__a"><p class="a">Да. Для исследования берут венозную кровь у матери — процедура ничем не отличается от обычного анализа крови. Фрагменты ДНК плаценты сами попадают в кровь матери, поэтому прокол плодных оболочек, как при амниоцентезе или биопсии ворсин хориона, не нужен и риска для беременности нет.</p></div></details>
+<details class="fq" style="order:3"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/><path d="m16 16-1.9-1.9"/></svg></span><span class="fq__q"><span class="fq__n mono">03</span>Заменяет ли НИПТ инвазивную диагностику?</span></summary><div class="fq__a"><p class="a">Нет. НИПТ — скрининговое исследование: оно оценивает вероятность хромосомной аномалии, но не устанавливает диагноз. При высоком риске результат подтверждают инвазивной диагностикой с последующим хромосомным анализом. В расширенной и экспертной панелях Геномед такое подтверждение выполняется бесплатно.</p></div></details>
+<details class="fq" style="order:5"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span><span class="fq__q"><span class="fq__n mono">05</span>Нужно ли готовиться к сдаче крови?</span></summary><div class="fq__a"><p class="a">Специальная подготовка не требуется. Сдавать кровь можно не натощак, диета и отмена препаратов не нужны. Для исследования берут 20 мл венозной крови.</p></div></details>
+<details class="fq" style="order:7"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/></svg></span><span class="fq__q"><span class="fq__n mono">07</span>Можно ли сдать НИПТ при двойне?</span></summary><div class="fq__a"><p class="a">При двуплодной беременности и после редукции одного эмбриона выполняются панели Т21 и базовая. Панели с анеуплоидиями половых хромосом при двойне не применяются: ДНК каждого плода в крови матери разделить нельзя. При тройне и большем числе плодов исследование не проводится.</p></div></details>
+<details class="fq" style="order:9"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg></span><span class="fq__q"><span class="fq__n mono">09</span>Что будет, если плодной фракции не хватит?</span></summary><div class="fq__a"><p class="a">Доля ДНК плода определяется уже в ходе исследования. Если она ниже 4 %, достоверный результат получить нельзя — лаборатория бесплатно выполняет анализ нового образца крови на большем сроке. Низкая плодная фракция сама по себе считается поводом обсудить с генетиком дальнейшую тактику.</p></div></details>
+</div><div class="fqc">
+<details class="fq" style="order:2"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span><span class="fq__q"><span class="fq__n mono">02</span>С какого срока можно сдавать?</span></summary><div class="fq__a"><p class="a">С 10 полных недель беременности: к этому сроку доля ДНК плода в материнской крови обычно достигает необходимых 4 % и выше. Верхней границы срока практически нет. Плодная фракция определяется в процессе исследования — если она оказалась ниже 4 %, кровь потребуется сдать повторно на более позднем сроке.</p></div></details>
+<details class="fq" style="order:4"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></span><span class="fq__q"><span class="fq__n mono">04</span>Что означает «остаточный риск» в заключении?</span></summary><div class="fq__a"><p class="a">Это вероятность того, что при низком риске по результату хромосомная аномалия у плода всё же есть. Для НИПТ она очень мала: надёжность низкого результата (NPV) превышает 99,9 %, но формально остаточный риск не равен нулю.</p></div></details>
+<details class="fq" style="order:6"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="fq__q"><span class="fq__n mono">06</span>Когда и как приходит результат?</span></summary><div class="fq__a"><p class="a">Через 8 дней после взятия крови заключение врача-генетика приходит на электронную почту, указанную в договоре. Для панелей Т21, базовой и стандартной срок считается в календарных днях, для расширенной и экспертной — в рабочих. Разбор заключения с врачом-генетиком входит в стоимость.</p></div></details>
+<details class="fq" style="order:8"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span><span class="fq__q"><span class="fq__n mono">08</span>Определяется ли пол ребёнка?</span></summary><div class="fq__a"><p class="a">Да, определение пола плода входит во все пять панелей. Если вы не хотите знать пол до родов, скажите об этом при записи — врач не назовёт его при разборе заключения.</p></div></details>
+</div>
   </div>
 </section>
 <section id="cta" style="padding-top:0">
@@ -1620,14 +1556,8 @@ html{-webkit-tap-highlight-color:transparent}
       <div>
         <span class="section-eyebrow" style="color:var(--cyan)">Записаться</span>
         <h2 style="font-size:clamp(26px,3.4vw,42px) !important">Подберём НИПТ <em style="color:var(--cyan)">под ваш срок</em> беременности</h2>
-        <p style="max-width:58ch;margin-top:1em">Оставьте телефон — перезвоним, поможем выбрать панель, подскажем ближайший медицинский офис и ответим на вопросы. Консультация перед исследованием бесплатна.</p>
-
-        <form class="leadform" id="leadform">
-          <input type="text" name="fio" placeholder="Ваше имя" autocomplete="name">
-          <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
-          <button type="submit" class="btn-lnipt btn-lnipt--light"><span>Получить консультацию</span></button>
-          <p class="leadform__note">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных.</p>
-        </form>
+        <p style="max-width:58ch;margin-top:1em">Напишите в клиентский сервис — поможем выбрать панель, подскажем ближайший медицинский офис и ответим на вопросы. Консультация перед исследованием бесплатна.</p>
+        <div class="v3chat"><a class="btn-lnipt btn-lnipt--light" href="https://wa.me/74956608377" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><span>WhatsApp</span></a><a class="btn-lnipt btn-lnipt--light" href="https://t.me/genomed_b2c_bot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#27A7E8" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span>Telegram</span></a><a class="btn-lnipt btn-lnipt--light" href="https://max.ru/id7701759381_bot" target="_blank" rel="noopener"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAydpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDkuMS1jMDAxIDc5LjE0NjI4OTk3NzcsIDIwMjMvMDYvMjUtMjM6NTc6MTQgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjM2OUI0NjQzRjUyMDExRjBBRjY2OEUwOTEzMTMxMkEwIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjM2OUI0NjQyRjUyMDExRjBBRjY2OEUwOTEzMTMxMkEwIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyNS4wIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkM4MUVGMzU2Q0VBNzExRjA5Qjg2OThEQzc2QkZBRUYzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkM4MUVGMzU3Q0VBNzExRjA5Qjg2OThEQzc2QkZBRUYzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+PnVEWAAAB3lJREFUeNqc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" alt="" width="30" height="30"><span>Max</span></a></div><p class="v3tel">Клиентский сервис 24/7 · горячая линия <a class="mono" href="tel:84956608377">8 (495) 660-83-77</a></p>
 
       </div>
       <div class="pricebox">
@@ -1650,7 +1580,7 @@ html{-webkit-tap-highlight-color:transparent}
     <div class="ftr-top">
       <div class="ftr-brand">
         <img src="img/logo.svg" alt="Геномед">
-        <p>Медико-генетический центр «Геномед» — собственная лаборатория молекулярной диагностики.</p>
+        <p>Медико-генетический центр Геномед — собственная лаборатория молекулярной диагностики.</p>
       </div>
       <div class="ftr-col"><b>О нас</b>
         <a href="https://genomed.ru/laboratory/">Лаборатория</a>
@@ -2224,6 +2154,31 @@ html{-webkit-tap-highlight-color:transparent}
     io.observe(canvas);
   }
   if ('ResizeObserver' in window) new ResizeObserver(function () { requestAnimationFrame(layout); }).observe(canvas); else { window.addEventListener('resize', layout); layout(); }
+})();
+
+/* ===== v3: появление блоков, полоски точности, счётчики ===== */
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sel = '.intro3>div,.ben,.cmp-card,.panel,.step,.wcard,.res,.limgrp,.fcard,.fq,.dnapath li,.nstat__i';
+  var els = [].slice.call(document.querySelectorAll(sel));
+  if (reduce || !('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+  var groups = new Map();
+  els.forEach(function (e) {
+    e.classList.add('v3rv');
+    var p = e.parentElement, i = groups.get(p) || 0; groups.set(p, i + 1);
+    e.style.setProperty('--d', Math.min(i, 6));
+  });
+  var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }); },
+    { threshold: .15, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function (e) { io.observe(e); });
+  document.querySelectorAll('[data-count]').forEach(function (el) {
+    var n = +el.dataset.count; el.textContent = '0';
+    var o = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return; o.disconnect(); var t0 = performance.now();
+      (function f(t) { var p = Math.min(1, (t - t0) / 900); el.textContent = String(Math.round(n * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(f); })(t0);
+    });
+    o.observe(el);
+  });
 })();
 </script>
 </body>

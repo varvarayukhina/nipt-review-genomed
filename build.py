@@ -285,17 +285,17 @@ EXTRA_CSS = """
 
 
 def vbar(active: str) -> str:
-    tabs = [("anim", "index.html", "С анимацией"), ("static", "bez-animacii.html", "Без анимации")]
+    tabs = [("anim", "index.html", "Сцена на прокрутке"), ("static", "bez-animacii.html", "Компактный")]
     links = "".join(f'<a href="{href}"' + (' class="on" aria-current="page"' if key == active else "") + f">{label}</a>"
                     for key, href, label in tabs)
     return f'<div class="vbar"><div class="wrap vbar__in"><b>Версии для сравнения:</b>{links}</div></div>'
 
 
 def page(version: str, blocks_in: dict, css_all: str, js_extra: str = "") -> str:
-    title = "НИПТ — Геномед · с анимацией" if version == "anim" else "НИПТ — Геномед · без анимации"
+    title = "НИПТ — Геномед · сцена на прокрутке" if version == "anim" else "НИПТ — Геномед · компактный"
     head_extra = '<meta name="theme-color" content="#0A2540">\n'
     order = [
-        vbar(version), SITE_HEADER, NAV, blocks_in["hero"], intro, notice, blocks_in["safe"], blocks_in["about"], blocks_in["acc"],
+        vbar(version), SITE_HEADER, NAV, blocks_in["hero"], v3.STATBAND, intro, notice, blocks_in["safe"], blocks_in["about"], blocks_in["acc"],
         blocks_in["panels"], blocks["compare"], blocks["quiz"], blocks_in["how"], RESULTS, LIMITS,
         blocks["why"], blocks["faq"], DOCTORS, blocks["cta"], ldisc, SITE_FOOTER, sticky, MODAL,
     ]
@@ -310,7 +310,7 @@ def page(version: str, blocks_in: dict, css_all: str, js_extra: str = "") -> str
 </head>
 <body>
 {chr(10).join(x for x in order if x)}
-<script>{script}{MODAL_JS}{js_extra}</script>
+<script>{script}{MODAL_JS}{js_extra}{v3.JS}</script>
 </body>
 </html>
 """
@@ -381,16 +381,31 @@ how_new = swap_badges(how_new, '<div class="wrap where">', [(n, "wcard__img") fo
 # hover только у мыши (mobile-native): иначе на телефоне залипает после тапа
 css_base = re.sub(r"(?m)^([^@\n{]*:hover[^{\n]*\{[^}\n]*\})\s*$", r"@media (hover:hover) and (pointer:fine){\1}", css) + EXTRA_CSS + common_css + chrome_css
 
+# ---------------------------------------------------------------- v3: только пациентам, оба варианта анимированы
+import v3  # noqa: E402
+
+NAV = v3.nav(NAV)
+hero_new = v3.hero(hero_new)
+intro = v3.intro(intro)
+how_new = v3.band(v3.how(how_new), "how")
+blocks["cta"] = v3.cta(blocks["cta"], v3.chat_icons((PARTS / "chat-icons.html").read_text(encoding="utf-8")))
+blocks["faq"] = v3.band(v3.faq(blocks["faq"]), "faq")
+blocks["compare"] = v3.band(blocks["compare"], "compare")
+scene = v3.scene(scene)
+SAFE_STATIC = v3.safe_static(SAFE_STATIC)
+DOCTORS = ""  # раздел для врачей убран: страница только для пациентов
+css_base += v3.CSS
+
 # ---------------------------------------------------------------- вкладка «С анимацией»
 ci = acc_main.index('<div class="cmp-card">')
 cj = acc_main.rindex("  </div>\n</section>")
-acc_anim = acc_main[:ci] + fpv.strip() + "\n" + acc_main[cj:]
+acc_anim = v3.band(v3.accuracy_anim(acc_main[:ci] + fpv.strip() + "\n" + acc_main[cj:]), "accuracy")
 anim = page("anim", {"hero": hero_new, "safe": scene, "about": about_new, "acc": acc_anim, "panels": panels_new, "how": how_new},
             css_base + anim_css, anim_js)
 (HERE / "index.html").write_text(anim, encoding="utf-8")
 
 # ---------------------------------------------------------------- вкладка «Без анимации»
-static = page("static", {"hero": hero_new, "safe": SAFE_STATIC, "about": about_new, "acc": acc_main, "panels": panels_new, "how": how_new},
+static = page("static", {"hero": hero_new, "safe": SAFE_STATIC, "about": about_new, "acc": v3.band(v3.accuracy_static(acc_main), "accuracy"), "panels": panels_new, "how": how_new},
               css_base + static_css)
 (HERE / "bez-animacii.html").write_text(static, encoding="utf-8")
 
