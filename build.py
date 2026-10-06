@@ -285,19 +285,19 @@ EXTRA_CSS = """
 
 
 def vbar(active: str) -> str:
-    tabs = [("anim", "index.html", "Сцена на прокрутке"), ("static", "bez-animacii.html", "Компактный")]
+    tabs = [("anim", "index.html", "Анимация по шагам"), ("static", "bez-animacii.html", "Компактный")]
     links = "".join(f'<a href="{href}"' + (' class="on" aria-current="page"' if key == active else "") + f">{label}</a>"
                     for key, href, label in tabs)
     return f'<div class="vbar"><div class="wrap vbar__in"><b>Версии для сравнения:</b>{links}</div></div>'
 
 
 def page(version: str, blocks_in: dict, css_all: str, js_extra: str = "") -> str:
-    title = "НИПТ — Геномед · сцена на прокрутке" if version == "anim" else "НИПТ — Геномед · компактный"
+    title = "НИПТ — Геномед · анимация по шагам" if version == "anim" else "НИПТ — Геномед · компактный"
     head_extra = '<meta name="theme-color" content="#0A2540">\n'
     order = [
-        vbar(version), SITE_HEADER, NAV, blocks_in["hero"], v3.STATBAND, intro, notice, blocks_in["safe"], blocks_in["about"], blocks_in["acc"],
-        blocks_in["panels"], blocks["compare"], blocks["quiz"], blocks_in["how"], RESULTS, LIMITS,
-        blocks["why"], blocks["faq"], DOCTORS, blocks["cta"], ldisc, SITE_FOOTER, sticky, MODAL,
+        vbar(version), SITE_HEADER, NAV, blocks_in["hero"], v3.STATBAND, blocks_in["safe"], blocks_in["about"], blocks_in["acc"],
+        blocks_in["panels"], blocks["compare"], v4.QUIZ, blocks_in["how"], RESULTS,
+        blocks["why"], blocks["faq"], LIMITS, DOCTORS, blocks["cta"], ldisc, SITE_FOOTER, sticky, MODAL,
     ]
     return f"""<!DOCTYPE html>
 <html lang="ru">
@@ -335,12 +335,11 @@ scene = (V2 / "scene.html").read_text(encoding="utf-8")
 fpv = (V2 / "fpv.html").read_text(encoding="utf-8")
 
 # ---------------------------------------------------------------- общее для обеих вкладок
-# первый экран: текст слева, 3D-пробирка справа (фото с поцелуем малыша убрано)
-hero_new = sub1(hero, '<div class="wrap hero__grid">', '<div class="wrap hv2">')
+# первый экран: текст по центру поверх иллюстрации во всю ширину (как у Фемабиома); на телефоне картинка под текстом
+hero_new = sub1(hero, '<section class="hero">\n  <div class="wrap hero__grid">', '<section class="hero v4hero">\n  <div class="wrap v4hero__in">')
 hero_new = sub1(hero_new, "\n\n    \n  </div>\n</section>",
-    '\n    <figure class="hv2__tube"><img src="img/hero-tube.webp" alt="Пробирка с кровью: в плазме — фрагменты ДНК" width="279" height="1100" fetchpriority="high">'
-    '<figcaption class="l"><b>20 мл крови из вены</b>без прокола и подготовки</figcaption>'
-    '<figcaption><b>Результат — через 8 дней</b>заключение врач-генетик разбирает вместе с вами</figcaption></figure>\n  </div>\n</section>')
+    '\n  </div>\n  <img class="v4hero__pic" src="img/hero-placenta.webp" alt="Иллюстрация: из плаценты фрагменты ДНК попадают в кровь мамы"'
+    ' width="1774" height="887" fetchpriority="high">\n</section>')
 
 
 def swap_badges(block: str, scope_start: str, images: list[tuple[str, str]]) -> str:
@@ -396,12 +395,21 @@ SAFE_STATIC = v3.safe_static(SAFE_STATIC)
 DOCTORS = ""  # раздел для врачей убран: страница только для пациентов
 css_base += v3.CSS
 
+# ---------------------------------------------------------------- v4: название исследования в hero, меньше карточек
+import v4  # noqa: E402
+
+hero_new = v4.hero(hero_new)
+RESULTS = v4.RESULTS
+scene = v4.scene(scene)
+css_base += v4.CSS + v4.QUIZ_CSS
+script = v4.script(script)
+
 # ---------------------------------------------------------------- вкладка «С анимацией»
 ci = acc_main.index('<div class="cmp-card">')
 cj = acc_main.rindex("  </div>\n</section>")
 acc_anim = v3.band(v3.accuracy_anim(acc_main[:ci] + fpv.strip() + "\n" + acc_main[cj:]), "accuracy")
-anim = page("anim", {"hero": hero_new, "safe": scene, "about": about_new, "acc": acc_anim, "panels": panels_new, "how": how_new},
-            css_base + anim_css, anim_js)
+anim = page("anim", {"hero": hero_new, "safe": v4.STEPS, "about": about_new, "acc": acc_anim, "panels": panels_new, "how": how_new},
+            css_base + anim_css + v4.STEPS_CSS, anim_js + v4.STEPS_JS)
 (HERE / "index.html").write_text(anim, encoding="utf-8")
 
 # ---------------------------------------------------------------- вкладка «Без анимации»

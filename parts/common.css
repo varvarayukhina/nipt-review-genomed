@@ -3,21 +3,6 @@
    ОБЩЕЕ ДЛЯ ОБЕИХ ВКЛАДОК
    ============================================================ */
 
-/* ——— первый экран: текст + 3D-пробирка ——— */
-.hv2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(2em,4vw,3.5em);align-items:center}
-.hv2 h1{font-size:clamp(34px,4.6vw,60px)}
-.hv2 .lead{max-width:42ch}
-.hv2__tube{margin:0;position:relative;display:grid;place-items:center;min-height:clamp(360px,42vw,560px);
-  background:radial-gradient(closest-side,rgba(0,194,255,.2),rgba(0,87,255,.08) 55%,transparent 100%)}
-.hv2__tube img{display:block;height:clamp(340px,40vw,540px);width:auto;filter:drop-shadow(0 30px 40px rgba(10,37,64,.25))}
-.hv2__tube figcaption{position:absolute;right:0;bottom:8%;max-width:15em;padding:.85em 1.05em;border-radius:var(--r-md);
-  background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--shadow-md);
-  font-size:.85em;color:var(--ink-2);line-height:1.45}
-.hv2__tube figcaption b{display:block;color:var(--ink)}
-.hv2__tube figcaption.l{right:auto;left:0;bottom:auto;top:12%}
-@media(max-width:940px){.hv2{grid-template-columns:minmax(0,1fr)}.hv2__tube{min-height:0;padding:1em 0}
-  .hv2__tube img{height:300px}.hv2__tube figcaption{position:static;margin-top:1em;max-width:none}.hv2__tube figcaption.l{display:none}}
-
 /* ——— 3D-иконки вместо плоских значков ——— */
 .ben__img{display:block;align-self:flex-start;object-fit:contain;width:auto;height:76px;margin:-.3em 0 .9em;filter:drop-shadow(0 8px 14px rgba(0,87,255,.18))}
 .wcard__img{display:block;align-self:flex-start;object-fit:contain;width:auto;height:96px;margin:1.5rem 1.5rem 0;filter:drop-shadow(0 10px 16px rgba(0,87,255,.18))}

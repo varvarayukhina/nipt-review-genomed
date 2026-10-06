@@ -6,7 +6,6 @@ SRC = Path.home() / "Downloads"
 OUT = Path(__file__).parent / "img"
 STAMP = "ChatGPT Image 25 сент. 2026 г., "
 MAP = {  # исходник → (имя, максимальная сторона)
-    "11_21_54 (1).png": ("hero-tube", 1100),
     "11_21_54 (2).png": ("ic-office", 360),
     "11_21_55 (3).png": ("ic-partner", 360),
     "11_21_55 (4).png": ("ic-home", 360),
