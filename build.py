@@ -415,6 +415,10 @@ acc_anim = v3.band(v3.accuracy_anim(acc_main[:ci] + fpv.strip() + "\n" + acc_mai
 anim = page("anim", {"hero": hero_new, "safe": v4.STEPS, "about": about_new, "acc": acc_anim, "panels": panels_new, "how": how_new},
             css_base + anim_css + v4.STEPS_CSS, anim_js + v4.STEPS_JS)
 (HERE / "index.html").write_text(anim, encoding="utf-8")
+# для ai.genomed.ru (сайт Фемабиом, папка /nipt/): та же вкладка, без полосы «Версии для сравнения»
+assert anim.count(vbar("anim")) == 1
+(HERE / "aiweb.html").write_text(anim.replace(vbar("anim"), "").replace(
+    "<title>НИПТ — Геномед · анимация по шагам</title>", "<title>НИПТ — неинвазивный пренатальный тест | Геномед</title>"), encoding="utf-8")
 
 # ---------------------------------------------------------------- вкладка «Анимация на прокрутке»: сцена «путь ДНК», привязанная к прокрутке (как в v3)
 scroll = page("scroll", {"hero": hero_new, "safe": scene, "about": about_new, "acc": acc_anim, "panels": panels_new, "how": how_new},
