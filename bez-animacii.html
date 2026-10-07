@@ -856,10 +856,6 @@ html{-webkit-tap-highlight-color:transparent}
   .v4fork__row p+p::before{content:"Что дальше: ";font-weight:700}
 }
 
-/* ===== v4: вопросы — аккордеон на линиях ===== */
-.fqg .fq{background:none !important;border:none !important;border-bottom:1px solid var(--line) !important;border-radius:0 !important;box-shadow:none !important}
-.fqg .fq__ic{display:none}
-.fqg .fqc{border-top:1px solid var(--line)}
 
 /* ===== v4: квиз — шесть вопросов, лесенка панелей ===== */
 .v4q{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);margin-top:2.2em;background:#fff;border:1px solid var(--line-soft);border-radius:var(--r-xl);box-shadow:0 24px 60px rgba(10,37,64,.08);overflow:hidden}
@@ -925,6 +921,59 @@ html{-webkit-tap-highlight-color:transparent}
 @media(max-width:900px){.v4q{grid-template-columns:minmax(0,1fr)}.v4q__side{display:none}.v4q__now{display:block}.v4q__main{min-height:0}}
 @media(max-width:560px){.v4q__opts,.v4q__duo{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.v4q *{animation:none !important;transition:none !important}}
+
+/* ===== v4: вопросы — заголовок слева, карточки справа ===== */
+.v4faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:clamp(2em,5vw,4.5em);align-items:start}
+.v4faq__side{position:sticky;top:calc(96px + env(safe-area-inset-top,0px))}
+.v4faq__side h2{margin:.35em 0 0}
+.v4faq__ask{display:flex;gap:1.1em;align-items:center;margin-top:1.8em;padding:1.2em 1.3em;border-radius:var(--r-lg);background:linear-gradient(135deg,#EEF5FF,#E2F4FF);border:1px solid var(--line-soft)}
+.v4faq__ask img{width:auto;height:88px;flex:none;filter:drop-shadow(0 10px 16px rgba(10,37,64,.15))}
+.v4faq__ask b{display:block;font-family:var(--disp);font-weight:800;font-size:1.08em;color:var(--ink)}
+.v4faq__ask p{margin:.3em 0 .9em;color:var(--ink-2);font-size:.92em;line-height:1.5}
+.v4faq__list{display:grid;gap:10px;min-width:0}
+.v4fq{background:var(--bg);border:1px solid var(--line-soft);border-radius:var(--r-md);transition:background-color .2s ease-out,border-color .2s ease-out,box-shadow .2s ease-out}
+.v4fq[open]{background:#fff;border-color:var(--cyan-soft);box-shadow:var(--shadow-md)}
+.v4fq summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:2.2em minmax(0,1fr) 36px;align-items:center;gap:.8em;padding:1.05em 1.2em;font-weight:700;color:var(--ink);line-height:1.35}
+.v4fq summary::-webkit-details-marker,.v4lim summary::-webkit-details-marker{display:none}
+.v4fq summary:focus-visible,.v4lim summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:var(--r-md)}
+.v4fq__n{font-size:.78em;color:var(--blue)}
+.v4fq__a{padding:0 calc(2.4em + 36px) 1.25em calc(1.2em + 2.2em + .8em)}
+.v4fq__a p{margin:0;padding:0;color:var(--ink-2);line-height:1.6;text-wrap:pretty}
+.v4chev{flex:none;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid var(--line);position:relative;transition:transform .2s ease-out,background-color .2s ease-out,border-color .2s ease-out}
+.v4chev::after{content:"";position:absolute;left:50%;top:45%;width:8px;height:8px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:translate(-50%,-50%) rotate(45deg)}
+details[open]>summary .v4chev{transform:rotate(180deg);background:var(--blue);border-color:var(--blue)}
+details[open]>summary .v4chev::after{border-color:#fff}
+@media(hover:hover) and (pointer:fine){.v4fq:not([open]) summary:hover .v4chev,.v4lim:not([open]) summary:hover .v4chev{border-color:var(--blue)}}
+@media(max-width:900px){.v4faq{grid-template-columns:minmax(0,1fr)}.v4faq__side{position:static}}
+@media(max-width:560px){.v4fq summary{grid-template-columns:minmax(0,1fr) 32px}.v4fq__n{display:none}.v4fq__a{padding:0 1.2em 1.2em}.v4chev{width:32px;height:32px}}
+
+/* ===== v4: ограничения — раскрывающаяся полоса ===== */
+#limits.v4lim-sec{padding-block:clamp(2em,4vw,3em) !important}
+.v4lim{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);transition:box-shadow .2s ease-out}
+.v4lim[open]{box-shadow:var(--shadow-md)}
+.v4lim summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:1.1em;align-items:center;padding:clamp(1.1em,2.5vw,1.6em) clamp(1.1em,3vw,2em)}
+.v4lim__ic{width:52px;height:52px;border-radius:16px;background:var(--warn-soft);color:var(--warn);display:grid;place-items:center}
+.v4lim__ic svg{width:24px;height:24px}
+.v4lim__t{display:grid;gap:.3em;min-width:0}
+.v4lim__t .section-eyebrow{margin:0}
+.v4lim__t b{font-family:var(--disp);font-weight:800;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.025em;line-height:1.15;color:var(--ink)}
+.v4lim__t b em{color:var(--blue);font-style:normal}
+.v4lim__t small{color:var(--muted);font-size:.9em;font-weight:500;line-height:1.45}
+.v4lim__btn{display:flex;align-items:center;gap:.7em;font-weight:700;color:var(--blue);font-size:.92em}
+.v4lim__more span+span,.v4lim[open] .v4lim__more span:first-child{display:none}
+.v4lim[open] .v4lim__more span+span{display:inline}
+.v4lim__body{padding:0 clamp(1.1em,3vw,2em) clamp(1.3em,3vw,2em);border-top:1px solid var(--line-soft)}
+.v4lim__lead{margin:1.3em 0 0;max-width:70ch;color:var(--ink-2);line-height:1.6}
+.v4lim .limgrp{color:var(--blue) !important}
+.v4lim .limlist>.limrow{border-top-color:var(--line-soft)}
+.v4lim .limrow__ic{background:var(--accent-soft);border-color:#C9DDFF;color:var(--blue)}
+.v4lim .limrow h3{color:var(--ink)}
+.v4lim .limrow p{color:var(--ink-2)}
+.v4lim .limnote p{background:var(--bg);border-color:var(--line-soft);color:var(--ink-2)}
+.v4lim .limnote b{color:var(--ink)}
+.v4lim__tail{margin:1.5em 0 0;color:var(--muted);font-size:.92em}
+@media(max-width:640px){.v4lim summary{grid-template-columns:minmax(0,1fr) auto}.v4lim__ic,.v4lim__more{display:none}}
+@media(prefers-reduced-motion:reduce){.v4fq,.v4chev,.v4lim{transition:none}}
 
 /* ============================================================
    ВКЛАДКА «БЕЗ АНИМАЦИИ»: никакого движения на странице
@@ -1446,32 +1495,38 @@ html{-webkit-tap-highlight-color:transparent}
   </div>
 </section>
 <section id="faq" class="v3band">
-  <div class="wrap section-head">
-    <span class="section-eyebrow">Вопросы</span>
-    <h2>Что чаще всего <em>спрашивают</em></h2>
-  </div>
-  <div class="wrap fqg">
-<div class="fqc">
-<details class="fq" style="order:1" open><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="fq__q"><span class="fq__n mono">01</span>НИПТ действительно безопасен для беременности?</span></summary><div class="fq__a"><p class="a">Да. Для исследования берут венозную кровь у матери — процедура ничем не отличается от обычного анализа крови. Фрагменты ДНК плаценты сами попадают в кровь матери, поэтому прокол плодных оболочек, как при амниоцентезе или биопсии ворсин хориона, не нужен и риска для беременности нет.</p></div></details>
-<details class="fq" style="order:3"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/><path d="m16 16-1.9-1.9"/></svg></span><span class="fq__q"><span class="fq__n mono">03</span>Заменяет ли НИПТ инвазивную диагностику?</span></summary><div class="fq__a"><p class="a">Нет. НИПТ — скрининговое исследование: оно оценивает вероятность хромосомной аномалии, но не устанавливает диагноз. При высоком риске результат подтверждают инвазивной диагностикой с последующим хромосомным анализом. В расширенной и экспертной панелях Геномед такое подтверждение выполняется бесплатно.</p></div></details>
-<details class="fq" style="order:5"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span><span class="fq__q"><span class="fq__n mono">05</span>Нужно ли готовиться к сдаче крови?</span></summary><div class="fq__a"><p class="a">Специальная подготовка не требуется. Сдавать кровь можно не натощак, диета и отмена препаратов не нужны. Для исследования берут 20 мл венозной крови.</p></div></details>
-<details class="fq" style="order:7"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/></svg></span><span class="fq__q"><span class="fq__n mono">07</span>Можно ли сдать НИПТ при двойне?</span></summary><div class="fq__a"><p class="a">При двуплодной беременности и после редукции одного эмбриона выполняются панели Т21 и базовая. Панели с анеуплоидиями половых хромосом при двойне не применяются: ДНК каждого плода в крови матери разделить нельзя. При тройне и большем числе плодов исследование не проводится.</p></div></details>
-<details class="fq" style="order:9"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg></span><span class="fq__q"><span class="fq__n mono">09</span>Что будет, если плодной фракции не хватит?</span></summary><div class="fq__a"><p class="a">Доля ДНК плода определяется уже в ходе исследования. Если она ниже 4 %, достоверный результат получить нельзя — лаборатория бесплатно выполняет анализ нового образца крови на большем сроке. Низкая плодная фракция сама по себе считается поводом обсудить с генетиком дальнейшую тактику.</p></div></details>
-</div><div class="fqc">
-<details class="fq" style="order:2"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span><span class="fq__q"><span class="fq__n mono">02</span>С какого срока можно сдавать?</span></summary><div class="fq__a"><p class="a">С 10 полных недель беременности: к этому сроку доля ДНК плода в материнской крови обычно достигает необходимых 4 % и выше. Верхней границы срока практически нет. Плодная фракция определяется в процессе исследования — если она оказалась ниже 4 %, кровь потребуется сдать повторно на более позднем сроке.</p></div></details>
-<details class="fq" style="order:4"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></span><span class="fq__q"><span class="fq__n mono">04</span>Что означает «остаточный риск» в заключении?</span></summary><div class="fq__a"><p class="a">Это вероятность того, что при низком риске по результату хромосомная аномалия у плода всё же есть. Для НИПТ она очень мала: надёжность низкого результата (NPV) превышает 99,9 %, но формально остаточный риск не равен нулю.</p></div></details>
-<details class="fq" style="order:6"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="fq__q"><span class="fq__n mono">06</span>Когда и как приходит результат?</span></summary><div class="fq__a"><p class="a">Через 8 дней после взятия крови заключение врача-генетика приходит на электронную почту, указанную в договоре. Для панелей Т21, базовой и стандартной срок считается в календарных днях, для расширенной и экспертной — в рабочих. Разбор заключения с врачом-генетиком входит в стоимость.</p></div></details>
-<details class="fq" style="order:8"><summary><span class="fq__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span><span class="fq__q"><span class="fq__n mono">08</span>Определяется ли пол ребёнка?</span></summary><div class="fq__a"><p class="a">Да, определение пола плода входит во все пять панелей. Если вы не хотите знать пол до родов, скажите об этом при записи — врач не назовёт его при разборе заключения.</p></div></details>
-</div>
+  <div class="wrap v4faq">
+    <div class="v4faq__side">
+      <span class="section-eyebrow">Вопросы</span>
+      <h2>Что чаще всего <em>спрашивают</em></h2>
+      <div class="v4faq__ask"><img src="img/ic-doctor.webp" alt="" width="216" height="280" loading="lazy">
+        <div><b>Не&nbsp;нашли ответа?</b><p>Спросите врача-генетика&nbsp;— консультация перед исследованием бесплатна.</p>
+        <a class="btn-lnipt btn-lnipt--primary btn-lnipt--sm" href="#modal-callback"><span>Задать вопрос</span></a></div></div>
+    </div>
+    <div class="v4faq__list">
+<details class="v4fq" open><summary><span class="v4fq__n mono">01</span><span class="v4fq__q">НИПТ действительно безопасен для беременности?</span><span class="v4chev" aria-hidden="true"></span></summary><div class="v4fq__a"><p class="a">Да. Для исследования берут венозную кровь у матери — процедура ничем не отличается от обычного анализа крови. Фрагменты ДНК плаценты сами попадают в кровь матери, поэтому прокол плодных оболочек, как при амниоцентезе или биопсии ворсин хориона, не нужен и риска для беременности нет.</p></div></details>
+<details class="v4fq"><summary><span class="v4fq__n mono">02</span><span class="v4fq__q">С какого срока можно сдавать?</span><span class="v4chev" aria-hidden="true"></span></summary><div class="v4fq__a"><p class="a">С 10 полных недель беременности: к этому сроку доля ДНК плода в материнской крови обычно достигает необходимых 4 % и выше. Верхней границы срока практически нет. Плодная фракция определяется в процессе исследования — если она оказалась ниже 4 %, кровь потребуется сдать повторно на более позднем сроке.</p></div></details>
+<details class="v4fq"><summary><span class="v4fq__n mono">03</span><span class="v4fq__q">Заменяет ли НИПТ инвазивную диагностику?</span><span class="v4chev" aria-hidden="true"></span></summary><div class="v4fq__a"><p class="a">Нет. НИПТ — скрининговое исследование: оно оценивает вероятность хромосомной аномалии, но не устанавливает диагноз. При высоком риске результат подтверждают инвазивной диагностикой с последующим хромосомным анализом. В расширенной и экспертной панелях Геномед такое подтверждение выполняется бесплатно.</p></div></details>
+<details class="v4fq"><summary><span class="v4fq__n mono">04</span><span class="v4fq__q">Что означает «остаточный риск» в заключении?</span><span class="v4chev" aria-hidden="true"></span></summary><div class="v4fq__a"><p class="a">Это вероятность того, что при низком риске по результату хромосомная аномалия у плода всё же есть. Для НИПТ она очень мала: надёжность низкого результата (NPV) превышает 99,9 %, но формально остаточный риск не равен нулю.</p></div></details>
+<details class="v4fq"><summary><span class="v4fq__n mono">05</span><span class="v4fq__q">Нужно ли готовиться к сдаче крови?</span><span class="v4chev" aria-hidden="true"></span></summary><div class="v4fq__a"><p class="a">Специальная подготовка не требуется. Сдавать кровь можно не натощак, диета и отмена препаратов не нужны. Для исследования берут 20 мл венозной крови.</p></div></details>
+<details class="v4fq"><summary><span class="v4fq__n mono">06</span><span class="v4fq__q">Когда и как приходит результат?</span><span class="v4chev" aria-hidden="true"></span></summary><div class="v4fq__a"><p class="a">Через 8 дней после взятия крови заключение врача-генетика приходит на электронную почту, указанную в договоре. Для панелей Т21, базовой и стандартной срок считается в календарных днях, для расширенной и экспертной — в рабочих. Разбор заключения с врачом-генетиком входит в стоимость.</p></div></details>
+<details class="v4fq"><summary><span class="v4fq__n mono">07</span><span class="v4fq__q">Можно ли сдать НИПТ при двойне?</span><span class="v4chev" aria-hidden="true"></span></summary><div class="v4fq__a"><p class="a">При двуплодной беременности и после редукции одного эмбриона выполняются панели Т21 и базовая. Панели с анеуплоидиями половых хромосом при двойне не применяются: ДНК каждого плода в крови матери разделить нельзя. При тройне и большем числе плодов исследование не проводится.</p></div></details>
+<details class="v4fq"><summary><span class="v4fq__n mono">08</span><span class="v4fq__q">Определяется ли пол ребёнка?</span><span class="v4chev" aria-hidden="true"></span></summary><div class="v4fq__a"><p class="a">Да, определение пола плода входит во все пять панелей. Если вы не хотите знать пол до родов, скажите об этом при записи — врач не назовёт его при разборе заключения.</p></div></details>
+<details class="v4fq"><summary><span class="v4fq__n mono">09</span><span class="v4fq__q">Что будет, если плодной фракции не хватит?</span><span class="v4chev" aria-hidden="true"></span></summary><div class="v4fq__a"><p class="a">Доля ДНК плода определяется уже в ходе исследования. Если она ниже 4 %, достоверный результат получить нельзя — лаборатория бесплатно выполняет анализ нового образца крови на большем сроке. Низкая плодная фракция сама по себе считается поводом обсудить с генетиком дальнейшую тактику.</p></div></details>
+    </div>
   </div>
 </section>
-<section id="limits" style="padding-top:0">
+<section id="limits" class="v4lim-sec">
   <div class="wrap">
-    <div class="deep">
-      <span class="section-eyebrow" style="color:var(--cyan)">Ограничения</span>
-      <h2 style="font-size:clamp(26px,3.4vw,42px) !important">Когда НИПТ <em style="color:var(--cyan)">не&nbsp;подходит</em></h2>
-      <p style="max-width:66ch;margin:1em 0 0">Часть ограничений связана с&nbsp;биологией метода: в&nbsp;этих ситуациях ДНК в&nbsp;крови мамы не&nbsp;отражает хромосомный набор плода или её недостаточно для надёжного анализа.</p>
-
+    <details class="v4lim">
+      <summary>
+        <span class="v4lim__ic"><svg class="v3ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
+        <span class="v4lim__t"><span class="section-eyebrow">Ограничения</span><b>Когда НИПТ <em>не&nbsp;подходит</em></b>
+          <small>4 ситуации, когда исследование не&nbsp;проводится, и&nbsp;6, когда результат может быть неточным</small></span>
+        <span class="v4lim__btn"><span class="v4lim__more"><span>Подробнее</span><span>Свернуть</span></span><span class="v4chev" aria-hidden="true"></span></span>
+      </summary>
+      <div class="v4lim__body">
+      <p class="v4lim__lead">Часть ограничений связана с&nbsp;биологией метода: в&nbsp;этих ситуациях ДНК в&nbsp;крови мамы не&nbsp;отражает хромосомный набор плода или её недостаточно для надёжного анализа.</p>
       <h3 class="limgrp">Исследование не&nbsp;проводится</h3>
       <div class="limlist">
         <div class="limrow"><span class="limrow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m14 14-4 4M10 14l4 4"/></svg></span>
@@ -1504,8 +1559,9 @@ html{-webkit-tap-highlight-color:transparent}
         <p><b>Чего НИПТ не&nbsp;выявляет.</b> Транслокационную и&nbsp;мозаичную формы синдромов Дауна, Эдвардса и&nbsp;Патау.</p>
         <p><b>Когда лучше сразу диагностика.</b> Если по&nbsp;УЗИ уже найдены маркеры или пороки развития плода и&nbsp;нет противопоказаний, врач рекомендует не&nbsp;НИПТ, а&nbsp;амниоцентез или биопсию ворсин хориона.</p>
       </div>
-      <p style="margin-top:1.8em;font-size:.92em">Все ограничения врач-генетик разбирает индивидуально на&nbsp;консультации перед исследованием.</p>
-    </div>
+      <p class="v4lim__tail">Все ограничения врач-генетик разбирает индивидуально на&nbsp;консультации перед исследованием.</p>
+      </div>
+    </details>
   </div>
 </section>
 <section id="cta" style="padding-top:0">
@@ -1758,6 +1814,14 @@ html{-webkit-tap-highlight-color:transparent}
     next();
   });
   prog(0, false);
+})();
+
+/* ограничения: ссылка «Ограничения» в меню раскрывает блок */
+(function () {
+  var d = document.querySelector('.v4lim');
+  if (!d) return;
+  document.querySelectorAll('a[href="#limits"]').forEach(function (a) { a.addEventListener('click', function () { d.open = true; }); });
+  if (location.hash === '#limits') d.open = true;
 })();
 
 

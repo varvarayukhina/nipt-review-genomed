@@ -12,6 +12,8 @@
 - «Когда НИПТ не подходит» переезжает вниз страницы, перед записью (порядок — в build.py).
 """
 
+import re
+
 from v3 import ic, sub1
 
 
@@ -127,10 +129,6 @@ CSS = """
   .v4fork__row p+p::before{content:"Что дальше: ";font-weight:700}
 }
 
-/* ===== v4: вопросы — аккордеон на линиях ===== */
-.fqg .fq{background:none !important;border:none !important;border-bottom:1px solid var(--line) !important;border-radius:0 !important;box-shadow:none !important}
-.fqg .fq__ic{display:none}
-.fqg .fqc{border-top:1px solid var(--line)}
 """
 
 
@@ -632,4 +630,125 @@ QUIZ_OLD_END = "/* ============================================================\
 def script(js: str) -> str:
     """Старый квиз прототипа (три вопроса) → новый."""
     i, j = js.index(QUIZ_OLD_START), js.index(QUIZ_OLD_END)
-    return js[:i] + QUIZ_JS.lstrip() + "\n\n" + js[j:]
+    return js[:i] + QUIZ_JS.lstrip() + LIM_JS + "\n\n" + js[j:]
+
+
+# ---------------------------------------------------------------- вопросы: слева заголовок и «спросите генетика», справа одна колонка карточек
+def faq(faq_html: str) -> str:
+    items = re.findall(r'(?s)<details class="fq" style="order:(\d+)"( open)?><summary><span class="fq__ic">.*?</span>'
+                       r'<span class="fq__q"><span class="fq__n mono">(\d+)</span>(.*?)</span></summary><div class="fq__a">(.*?)</div></details>',
+                       faq_html)
+    if len(items) != 9:
+        raise SystemExit(f"v4: ожидалось 9 вопросов, найдено {len(items)}")
+    items.sort(key=lambda t: int(t[0]))
+    cards = "\n".join(f'<details class="v4fq"{op}><summary><span class="v4fq__n mono">{n}</span><span class="v4fq__q">{q}</span>'
+                      f'<span class="v4chev" aria-hidden="true"></span></summary><div class="v4fq__a">{a}</div></details>'
+                      for _, op, n, q, a in items)
+    return f"""<section id="faq" class="v3band">
+  <div class="wrap v4faq">
+    <div class="v4faq__side">
+      <span class="section-eyebrow">Вопросы</span>
+      <h2>Что чаще всего <em>спрашивают</em></h2>
+      <div class="v4faq__ask"><img src="img/ic-doctor.webp" alt="" width="216" height="280" loading="lazy">
+        <div><b>Не&nbsp;нашли ответа?</b><p>Спросите врача-генетика&nbsp;— консультация перед исследованием бесплатна.</p>
+        <a class="btn-lnipt btn-lnipt--primary btn-lnipt--sm" href="#modal-callback"><span>Задать вопрос</span></a></div></div>
+    </div>
+    <div class="v4faq__list">
+{cards}
+    </div>
+  </div>
+</section>"""
+
+
+# ---------------------------------------------------------------- ограничения: светлая полоса со стрелкой вместо тёмной плашки на экран
+def limits(lim_html: str) -> str:
+    lead = re.search(r'<p style="max-width:66ch;margin:1em 0 0">(.*?)</p>', lim_html, re.S).group(1)
+    tail_m = re.search(r'\s*<p style="margin-top:1\.8em;font-size:\.92em">(.*?)</p>', lim_html, re.S)
+    body = lim_html[lim_html.index('<h3 class="limgrp">'):tail_m.start()]
+    groups = re.findall(r'(?s)<div class="limlist">(.*?)\n      </div>', body)
+    if len(groups) != 2:
+        raise SystemExit(f"v4: ожидалось 2 группы ограничений, найдено {len(groups)}")
+    n_no, n_bad = (g.count('class="limrow"') for g in groups)
+    return f"""<section id="limits" class="v4lim-sec">
+  <div class="wrap">
+    <details class="v4lim">
+      <summary>
+        <span class="v4lim__ic">{ic("info")}</span>
+        <span class="v4lim__t"><span class="section-eyebrow">Ограничения</span><b>Когда НИПТ <em>не&nbsp;подходит</em></b>
+          <small>{n_no} ситуации, когда исследование не&nbsp;проводится, и&nbsp;{n_bad}, когда результат может быть неточным</small></span>
+        <span class="v4lim__btn"><span class="v4lim__more"><span>Подробнее</span><span>Свернуть</span></span><span class="v4chev" aria-hidden="true"></span></span>
+      </summary>
+      <div class="v4lim__body">
+      <p class="v4lim__lead">{lead}</p>
+      {body.strip()}
+      <p class="v4lim__tail">{tail_m.group(1)}</p>
+      </div>
+    </details>
+  </div>
+</section>"""
+
+
+LIM_JS = r"""
+/* ограничения: ссылка «Ограничения» в меню раскрывает блок */
+(function () {
+  var d = document.querySelector('.v4lim');
+  if (!d) return;
+  document.querySelectorAll('a[href="#limits"]').forEach(function (a) { a.addEventListener('click', function () { d.open = true; }); });
+  if (location.hash === '#limits') d.open = true;
+})();
+"""
+
+FAQ_LIM_CSS = """
+/* ===== v4: вопросы — заголовок слева, карточки справа ===== */
+.v4faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:clamp(2em,5vw,4.5em);align-items:start}
+.v4faq__side{position:sticky;top:calc(96px + env(safe-area-inset-top,0px))}
+.v4faq__side h2{margin:.35em 0 0}
+.v4faq__ask{display:flex;gap:1.1em;align-items:center;margin-top:1.8em;padding:1.2em 1.3em;border-radius:var(--r-lg);background:linear-gradient(135deg,#EEF5FF,#E2F4FF);border:1px solid var(--line-soft)}
+.v4faq__ask img{width:auto;height:88px;flex:none;filter:drop-shadow(0 10px 16px rgba(10,37,64,.15))}
+.v4faq__ask b{display:block;font-family:var(--disp);font-weight:800;font-size:1.08em;color:var(--ink)}
+.v4faq__ask p{margin:.3em 0 .9em;color:var(--ink-2);font-size:.92em;line-height:1.5}
+.v4faq__list{display:grid;gap:10px;min-width:0}
+.v4fq{background:var(--bg);border:1px solid var(--line-soft);border-radius:var(--r-md);transition:background-color .2s ease-out,border-color .2s ease-out,box-shadow .2s ease-out}
+.v4fq[open]{background:#fff;border-color:var(--cyan-soft);box-shadow:var(--shadow-md)}
+.v4fq summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:2.2em minmax(0,1fr) 36px;align-items:center;gap:.8em;padding:1.05em 1.2em;font-weight:700;color:var(--ink);line-height:1.35}
+.v4fq summary::-webkit-details-marker,.v4lim summary::-webkit-details-marker{display:none}
+.v4fq summary:focus-visible,.v4lim summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:var(--r-md)}
+.v4fq__n{font-size:.78em;color:var(--blue)}
+.v4fq__a{padding:0 calc(2.4em + 36px) 1.25em calc(1.2em + 2.2em + .8em)}
+.v4fq__a p{margin:0;padding:0;color:var(--ink-2);line-height:1.6;text-wrap:pretty}
+.v4chev{flex:none;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid var(--line);position:relative;transition:transform .2s ease-out,background-color .2s ease-out,border-color .2s ease-out}
+.v4chev::after{content:"";position:absolute;left:50%;top:45%;width:8px;height:8px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:translate(-50%,-50%) rotate(45deg)}
+details[open]>summary .v4chev{transform:rotate(180deg);background:var(--blue);border-color:var(--blue)}
+details[open]>summary .v4chev::after{border-color:#fff}
+@media(hover:hover) and (pointer:fine){.v4fq:not([open]) summary:hover .v4chev,.v4lim:not([open]) summary:hover .v4chev{border-color:var(--blue)}}
+@media(max-width:900px){.v4faq{grid-template-columns:minmax(0,1fr)}.v4faq__side{position:static}}
+@media(max-width:560px){.v4fq summary{grid-template-columns:minmax(0,1fr) 32px}.v4fq__n{display:none}.v4fq__a{padding:0 1.2em 1.2em}.v4chev{width:32px;height:32px}}
+
+/* ===== v4: ограничения — раскрывающаяся полоса ===== */
+#limits.v4lim-sec{padding-block:clamp(2em,4vw,3em) !important}
+.v4lim{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);transition:box-shadow .2s ease-out}
+.v4lim[open]{box-shadow:var(--shadow-md)}
+.v4lim summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:1.1em;align-items:center;padding:clamp(1.1em,2.5vw,1.6em) clamp(1.1em,3vw,2em)}
+.v4lim__ic{width:52px;height:52px;border-radius:16px;background:var(--warn-soft);color:var(--warn);display:grid;place-items:center}
+.v4lim__ic svg{width:24px;height:24px}
+.v4lim__t{display:grid;gap:.3em;min-width:0}
+.v4lim__t .section-eyebrow{margin:0}
+.v4lim__t b{font-family:var(--disp);font-weight:800;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.025em;line-height:1.15;color:var(--ink)}
+.v4lim__t b em{color:var(--blue);font-style:normal}
+.v4lim__t small{color:var(--muted);font-size:.9em;font-weight:500;line-height:1.45}
+.v4lim__btn{display:flex;align-items:center;gap:.7em;font-weight:700;color:var(--blue);font-size:.92em}
+.v4lim__more span+span,.v4lim[open] .v4lim__more span:first-child{display:none}
+.v4lim[open] .v4lim__more span+span{display:inline}
+.v4lim__body{padding:0 clamp(1.1em,3vw,2em) clamp(1.3em,3vw,2em);border-top:1px solid var(--line-soft)}
+.v4lim__lead{margin:1.3em 0 0;max-width:70ch;color:var(--ink-2);line-height:1.6}
+.v4lim .limgrp{color:var(--blue) !important}
+.v4lim .limlist>.limrow{border-top-color:var(--line-soft)}
+.v4lim .limrow__ic{background:var(--accent-soft);border-color:#C9DDFF;color:var(--blue)}
+.v4lim .limrow h3{color:var(--ink)}
+.v4lim .limrow p{color:var(--ink-2)}
+.v4lim .limnote p{background:var(--bg);border-color:var(--line-soft);color:var(--ink-2)}
+.v4lim .limnote b{color:var(--ink)}
+.v4lim__tail{margin:1.5em 0 0;color:var(--muted);font-size:.92em}
+@media(max-width:640px){.v4lim summary{grid-template-columns:minmax(0,1fr) auto}.v4lim__ic,.v4lim__more{display:none}}
+@media(prefers-reduced-motion:reduce){.v4fq,.v4chev,.v4lim{transition:none}}
+"""

@@ -402,8 +402,10 @@ import v4  # noqa: E402
 hero_new = v4.hero(hero_new)
 RESULTS = v4.RESULTS
 scene = v4.scene(scene)
-css_base += v4.CSS + v4.QUIZ_CSS
+css_base += v4.CSS + v4.QUIZ_CSS + v4.FAQ_LIM_CSS
 blocks["cta"] = v4.cta(blocks["cta"])
+blocks["faq"] = v4.faq(blocks["faq"])
+LIMITS = v4.limits(LIMITS)
 script = v4.script(script)
 
 # ---------------------------------------------------------------- вкладка «С анимацией»
