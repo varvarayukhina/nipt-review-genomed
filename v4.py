@@ -64,6 +64,15 @@ RESULTS = """<section id="results">
 </section>"""
 
 
+# ---------------------------------------------------------------- запись: НИПТ одинаковый на любом сроке, «под ваш срок» не по смыслу
+CTA_H2_OLD = 'Подберём НИПТ <em style="color:var(--cyan)">под ваш срок</em> беременности'
+CTA_H2_NEW = 'Поможем <em style="color:var(--cyan)">выбрать панель</em> и&nbsp;записаться'
+
+
+def cta(cta_html: str) -> str:
+    return sub1(cta_html, CTA_H2_OLD, CTA_H2_NEW)
+
+
 # ---------------------------------------------------------------- сцена без подписи про масштаб
 FINE = '<span class="nleg__fine">схема: разница показана крупнее, чем в&nbsp;реальности</span>'
 
@@ -169,14 +178,14 @@ def _chip(x: float, y: float, text: str, tone: str = "b", n: int = 0, cls: str =
 HOW_STEPS = [
     ("Кровь мамы", "В&nbsp;крови мамы есть фрагменты ДНК плаценты.",
      "С&nbsp;10-й недели беременности их&nbsp;доля&nbsp;— плодная фракция&nbsp;— обычно достигает 4&nbsp;% и&nbsp;больше. Этого достаточно для анализа.",
-     '<img src="img/step-1-blood.webp" alt="" width="640" height="320" loading="lazy">'),  # подписи нарисованы на самой картинке
+     '<img src="img/step-1-blood.webp" alt="" width="1440" height="720" loading="lazy">'),  # подписи нарисованы на самой картинке
     ("Взятие крови", "Достаточно 20&nbsp;мл крови из&nbsp;вены.",
      "Как для обычного анализа&nbsp;— без прокола и&nbsp;риска для беременности. Из&nbsp;плазмы выделяют внеклеточную ДНК.",
-     '<img src="img/step-2-tube.webp" alt="" width="1400" height="700" loading="lazy">'
+     '<img src="img/step-2-tube.webp" alt="" width="1774" height="887" loading="lazy">'
      + _chip(55, 18, "20&nbsp;мл из&nbsp;вены", "r", 0) + _chip(30, 84, "без прокола и&nbsp;риска", "b", 1, "v4chip--hide-sm")),
     ("Секвенирование", "Секвенатор прочитывает фрагменты ДНК.",
      "Программа определяет, с&nbsp;какой хромосомы пришёл каждый фрагмент.",
-     '<img src="img/step-3-reads.webp" alt="" width="1400" height="700" loading="lazy">'
+     '<img src="img/step-3-reads.webp" alt="" width="1774" height="887" loading="lazy">'
      '<span class="v4reads" style="--n:0"><b>пример прочтений</b>'
      '<span>…GATTACAGGT <em>→ хр.&nbsp;7</em></span><span>…CCTAGGATCC <em>→ хр.&nbsp;21</em></span><span>…TTGACCAGTA <em>→ хр.&nbsp;13</em></span></span>'),
     ("Подсчёт", "Фрагменты раскладываются по&nbsp;хромосомам.",
@@ -184,7 +193,7 @@ HOW_STEPS = [
      _count_svg() + _chip(50, 9, "пунктир&nbsp;— ожидаемое число фрагментов", "b", 0)),
     ("Результат", "Лишняя хромосома видна в&nbsp;цифрах.",
      "Если фрагментов 21-й хромосомы больше ожидаемого, это признак синдрома Дауна. Врач-генетик оценивает риск; высокий риск подтверждают диагностическим исследованием.",
-     '<img src="img/step-5-result.webp" alt="" width="1400" height="700" loading="lazy">'
+     '<img src="img/step-5-result.webp" alt="" width="1774" height="887" loading="lazy">'
      + _chip(58.5, 88, "21-я: фрагментов больше ожидаемого", "r", 0)),
 ]
 

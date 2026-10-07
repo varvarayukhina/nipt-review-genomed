@@ -285,14 +285,15 @@ EXTRA_CSS = """
 
 
 def vbar(active: str) -> str:
-    tabs = [("anim", "index.html", "Анимация по шагам"), ("static", "bez-animacii.html", "Компактный")]
+    tabs = [("anim", "index.html", "Анимация по шагам"), ("scroll", "prokrutka.html", "Анимация на прокрутке"),
+            ("static", "bez-animacii.html", "Компактный")]
     links = "".join(f'<a href="{href}"' + (' class="on" aria-current="page"' if key == active else "") + f">{label}</a>"
                     for key, href, label in tabs)
     return f'<div class="vbar"><div class="wrap vbar__in"><b>Версии для сравнения:</b>{links}</div></div>'
 
 
 def page(version: str, blocks_in: dict, css_all: str, js_extra: str = "") -> str:
-    title = "НИПТ — Геномед · анимация по шагам" if version == "anim" else "НИПТ — Геномед · компактный"
+    title = "НИПТ — Геномед · " + {"anim": "анимация по шагам", "scroll": "анимация на прокрутке", "static": "компактный"}[version]
     head_extra = '<meta name="theme-color" content="#0A2540">\n'
     order = [
         vbar(version), SITE_HEADER, NAV, blocks_in["hero"], v3.STATBAND, blocks_in["safe"], blocks_in["about"], blocks_in["acc"],
@@ -339,7 +340,7 @@ fpv = (V2 / "fpv.html").read_text(encoding="utf-8")
 hero_new = sub1(hero, '<section class="hero">\n  <div class="wrap hero__grid">', '<section class="hero v4hero">\n  <div class="wrap v4hero__in">')
 hero_new = sub1(hero_new, "\n\n    \n  </div>\n</section>",
     '\n  </div>\n  <img class="v4hero__pic" src="img/hero-placenta.webp" alt="Иллюстрация: из плаценты фрагменты ДНК попадают в кровь мамы"'
-    ' width="1774" height="887" fetchpriority="high">\n</section>')
+    ' width="2880" height="1440" fetchpriority="high">\n</section>')
 
 
 def swap_badges(block: str, scope_start: str, images: list[tuple[str, str]]) -> str:
@@ -402,6 +403,7 @@ hero_new = v4.hero(hero_new)
 RESULTS = v4.RESULTS
 scene = v4.scene(scene)
 css_base += v4.CSS + v4.QUIZ_CSS
+blocks["cta"] = v4.cta(blocks["cta"])
 script = v4.script(script)
 
 # ---------------------------------------------------------------- вкладка «С анимацией»
@@ -411,6 +413,11 @@ acc_anim = v3.band(v3.accuracy_anim(acc_main[:ci] + fpv.strip() + "\n" + acc_mai
 anim = page("anim", {"hero": hero_new, "safe": v4.STEPS, "about": about_new, "acc": acc_anim, "panels": panels_new, "how": how_new},
             css_base + anim_css + v4.STEPS_CSS, anim_js + v4.STEPS_JS)
 (HERE / "index.html").write_text(anim, encoding="utf-8")
+
+# ---------------------------------------------------------------- вкладка «Анимация на прокрутке»: сцена «путь ДНК», привязанная к прокрутке (как в v3)
+scroll = page("scroll", {"hero": hero_new, "safe": scene, "about": about_new, "acc": acc_anim, "panels": panels_new, "how": how_new},
+              css_base + anim_css, anim_js)
+(HERE / "prokrutka.html").write_text(scroll, encoding="utf-8")
 
 # ---------------------------------------------------------------- вкладка «Без анимации»
 static = page("static", {"hero": hero_new, "safe": SAFE_STATIC, "about": about_new, "acc": v3.band(v3.accuracy_static(acc_main), "accuracy"), "panels": panels_new, "how": how_new},
